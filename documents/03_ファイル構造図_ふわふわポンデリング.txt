@@ -1,0 +1,51 @@
+source/
+   └─ src/
+      └─ main/
+         ├─ java/
+         │  ├─ servlet/
+         │  │  ├─ SignUpSevlet.java
+         │  │  ├─ LoginServlet.java
+         │  │  ├─ HomeServllet.java
+         │  │  ├─ MoodRegisterSerlvlet.java
+         │  │  ├─ ReportServlet.java
+         │  │  ├─ GachaServlet.java
+         │  │  └─ AccountServlet.java
+         │  ├─ lib/
+         │  │  ├─ AuthFilter.java
+         │  │  └─ Connection.java
+         │  ├─ dao/
+         │  │  ├─ UserDAO.java
+         │  │  ├─ MoodRecordDAO.java
+         │  │  └─ RewardsDAO.java
+         │  └─ model/
+         │     ├─ User.java
+         │     ├─ MoodRecord.java
+         │     └─ Rewards.java
+         └─ webapp/
+            ├─ META-INF/
+            └─ WEB-INF/
+               ├─ lib/
+               └─ jsp/
+                  ├─ sign_up.jsp
+                  ├─ login.jsp
+                  ├─ home.jsp
+                  ├─ mood_record.jsp
+                  ├─ report.jsp
+                  ├─ gacha.jsp
+                  └─ account.jsp
+            ├─ js/
+            │  ├─ sign_up.js
+            │  ├─ login.js
+            │  ├─ home.js
+            │  ├─ mood_record.js
+            │  ├─ report.js
+            │  └─ gacha.js
+            └─ css/
+               ├─ sign_up.css
+               ├─ login.css
+               ├─ home.css
+               ├─ mood_record.css
+               ├─ report.css
+               ├─ gacha.css
+               ├─ account.css
+               └─ common.css
