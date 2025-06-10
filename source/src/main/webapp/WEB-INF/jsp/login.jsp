@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>しごおわ日和 - ログイン</title>
+<title>しごおわ日和</title>
 <link rel="" type="" href="">
 </head>
 <body>
