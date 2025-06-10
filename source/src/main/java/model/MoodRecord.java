@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class MoodRecord implements Serializable {
 	private int user_id;
-	private int record_id;
+	private int record_date;
 	private int mood;
 	private String comment;
-	public MoodRecord(int user_id, int record_id, int mood, String comment) {
+	public MoodRecord(int user_id, int record_date, int mood, String comment) {
 		this.user_id = user_id;
-		this.record_id = record_id;
+		this.record_date = record_date;
 		this.mood = mood;
 		this.comment = comment;
 	}
@@ -20,10 +20,10 @@ public class MoodRecord implements Serializable {
 		this.user_id = user_id;
 	}
 	public int getRecord_id() {
-		return record_id;
+		return record_date;
 	}
 	public void setRecord_id(int record_id) {
-		this.record_id = record_id;
+		this.record_date = record_id;
 	}
 	public int getMood() {
 		return mood;
