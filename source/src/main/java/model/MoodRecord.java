@@ -1,13 +1,17 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class MoodRecord implements Serializable {
 	private int user_id;
-	private int record_date;
+	private Date record_date;
 	private int mood;
 	private String comment;
-	public MoodRecord(int user_id, int record_date, int mood, String comment) {
+	public MoodRecord() {
+		this(0,Date.valueOf(java.time.LocalDate.now()),0,"");
+	}
+	public MoodRecord(int user_id, Date record_date, int mood, String comment) {
 		this.user_id = user_id;
 		this.record_date = record_date;
 		this.mood = mood;
@@ -19,11 +23,11 @@ public class MoodRecord implements Serializable {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public int getRecord_id() {
+	public Date getRecord_date() {
 		return record_date;
 	}
-	public void setRecord_id(int record_id) {
-		this.record_date = record_id;
+	public void setRecord_date(Date record_date) {
+		this.record_date = record_date;
 	}
 	public int getMood() {
 		return mood;
@@ -38,6 +42,7 @@ public class MoodRecord implements Serializable {
 		this.comment = comment;
 	}
 	
+
 }
 
 
