@@ -67,7 +67,7 @@ public class UserDAO {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					return new User(rs.getString("password"), rs.getString("email"));
+					return new User(rs.getString("email"), rs.getString("password"));
 				}
 			}
 		} catch (SQLException e) {

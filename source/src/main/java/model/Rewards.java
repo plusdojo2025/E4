@@ -9,18 +9,17 @@ public class Rewards implements Serializable {
 	private String gacha_type;
 	private int gacha_number;
 
-	public Rewards(int user_id, Date gacha_time, String gacha_type, int gacha_number) {
+	public Rewards() {
+		this(0, Date.valueOf(java.time.LocalDate.now()), "", 0);
+	}
 
+	public Rewards(int user_id, Date gacha_time, String gacha_type, int gacha_number) {
 		this.user_id = user_id;
 		this.gacha_time = gacha_time;
 		this.gacha_type = gacha_type;
 		this.gacha_number = gacha_number;
 	}
-	
-	public Rewards() {
-		this(0,Date.valueOf(java.time.LocalDate.now()),"",0);
-	}
-	
+
 	public int getUser_id() {
 		return user_id;
 	}
