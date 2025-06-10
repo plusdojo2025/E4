@@ -32,7 +32,7 @@ public class UserDAO {
 
 		return false;
 	}
-	
+
 	public User insertUser(User user) {
 		String sql = "INSERT INTO user (email, password) VALUES (?, ?)";
 		try (Connection conn = DbConnection.getConnection();
@@ -40,7 +40,6 @@ public class UserDAO {
 
 			ps.setString(1, user.getEmail());
 			ps.setString(2, user.getPassword());
-
 
 			int affectedRows = ps.executeUpdate();
 
@@ -61,7 +60,7 @@ public class UserDAO {
 		}
 		return null;
 	}
-	
+
 	private User selectById(int id) {
 		String sql = "SELECT email, password FROM user WHERE id = ?";
 		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -70,7 +69,7 @@ public class UserDAO {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					return new User(rs.getString("password"),rs.getString("email"));
+					return new User(rs.getString("email"), rs.getString("password"));
 				}
 			}
 		} catch (SQLException e) {
