@@ -38,5 +38,7 @@ public class MoodRecord implements Serializable {
 		this.comment = comment;
 	}
 	
-	
 }
+
+
+

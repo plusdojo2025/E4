@@ -1,10 +1,9 @@
 package lib;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnection {
+public class Connection {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/e4?"
             + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true";
     private static final String DB_USER = "root";
@@ -18,7 +17,7 @@ public class DbConnection {
         }
     }
 
-    public static Connection getConnection() throws SQLException {
+    public static java.sql.Connection conn() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
     }
 }

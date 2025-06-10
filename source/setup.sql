@@ -19,7 +19,6 @@ CREATE TABLE mood_records (
     record_date DATE NOT NULL,
     mood INT NOT NULL,
     comment VARCHAR(140),
-    time TIME,
     FOREIGN KEY (user_id) REFERENCES users(ID)
 );
 
