@@ -18,12 +18,9 @@ public class Rewards implements Serializable {
 	}
 	
 	public Rewards() {
-		this.user_id = 0;
-		this.gacha_time = new Date(System.currentTimeMillis());
-		this.gacha_type = "";
-		this.gacha_number = 0;
+		this(0,Date.valueOf(java.time.LocalDate.now()),"",0);
 	}
-
+	
 	public int getUser_id() {
 		return user_id;
 	}
