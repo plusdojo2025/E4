@@ -13,7 +13,7 @@
 <p>※英数混合8文字以上</p>
 		<!-- このあたりにエラーメッセージ -->
 <button type="submit" name="loginButton" value="登録"></button><br>
-<a href="/webapp/RegistServlet" target="_blank">新規登録</a>
+<a href="E4/AccountServlet" >新規登録</a>
 
 
 </body>
