@@ -1,10 +1,35 @@
 package model;
 
-public class User {
+import java.io.Serializable;
 
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+public class User implements Serializable {
 
+	private String password;
+	private String email;
+	
+	public User(String password, String email) {
+		this.password = password;
+		this.email = email;
+	}
+	
+	public User() {
+		this("","");
+	}
+//getta setta
+	public String getPassword() {
+		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }
