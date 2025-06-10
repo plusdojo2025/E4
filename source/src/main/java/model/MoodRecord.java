@@ -1,10 +1,21 @@
 package model;
 
-public class MoodRecord {
+import java.io.Serializable;
 
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+public class MoodRecord implements Serializable {
+	private String comment;
 
+	public MoodRecord(String comment) {
+		this.comment = comment;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+	
 }
