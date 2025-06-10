@@ -11,7 +11,9 @@ import model.User;
 
 public class UserDAO {
 
+//Userテーブルを検索
 	public boolean isRegisteredUser(User user) {
+		//SQL文を作成
 		String sql = "SELECT COUNT(*) AS count FROM user WHERE email = ? AND password = ?";
 		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -67,7 +69,7 @@ public class UserDAO {
 
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
-					return new User(rs.getString("password"), rs.getString("email"));
+					return new User(rs.getString("email"), rs.getString("password"));
 				}
 			}
 		} catch (SQLException e) {
@@ -75,4 +77,5 @@ public class UserDAO {
 		}
 		return null;
 	}
+
 }
