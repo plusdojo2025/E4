@@ -3,19 +3,19 @@ package model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-
 	private String password;
 	private String email;
-	
+
+	public User() {
+		this("", "");
+	}
+
 	public User(String password, String email) {
 		this.password = password;
 		this.email = email;
 	}
-	
-	public User() {
-		this("","");
-	}
-//getta setta
+
+	// getta setta
 	public String getPassword() {
 		return password;
 	}
@@ -31,5 +31,4 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 }
