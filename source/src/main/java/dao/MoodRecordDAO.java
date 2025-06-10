@@ -16,8 +16,7 @@ public class MoodRecordDAO {
 	// mood_records に1件の気分記録を登録する
 	public boolean insert(MoodRecord record) {
 		String sql = "INSERT INTO mood_records (user_id, record_date, mood, comment, time) VALUES (?, ?, ?, ?, CURRENT_TIME)";
-		try (Connection conn = DbConnection.getConnection(); 
-			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			pstmt.setInt(1, record.getUser_id());
 			pstmt.setDate(2, record.getRecord_date());
@@ -37,8 +36,7 @@ public class MoodRecordDAO {
 	// 特定のユーザーと日付に一致する気分記録を取得する
 	public MoodRecord findByUserAndDate(int userId, Date date) {
 		String sql = "SELECT * FROM mood_records WHERE user_id = ? AND record_date = ?";
-		try (Connection conn = DbConnection.getConnection(); 
-			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			pstmt.setInt(1, userId);
 			pstmt.setDate(2, date);
@@ -66,8 +64,7 @@ public class MoodRecordDAO {
 		String sql = "SELECT * FROM mood_records WHERE user_id = ? AND record_date >= DATE_SUB(?, INTERVAL 6 DAY) ORDER BY record_date";
 		List<MoodRecord> list = new ArrayList<>();
 
-		try (Connection conn = DbConnection.getConnection(); 
-			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			pstmt.setInt(1, userId);
 			pstmt.setDate(2, fromDate);
