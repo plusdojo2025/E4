@@ -4,6 +4,7 @@ CREATE DATABASE IF NOT EXISTS E4;
 USE E4;
 
 -- ユーザーテーブル
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     password VARCHAR(255) NOT NULL,
@@ -11,6 +12,7 @@ CREATE TABLE users (
 );
 
 -- 気分記録テーブル
+DROP TABLE IF EXISTS mood_records;
 CREATE TABLE mood_records (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -22,6 +24,7 @@ CREATE TABLE mood_records (
 );
 
 -- ご褒美マスターテーブル
+DROP TABLE IF EXISTS rewards_collection;
 CREATE TABLE rewards_collection (
     id INT AUTO_INCREMENT PRIMARY KEY,
     gacha_low VARCHAR(100) NOT NULL,
@@ -30,6 +33,7 @@ CREATE TABLE rewards_collection (
 );
 
 -- ご褒美実績テーブル
+DROP TABLE IF EXISTS rewards_result;
 CREATE TABLE rewards_result (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
