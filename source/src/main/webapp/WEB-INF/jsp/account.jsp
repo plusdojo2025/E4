@@ -4,17 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>アカウント情報</title>
 </head>
 <body>
-<p>新規登録</P>
-<input type="text" name="email" placeholder="メールアドレス"><br>
-<input type="text" name="password" placeholder="PW"><br>
-<p>※英数混合8文字以上</p>
-		<!-- このあたりにエラーメッセージ -->
-<button type="submit" name="loginButton" value="登録"></button><br>
-<a href="E4/AccountServlet" >新規登録</a>
-
-
+<header>
+    <div class="">☰</div>
+    <div class="logo-area">
+      <img src="/webapp/images/" alt="ロゴ" class="">
+      <div class="logo-text">しごおわ日和</div>
+    </div>
+  </header>
+  <main>
+    <div class="">
+      <div class="">アカウント情報</div>
+      <div class="">メールアドレス</div>
+      <div class="">hogehoge@example.com</div>
+      <form action="?Servlet" method="post">
+        <button type="submit" class="logout-button">ログアウト</button>
+      </form>
+    </div>
+  </main>
 </body>
 </html>
