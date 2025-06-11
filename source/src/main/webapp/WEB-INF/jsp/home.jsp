@@ -11,10 +11,12 @@
 
 <header class="header">
   <div class="titlelogo">
-     <a href=""><img src="images/sigoowabiyori_title" alt="しごおわ日和"></a>
-     <a href=""><img src="images/menu" alt="メニューバー"></a>
+     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
+     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
   </div>          
 </header>
+
+
 
 </body>
 </html>
