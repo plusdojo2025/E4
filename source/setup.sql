@@ -14,6 +14,7 @@ CREATE TABLE users (
 
 INSERT INTO users (email, password) VALUES
   ('test@example.com', 'password');
+
   
 -- ご褒美マスターテーブル
 DROP TABLE IF EXISTS rewards_collection;
@@ -31,9 +32,18 @@ CREATE TABLE mood_records (
     record_date DATE NOT NULL,
     mood INT NOT NULL,
     comment VARCHAR(140),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+DELETE FROM mood_records
+WHERE record_date = CURDATE();
+
+-- 架空のデータ、CURDATEはその日の日付を返す	
+INSERT INTO mood_records (user_id, record_date, mood, comment)
+VALUES 
+(1, CURDATE(), 3, '昼頃から少し気分が落ちた'),
+(1, CURDATE(), 4, 'コーヒーを飲んで回復した'),
+(2, CURDATE(), 2, '疲れが溜まっている感じ');
 
 -- ご褒美実績テーブル
 DROP TABLE IF EXISTS rewards_result;

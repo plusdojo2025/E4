@@ -1,10 +1,26 @@
 package servlet;
 
-public class AccountServlet {
+import java.io.IOException;
 
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+@WebServlet("/AccountServlet")
+public class AccountServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// セッションスコープを破棄する
+		HttpSession session = request.getSession();
+		session.invalidate();
+
+		// ログインページにリダイレクトする
+		response.sendRedirect("/webapp/LoginServlet");
 	}
 
 }
+
