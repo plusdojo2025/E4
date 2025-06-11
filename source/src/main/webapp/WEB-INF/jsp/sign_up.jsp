@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規登録</title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 <p>※英数混合8文字以上</p>
 		<!-- このあたりにエラーメッセージ -->
 <button type="submit" name="loginButton" value="登録"></button><br>
-<a href="E4/AccountServlet" >新規登録</a>
+<a href="${pageContext.request.contextPath}/LoginServlet">ログインはこちら</a>
 
 
 </body>

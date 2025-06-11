@@ -26,7 +26,7 @@
     </form>
 
 	<div class="">
-        <a href="">アカウントをお持ちでない方はこちら</a>
+        <a href="${pageContext.request.contextPath}/SignUpServlet">アカウントをお持ちでない方はこちら</a>
     </div>
 </main>
 
