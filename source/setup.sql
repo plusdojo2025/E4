@@ -10,6 +10,9 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL
 );
 
+INSERT INTO users (email, password) VALUES
+  ('test@example.com', 'password');
+  
 -- ご褒美マスターテーブル
 DROP TABLE IF EXISTS rewards_collection;
 CREATE TABLE rewards_collection (
