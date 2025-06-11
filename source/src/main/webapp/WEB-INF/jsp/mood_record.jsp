@@ -20,8 +20,8 @@
   <img src="images/sad.png" data-mood="3" class="moodSelect" style="width:60px;">
   <br><button id="modalClose">閉じる</button>
 </div>
-<input type="textarea" name="commentArea" placeholder="ひとこと記録しませんか？<dr>※１４０文字以内"><br>
-<imput type="submit" name="registButton" value="登録">
+<textarea name="commentArea" placeholder="ひとこと記録しませんか？※140文字以内"></textarea><br>
+<input type="submit" name="registButton" value="登録">
 エラーメッセージ表示所
 <p>今日のご褒美</p><br>
 ご褒美の内容
