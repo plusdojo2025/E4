@@ -24,13 +24,9 @@ public class MoodRegisterServlet extends HttpServlet {
         Date today = Date.valueOf(LocalDate.now());
 
         MoodRecordDAO dao = new MoodRecordDAO();
-        //MoodRecord record = dao.findByUserAndDate(userId, today);
-
-       // if (record != null) {
-        //    request.setAttribute("record", record);
+        
         }
-     //   request.getRequestDispatcher("mood_record.jsp").forward(request, response);
-  //  }
+     
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
