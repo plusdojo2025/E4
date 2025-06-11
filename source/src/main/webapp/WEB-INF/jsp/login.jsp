@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
-<link rel="stylesheet" href="">
+  <!-- 全体共通CSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+  <!-- ログインページ専用のCSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 
 <body>

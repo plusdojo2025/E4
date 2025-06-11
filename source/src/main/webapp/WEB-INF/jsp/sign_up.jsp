@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録</title>
+  <!-- 全体共通CSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+  <!-- 新規登録ページ専用のCSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sign_up.css">
 </head>
 <body>
 
