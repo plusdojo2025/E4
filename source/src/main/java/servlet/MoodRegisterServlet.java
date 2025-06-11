@@ -19,18 +19,18 @@ public class MoodRegisterServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+    	request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp").forward(request, response);
         int userId = 1; // 本来はセッション等から取得
         Date today = Date.valueOf(LocalDate.now());
 
         MoodRecordDAO dao = new MoodRecordDAO();
-        MoodRecord record = dao.findByUserAndDate(userId, today);
+        //MoodRecord record = dao.findByUserAndDate(userId, today);
 
-        if (record != null) {
-            request.setAttribute("record", record);
+       // if (record != null) {
+        //    request.setAttribute("record", record);
         }
-        request.getRequestDispatcher("mood_record.jsp").forward(request, response);
-    }
+     //   request.getRequestDispatcher("mood_record.jsp").forward(request, response);
+  //  }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
