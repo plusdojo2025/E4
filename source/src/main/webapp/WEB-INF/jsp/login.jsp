@@ -23,7 +23,7 @@
     <h2>ログイン</h2>
 	<form action="LoginServlet" method="post" class="">
         <input type="text" name="email" placeholder="メールアドレス" required><br>
-        <input type="password" name="password" placeholder="パスワード" required><br>
+        <input type="password" name="password" placeholder="PW" required><br>
         <p class="">※英数字混合8文字以上</p>
         <button type="submit">ログイン</button>
     </form>
