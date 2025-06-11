@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>今週のレポート</title>
+<title>今週の記録</title>
  <!-- 全体共通CSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
   <!-- レポートページ専用のCSS -->
@@ -18,6 +18,8 @@
      <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
   </div>          
 </header>
+
+<h1>今週の記録</h1>
 
 
 </body>
