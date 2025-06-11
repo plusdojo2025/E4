@@ -23,8 +23,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 	}
-	
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// リクエストパラメータを取得する
@@ -37,13 +36,14 @@ public class LoginServlet extends HttpServlet {
 		if (iDao.isRegisteredUser(new User(email, pw))) { // ログイン成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			session.setAttribute("email", new LoginUser(email));
+			session.setAttribute("user", new User(email, ""));
 
 			// メニューサーブレットにリダイレクトする
 			response.sendRedirect("/webapp/MenuServlet");
 		} else { // ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
-			//request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/webapp/LoginServlet"));
+			// request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。",
+			// "/webapp/LoginServlet"));
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
