@@ -24,6 +24,9 @@
 		<input type="text" name="email" placeholder="メールアドレス"><br>
 		<input type="text" name="password" placeholder="PW"><br>
 		<p>※英数字混合8文字以上</p>
+		<% if (request.getAttribute("errorMsg") != null) { %>
+    		<p style="color:red;"><%= request.getAttribute("errorMsg") %></p>
+		<% } %>
 				<!-- このあたりにエラーメッセージ -->
 		<button type="submit" name="loginButton" value="登録">登録</button>
 		<a href="${pageContext.request.contextPath}/LoginServlet">ログインはこちら</a>

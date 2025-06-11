@@ -5,24 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>アカウント情報</title>
+  <!-- 全体共通CSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+  <!-- ホーム専用のCSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
 </head>
+
 <body>
-<header>
-    <div class="">☰</div>
-    <div class="logo-area">
-      <img src="/webapp/images/" alt="ロゴ" class="">
-      <div class="logo-text">しごおわ日和</div>
-    </div>
-  </header>
+<header class="header_1">
+  <div class="titlelogo"> 
+     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
+     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
+  </div>          
+</header>
   <main>
-    <div class="">
-      <div class="">アカウント情報</div>
+    <h2>アカウント情報</h2>
       <div class="">メールアドレス</div>
-      <div class="">hogehoge@example.com</div>
-      <form action="?Servlet" method="post">
-        <button type="submit" class="logout-button">ログアウト</button>
+      <div>${email}</div>  <!-- セッションから取得したアドレスを表示 -->
+      
+      <form action="/webapp/LogoutServlet" method="get">
+      	<button type="submit" class="logout-button">ログアウト</button>
       </form>
-    </div>
   </main>
 </body>
 </html>
