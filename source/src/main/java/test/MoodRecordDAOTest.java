@@ -7,7 +7,7 @@ import model.MoodRecord;
 
 public class MoodRecordDAOTest {
     public static void main(String[] args) {
-        int userId = 1;  // 表示対象のユーザーID
+        int userId = 1;  
 
         MoodRecordDAO dao = new MoodRecordDAO();
         List<MoodRecord> records = dao.findAllByUser(userId);
