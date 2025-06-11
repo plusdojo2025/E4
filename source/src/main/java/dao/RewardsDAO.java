@@ -79,7 +79,7 @@ public class RewardsDAO {
 
 	private boolean insertRewardsResult(int user_id, String gachaItem) {
 		String selectSql = "SELECT id FROM rewards_collection WHERE gacha_item = ?";
-		String insertSql = "INSERT INTO contact (user_id, gacha_time, gacha_id) VALUES (?, CURRENT_TIMESTAMP, ?)";
+		String insertSql = "INSERT INTO rewards_result (user_id, gacha_time, gacha_id) VALUES (?, CURRENT_TIMESTAMP, ?)";
 
 		try (Connection conn = DbConnection.getConnection()) {
 			// gacha_item から gacha_id を取得
