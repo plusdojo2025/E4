@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		if (iDao.isRegisteredUser(new User(email, pw))) { // ログイン成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			session.setAttribute("email", new User(email, ""));
+			session.setAttribute("email", new LoginUser(email));
 
 			// メニューサーブレットにリダイレクトする
 			response.sendRedirect("/webapp/MenuServlet");
