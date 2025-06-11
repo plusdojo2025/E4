@@ -1,10 +1,21 @@
 package servlet;
 
-public class LoginServlet {
+import java.io.IOException;
 
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	// ログイン画面表示
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 	}
-
 }
