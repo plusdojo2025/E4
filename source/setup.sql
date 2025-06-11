@@ -1,6 +1,5 @@
 -- データベース作成と使用
 CREATE DATABASE IF NOT EXISTS E4;
-
 USE E4;
 
 -- ユーザーテーブル
@@ -11,6 +10,14 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL
 );
 
+-- ご褒美マスターテーブル
+DROP TABLE IF EXISTS rewards_collection;
+CREATE TABLE rewards_collection (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    gacha_item VARCHAR(100) NOT NULL,
+    gacha_rarity INT NOT NULL
+); 
+
 -- 気分記録テーブル
 DROP TABLE IF EXISTS mood_records;
 CREATE TABLE mood_records (
@@ -20,14 +27,6 @@ CREATE TABLE mood_records (
     mood INT NOT NULL,
     comment VARCHAR(140),
     FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
--- ご褒美マスターテーブル
-DROP TABLE IF EXISTS rewards_collection;
-CREATE TABLE rewards_collection (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    gacha_item VARCHAR(100) NOT NULL,
-    gacha_rarity INT NOT NULL,
 );
 
 -- ご褒美実績テーブル
