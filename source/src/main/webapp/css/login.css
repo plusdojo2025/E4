@@ -93,3 +93,16 @@
 .login-container a:hover {
   color: #7bb050;
 }
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 480px) {
+  .form-container {
+    max-width: 90%;
+    padding: 1.25rem 0.5rem; /* 20px 8px */
+  }
+
+  .form-container__input,
+  .form-container__button {
+    width: 100%;
+  }
+}

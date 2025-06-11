@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
  <head>
- <meta charset="UTF-8">
+ <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>新規登録</title>
 	  <!-- 全体共通CSS -->
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
@@ -23,7 +23,7 @@
 	<h2>新規登録</h2>
 		<input type="text" name="email" placeholder="メールアドレス"><br>
 		<input type="text" name="password" placeholder="PW"><br>
-		<p>※英数混合8文字以上</p>
+		<p>※英数字混合8文字以上</p>
 				<!-- このあたりにエラーメッセージ -->
 		<button type="submit" name="loginButton" value="登録">登録</button><br>
 		<a href="${pageContext.request.contextPath}/LoginServlet">ログインはこちら</a>
