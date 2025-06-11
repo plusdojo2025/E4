@@ -1,1 +1,94 @@
 @charset "UTF-8";
+
+.header_2 {
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 0px
+}
+
+.titlelogo_white img {
+  max-width: 150px;
+  height: auto;
+  display: inline-block;
+}
+
+/* 新規登録コンテナ */
+.signup-container {
+  background-color: #ffffff;
+  border-radius: 40px;
+  padding: 40px 5px; 
+  max-width: 400px;
+  margin: 40px auto;
+  box-shadow: 0 4px 10px rgba(168, 225, 133, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-container h2,
+.signup-container a {
+  text-align: center;
+  width: 100%;
+  color: #94cc6b;       
+}
+
+.signup-container button {
+  width: 80%; 
+}
+
+.signup-container input[type="text"],
+.signup-container input[type="password"] {
+  width: 80%;
+  margin: 0 auto 18px; 
+  padding: 10px 12px;
+  border: 1.5px solid #A8E185;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.signup-container input[type="text"]:focus,
+.signup-container input[type="password"]:focus {
+  border-color: #7bb050;
+}
+
+.signup-container p {
+  font-size: 13px;
+  color: #7bb050;
+  margin-top: -12px;
+  margin-bottom: 22px;
+}
+
+.signup-container button {
+  width: 100%;
+  background-color: #94cc6b;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 12px 0;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+   border-radius: 10px;
+}
+
+.signup-container button:hover {
+  background-color: #7bb050;
+}
+
+.signup-container a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #4a7c27;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.signup-container a:hover {
+  color: #7bb050;
+}
