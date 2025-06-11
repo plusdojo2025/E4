@@ -14,11 +14,11 @@ window.addEventListener("DOMContentLoaded", function () {
     moodModal.style.display = "none";
   });
 
-  moodChoices.forEach(function (img) {
+   moodChoices.forEach(function (img) {
     img.addEventListener("click", function () {
       const mood = img.getAttribute("data-mood");
       selectedMoodValue.value = mood;
-      selectedMoodImg.src = img.src;
+      selectedMoodImg.src = "images/mood_" + mood + ".png";
       moodModal.style.display = "none";
     });
   });
