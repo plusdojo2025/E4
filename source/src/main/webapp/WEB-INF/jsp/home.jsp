@@ -5,19 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>ホーム</title>
-<link rel="stylesheet" href="home.jsp">
+<link rel="stylesheet" href="">
 </head>
 <body>
 
 <header class="header">
   <div class="titlelogo">
      <a href=""><img src="images/sigoowabiyori_title" alt="しごおわ日和"></a>
+     <a href=""><img src="images/menu" alt="メニューバー"></a>
   </div>          
 </header>
- 
- <footer>
-   <p class="copyright">&copy; E4</p>
-</footer>
 
 </body>
 </html>
