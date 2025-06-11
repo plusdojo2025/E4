@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- リクエスト属性空MoodRecordオブジェクトを取得 -->
 <%
     model.MoodRecord record = (model.MoodRecord) request.getAttribute("record");
     int mood = (record != null) ? record.getMood() : 0;
@@ -38,11 +39,11 @@
 <div id="moodModal">
   <p>お疲れ様です！今の気分はいかがですか？</p>
   <div>
-    <img src="images/mood1.png" data-mood="1" class="moodChoice" style="width:60px; cursor:pointer;">
-    <img src="images/mood2.png" data-mood="2" class="moodChoice" style="width:60px; cursor:pointer;">
-    <img src="images/mood3.png" data-mood="3" class="moodChoice" style="width:60px; cursor:pointer;">
-    <img src="images/mood4.png" data-mood="4" class="moodChoice" style="width:60px; cursor:pointer;">
-    <img src="images/mood5.png" data-mood="5" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood_1.png" data-mood="1" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood_2.png" data-mood="2" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood_3.png" data-mood="3" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood_4.png" data-mood="4" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood_5.png" data-mood="5" class="moodChoice" style="width:60px; cursor:pointer;">
   </div>
   <br>
   <button id="modalClose">閉じる</button>
