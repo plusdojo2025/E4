@@ -10,9 +10,8 @@
 
 <body>
 <header class="header">
-  <div class="titlelogo"> 
-     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
-     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
+  <div class="titlelogo_white"> 
+     <a href=""><img src="images/sigoowabiyori_title_white.png" alt="しごおわ日和"></a>
   </div>          
 </header>
 	

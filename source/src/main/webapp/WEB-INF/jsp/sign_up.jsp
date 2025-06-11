@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<header class="header">
+  <div class="titlelogo_white"> 
+     <a href=""><img src="images/sigoowabiyori_title_white.png" alt="しごおわ日和"></a>
+  </div>          
+</header>
+
 <p>新規登録</P>
 <input type="text" name="email" placeholder="メールアドレス"><br>
 <input type="text" name="password" placeholder="PW"><br>
