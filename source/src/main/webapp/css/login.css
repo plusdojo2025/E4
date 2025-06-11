@@ -65,7 +65,9 @@
 }
 
 .login-container button {
-  width: 100%;
+  width: 80%;
+  display: block;
+  margin: 0 auto;   
   background-color: #94cc6b;
   border: none;
   color: white;

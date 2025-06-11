@@ -25,7 +25,7 @@
 		<input type="text" name="password" placeholder="PW"><br>
 		<p>※英数字混合8文字以上</p>
 				<!-- このあたりにエラーメッセージ -->
-		<button type="submit" name="loginButton" value="登録">登録</button><br>
+		<button type="submit" name="loginButton" value="登録">登録</button>
 		<a href="${pageContext.request.contextPath}/LoginServlet">ログインはこちら</a>
 	</form>
 </main>
