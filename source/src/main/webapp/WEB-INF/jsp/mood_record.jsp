@@ -1,32 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    model.MoodRecord record = (model.MoodRecord) request.getAttribute("record");
+    int mood = (record != null) ? record.getMood() : 0;
+    String comment = (record != null && record.getComment() != null) ? record.getComment() : "";
+    String error = (String) request.getAttribute("error");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>気分登録</title>
 <link rel="stylesheet" href="css/mood_record.css">
+
 </head>
 <body>
+<header class="header">
+  <div class="titlelogo"> 
+     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
+     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
+  </div>          
+</header>
 
-<!-- 押したらモーダル開くー -->
-<img  src="images/mood_new.png" alt="気分を選択" style="width:60px;">
+<form action="MoodRegisterServlet" method="post" id="moodForm">
+    <img id="selectedMoodImg" src="<%= (mood == 0) ? "images/mood_new.png" : "images/mood" + mood + ".png" %>" alt="気分" style="width:100px; cursor:pointer;">
+    <input type="hidden" name="mood" id="selectedMoodValue" value="<%= mood %>"><br>
 
-<!-- モーダル -->
-<div id="moodModal" style="display:none; position:fixed; top:20%; left:30%; background:white; border:1px solid #ccc; padding:10px;">
-  <p>気分を選んでください</p>
-  <img src="images/happy.png" data-mood="1" class="moodSelect" style="width:60px;">
-  <img src="images/normal.png" data-mood="2" class="moodSelect" style="width:60px;">
-  <img src="images/sad.png" data-mood="3" class="moodSelect" style="width:60px;">
-  <br><button id="modalClose">閉じる</button>
+    <textarea name="comment" maxlength="140" placeholder="ひとこと記録しませんか？※１４０文字以内"><%= comment %></textarea><br>
+
+    <input type="submit" value="登録"><br>
+    <% if (error != null) { %>
+      <p style="color:red;"><%= error %></p>
+    <% } %>
+</form>
+
+<!-- モーダル表示部分 -->
+<div id="moodModal">
+  <p>お疲れ様です！今の気分はいかがですか？</p>
+  <div>
+    <img src="images/mood1.png" data-mood="1" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood2.png" data-mood="2" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood3.png" data-mood="3" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood4.png" data-mood="4" class="moodChoice" style="width:60px; cursor:pointer;">
+    <img src="images/mood5.png" data-mood="5" class="moodChoice" style="width:60px; cursor:pointer;">
+  </div>
+  <br>
+  <button id="modalClose">閉じる</button>
 </div>
-<textarea name="commentArea" placeholder="ひとこと記録しませんか？※140文字以内"></textarea><br>
-<input type="submit" name="registButton" value="登録">
-エラーメッセージ表示所
-<p>今日のご褒美</p><br>
-ご褒美の内容
 
-
-
+<script src="js/mood_record.js"></script>
 </body>
 </html>
