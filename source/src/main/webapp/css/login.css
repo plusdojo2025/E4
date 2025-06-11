@@ -96,15 +96,37 @@
   color: #7bb050;
 }
 
-/* レスポンシブ対応 */
+/* スマホ表示のレスポンシブ対応 */
 @media screen and (max-width: 480px) {
-  .form-container {
-    max-width: 90%;
-    padding: 1.25rem 0.5rem; /* 20px 8px */
+	
+  .titlelogo_white img {
+  max-width: 120px;
+  margin-top: 70px;
+  }
+	
+  .login-container {
+    margin: 40px 40px 40px 40px; 
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 14px;
   }
 
-  .form-container__input,
-  .form-container__button {
-    width: 100%;
+  .login-container input[type="text"],
+  .login-container input[type="password"],
+  .login-container button {
+    font-size: 14px; 
+    padding: 8px 12px;
+  }
+
+  .login-container h2 {
+    font-size: 20px;
+  }
+
+  .login-container p {
+    font-size: 12px;
+  }
+
+  .login-container a {
+    font-size: 10px;
   }
 }

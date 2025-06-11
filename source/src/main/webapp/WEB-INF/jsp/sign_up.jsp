@@ -11,7 +11,7 @@
 	  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sign_up.css">
   </head>
 <body>
-
+<div class="center-wrapper">
 <header class="header_2">
   <div class="titlelogo_white"> 
      <a href=""><img src="images/sigoowabiyori_title_white.png" alt="しごおわ日和"></a>
@@ -29,6 +29,7 @@
 		<a href="${pageContext.request.contextPath}/LoginServlet">ログインはこちら</a>
 	</form>
 </main>
+</div>
 
 
 </body>

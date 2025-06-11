@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* ヘッダーロゴ */
 .header_2 {
   text-align: center;
   padding-top: 100px;
@@ -92,4 +93,39 @@
 
 .signup-container a:hover {
   color: #7bb050;
+}
+
+/* スマホ表示のレスポンシブ対応 */
+@media screen and (max-width: 480px) {
+	
+	.titlelogo_white img {
+  max-width: 120px;
+  margin-top: 70px;
+  }
+	
+  .signup-container {
+    margin: 40px 40px 40px 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 14px;
+  }
+
+  .signup-container input[type="text"],
+  .signup-container input[type="password"],
+  .signup-container button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .signup-container h2 {
+    font-size: 20px;
+  }
+
+  .signup-container p {
+    font-size: 12px;
+  }
+
+  .signup-container a {
+    font-size: 10px;
+  }
 }
