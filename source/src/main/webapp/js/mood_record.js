@@ -5,18 +5,15 @@ window.addEventListener("DOMContentLoaded", function () {
   const moodChoices = document.querySelectorAll(".moodChoice");
   const selectedMoodValue = document.getElementById("selectedMoodValue");
 
-  // 画像クリックでモーダル表示
   selectedMoodImg.addEventListener("click", function () {
-    moodModal.style.display = "block";
+    moodModal.style.display = "flex";
   });
 
-  // モーダルの閉じるボタン
   modalCloseBtn.addEventListener("click", function (e) {
     e.preventDefault();
     moodModal.style.display = "none";
   });
 
-  // 気分画像選択
   moodChoices.forEach(function (img) {
     img.addEventListener("click", function () {
       const mood = img.getAttribute("data-mood");
