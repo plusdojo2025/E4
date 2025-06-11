@@ -61,6 +61,6 @@
 	  </div>
 	</div>
 
-<script src="js/mood_record.js"></script>
+<script src="/js/mood_record.js"></script>
 </body>
 </html>
