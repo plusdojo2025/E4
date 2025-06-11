@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<header class="header">
+<header class="header_2">
   <div class="titlelogo_white"> 
      <a href=""><img src="images/sigoowabiyori_title_white.png" alt="しごおわ日和"></a>
   </div>          

@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<header class="header">
+<header class="header_2">
   <div class="titlelogo_white"> 
      <a href=""><img src="images/sigoowabiyori_title_white.png" alt="しごおわ日和"></a>
   </div>          
@@ -23,7 +23,7 @@
 <input type="text" name="password" placeholder="PW"><br>
 <p>※英数混合8文字以上</p>
 		<!-- このあたりにエラーメッセージ -->
-<button type="submit" name="loginButton" value="登録"></button><br>
+<button type="submit" name="loginButton" value="登録">登録</button><br>
 <a href="${pageContext.request.contextPath}/LoginServlet">ログインはこちら</a>
 
 
