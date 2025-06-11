@@ -5,16 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>今週のレポート</title>
-<link rel="stylesheet" href="">
+ <!-- 全体共通CSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+  <!-- レポートページ専用のCSS -->
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/report.css">
 </head>
 <body>
 
-<header class="header">
-  <div class="titlelogo">
-     <a href=""><img src="images/sigoowabiyori_title" alt="しごおわ日和"></a>
-     <a href=""><img src="images/menu" alt="メニューバー"></a>
-  </div> 
+<header class="header_1">
+  <div class="titlelogo"> 
+     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
+     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
+  </div>          
 </header>
+
 
 </body>
 </html>
