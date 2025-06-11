@@ -26,6 +26,7 @@ CREATE TABLE mood_records (
     record_date DATE NOT NULL,
     mood INT NOT NULL,
     comment VARCHAR(140),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 

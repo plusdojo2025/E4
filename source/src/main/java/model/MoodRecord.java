@@ -2,12 +2,14 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class MoodRecord implements Serializable {
 	private int user_id;
 	private Date record_date;
 	private int mood;
 	private String comment;
+	private Timestamp created_at;
 
 	public MoodRecord() {
 		this(0, Date.valueOf(java.time.LocalDate.now()), 0, "");
@@ -51,4 +53,15 @@ public class MoodRecord implements Serializable {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+
+	public Timestamp getCreated_at() {
+	    return created_at;
+	}
+
+	public void setCreated_at(Timestamp created_at) {
+	    this.created_at = created_at;
+	}
+
+	
 }
