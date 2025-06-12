@@ -19,18 +19,16 @@
 		<title>気分登録</title>
 		<!-- 全体共通CSS -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+        <!-- ヘッダーCSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
         <!-- 気分登録専用CSS -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mood_record.css">
 	
 	</head>
 
 <body>
-	<header class="header_1">
-	  <div class="titlelogo"> 
-	     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
-	     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
-	  </div>          
-	</header>
+	<!-- ヘッダー -->
+    <%@ include file="header.jsp" %>
 
 	<form action="MoodRegisterServlet" method="post" id="moodForm">
 			<!-- mood_new.pngでモーダル開く -->
