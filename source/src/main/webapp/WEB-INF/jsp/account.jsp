@@ -23,7 +23,7 @@
       <div class="">メールアドレス</div>
       <div>${email}</div>  <!-- セッションから取得したアドレスを表示 -->
       
-      <form action="/E4/LogoutServlet" method="get">
+      <form action="/E4/AccountServlet" method="post">
       	<button type="submit" class="logout-button">ログアウト</button>
       </form>
   </main>
