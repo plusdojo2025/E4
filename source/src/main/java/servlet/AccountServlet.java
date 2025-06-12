@@ -18,6 +18,7 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	request.getRequestDispatcher("/WEB-INF/jsp/account.jsp").forward(request, response);
         // セッションの取得（ログイン情報の確認）
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
