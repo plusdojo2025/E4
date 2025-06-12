@@ -20,7 +20,7 @@
 
 .account-title {
 	font-size: 1.4em;
-	color: #76c25b;
+	color: #94cc6b;
 	margin-bottom: 20px;
 }
 
@@ -37,11 +37,11 @@
 }
 
 /* ログアウトボタン */
-.logout-botton {
+.logout-button {
 	padding: 10px 24px;
 	font-size: 1em;
 	color: white;
-	background-color: #76c25b;
+	background-color: #94cc6b;
 	border: none;
 	border-radius: 8px;
 	cursor: pointer;
