@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!-- リクエスト属性空MoodRecordオブジェクトを取得 -->
+<!--recrodが存在する場合はmoodを取得、無ければ0（未選択）を設定 -->
+<!-- recordとそのコメントがある場合は取得し、無ければ空文字 -->
+<!-- エラーメッセージを取得 -->
 <%
     model.MoodRecord record = (model.MoodRecord) request.getAttribute("record");
-    int mood = (record != null) ? record.getMood() : 0;
+    int mood = (record != null) ? record.getMood() : 0; 
     String comment = (record != null && record.getComment() != null) ? record.getComment() : "";
     String error = (String) request.getAttribute("error");
 %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,8 +36,8 @@
 		    <!-- 選択された気分画像を保持 -->
 		    <input type="hidden" name="mood" id="selectedMoodValue" value="<%= mood %>"><br>
 		    
-		    <!-- 現在選択されている画像を表示 -->
-		    <img id="currentMoodImg" src="<%= (mood == 0) ? "images/mood_new.png" : "images/mood" + mood + ".png" %>" alt="現在の気分" style="width:100px;">
+		    <!-- 選択された画像を表示 -->
+		    <img id="currentMoodImg" src="<%= (mood == 0) ? "images/mood_new.png" : "images/mood" + mood + ".png" %>" alt="気分選択" style="width:100px;">
 		    
 			<!-- コメント -->
 		    <textarea name="comment" maxlength="140" placeholder="ひとこと記録しませんか？<br>※１４０文字以内"><%= comment %></textarea><br>
