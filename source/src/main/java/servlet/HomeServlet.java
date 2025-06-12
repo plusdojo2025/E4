@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
-import dao.UserDAO;
 import model.MoodRecord;
 import model.User;
 
@@ -28,16 +27,13 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		UserDAO dao = new UserDAO();
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("user") == null) {
 			response.sendRedirect("/E4/LoginServlet");
 			return;
 		}
 		User user = (User) session.getAttribute("user");
-		String email = user.getEmail();
-		User userInfo = dao.selectByEmail(email);
-		int userId = userInfo.getId();
+		int userId = user.getId();
 
 		LocalDate today = LocalDate.now();
 

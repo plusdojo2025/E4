@@ -32,11 +32,11 @@ public class LoginServlet extends HttpServlet {
 		String pw = request.getParameter("password");
 
 		// ログイン処理を行う
-		UserDAO iDao = new UserDAO();
-		if (iDao.isRegisteredUser(new User(email, pw))) { // ログイン成功
+		UserDAO dao = new UserDAO();
+		if (dao.isRegisteredUser(new User(email, pw))) { // ログイン成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession(true);
-			session.setAttribute("user", new User(email, ""));
+			session.setAttribute("user", dao.selectByEmail(email));
 
 			response.sendRedirect("/E4/HomeServlet");
 		} else { // ログイン失敗
