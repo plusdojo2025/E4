@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import model.MoodRecord;
@@ -26,11 +25,11 @@ public class MoodRegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// ログインチェック
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/E4/LoginServlet");
-			return;
-		}
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("user_id") == null) {
+//			response.sendRedirect("/E4/LoginServlet");
+//			return;
+//		}
 
 		// 現在時刻を取得（時:分表示用）
 		LocalTime now = LocalTime.now();
@@ -50,14 +49,15 @@ public class MoodRegisterServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// ログインチェック
-		HttpSession session = request.getSession();
-		if (session.getAttribute("user_id") == null) {
-			response.sendRedirect("/E4/LoginServlet");
-			return;
-		}
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("user_id") == null) {
+//			response.sendRedirect("/E4/LoginServlet");
+//			return;
+//		}
 
 		// セッションからuser_id取得
-		Integer userId = (Integer) session.getAttribute("user_id");
+		int userId = 1;
+		//Integer userId = (Integer) session.getAttribute("user_id");
 
 		// パラメータ取得
 		int mood = Integer.parseInt(request.getParameter("mood"));

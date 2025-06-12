@@ -4,6 +4,10 @@ export class ModalController {
     this.modal = document.getElementById("moodSelectModal");//モーダル本体
     this.closeButton = document.getElementById("closeModal");//閉じるボタン
 
+	if (this.modal) {
+            this.modal.classList.add("hidden");
+     }
+        
     this.setupEvents();
   }
 

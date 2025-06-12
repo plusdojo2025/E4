@@ -17,6 +17,8 @@
 			<!-- ホーム専用のCSS -->
 			<link rel="stylesheet"
 				href="${pageContext.request.contextPath}/css/home.css">
+				
+			<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mood_record.css">
 	</head>
 <body>
 		<%@ include file="header.jsp" %>

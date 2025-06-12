@@ -1,5 +1,5 @@
 .hidden {/*モーダル表示非表示調整*/
-  display: none;
+  display: none !important;
 }
 
 #moodSelectModal {
