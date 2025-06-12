@@ -39,11 +39,11 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", new User(email, ""));
 
 			// メニューサーブレットにリダイレクトする
-			response.sendRedirect("/webapp/MenuServlet");
+			response.sendRedirect("/E4/MenuServlet");
 		} else { // ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 			// request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。",
-			// "/webapp/LoginServlet"));
+			// "/E4/LoginServlet"));
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");

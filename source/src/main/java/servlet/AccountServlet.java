@@ -23,7 +23,7 @@ public class AccountServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             // セッションなしはログインページへ
-            response.sendRedirect("/webapp/LoginServlet");
+            response.sendRedirect("/E4/LoginServlet");
             return;
         }
 

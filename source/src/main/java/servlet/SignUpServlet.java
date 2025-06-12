@@ -40,11 +40,11 @@ public class SignUpServlet extends HttpServlet {
  			if (registeredUser != null) {
  				// 登録成功 → 成功メッセージを表示
  				//request.setAttribute("resultTitle", "登録成功");
- 				request.setAttribute("nextUrl", "/webapp/LoginServlet");
+ 				request.setAttribute("nextUrl", "/E4/LoginServlet");
  			} else {
  				// 登録失敗（たとえばすでに同じemailがあるなど）
  				//request.setAttribute("resultTitle", "登録失敗");
- 				request.setAttribute("nextUrl", "/webapp/SignUpServlet");
+ 				request.setAttribute("nextUrl", "/E4/SignUpServlet");
  			}
  	}
 
