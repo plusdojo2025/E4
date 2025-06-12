@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <title>アカウント情報</title>
   <!-- 全体共通CSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
