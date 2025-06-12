@@ -17,7 +17,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>気分登録</title>
-		<link rel="stylesheet" href="css/mood_record.css">
+		<!-- 全体共通CSS -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+        <!-- 気分登録専用CSS -->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mood_record.css">
 	
 	</head>
 
