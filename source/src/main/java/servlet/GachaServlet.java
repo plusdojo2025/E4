@@ -64,7 +64,7 @@ public class GachaServlet extends HttpServlet {
         
         // ログインIDと今日の気分取得
         
-        int userId = 1;  // テスト用の固定ID(あとで消す)
+        int userId = 1;  // テスト用の固定ID(テスト以外コメントアウト)
         
 //        int userId = (int) session.getAttribute("user_id");
         int todayMood = getTodayMood(userId);
