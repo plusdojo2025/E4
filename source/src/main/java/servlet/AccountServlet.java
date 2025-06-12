@@ -13,30 +13,38 @@ import model.User;
 
 @WebServlet("/AccountServlet")
 public class AccountServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-    	request.getRequestDispatcher("/WEB-INF/jsp/account.jsp").forward(request, response);
-        // セッションの取得（ログイン情報の確認）
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            // セッションなしはログインページへ
-            response.sendRedirect("/E4/LoginServlet");
-            return;
-        }
+		// セッションの取得（ログイン情報の確認）
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("user") == null) {
+			// セッションなしはログインページへ
+			response.sendRedirect("/E4/LoginServlet");
+			return;
+		}
 
-        // ユーザー情報（メールアドレス）を取得
-        User user = (User) session.getAttribute("user");
-        String email = user.getEmail();
+		// ユーザー情報（メールアドレス）を取得
+		User user = (User) session.getAttribute("user");
+		String email = user.getEmail();
 
-        // メールアドレスをリクエストスコープに格納
-        request.setAttribute("email", email);
+		// メールアドレスをリクエストスコープに格納
+		request.setAttribute("email", email);
 
-        // アカウント情報表示ページへフォワード
-        request.getRequestDispatcher("/WEB-INF/jsp/account.jsp").forward(request, response);
+		// アカウント情報表示ページへフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/account.jsp").forward(request, response);
+	}
 
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// セッションスコープを破棄する
+		HttpSession session = request.getSession(false);
+		session.invalidate();
+
+		// ログインページにリダイレクトする
+		response.sendRedirect("/E4/LoginServlet");
+
+	}
 }
-

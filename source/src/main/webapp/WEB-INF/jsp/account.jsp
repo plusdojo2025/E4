@@ -31,6 +31,9 @@
 	      	<button type="submit" class="logout-button">ログアウト</button>
 	      </form>
     </div>
+      <form action="/E4/AccountServlet" method="post">
+      	<button type="submit" class="logout-button">ログアウト</button>
+      </form>
   </main>
   
 </body>
