@@ -62,6 +62,4 @@ public class MoodRecord implements Serializable {
 	public void setCreated_at(Timestamp created_at) {
 	    this.created_at = created_at;
 	}
-
-	
 }
