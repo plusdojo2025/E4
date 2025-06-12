@@ -6,6 +6,7 @@ window.addEventListener("DOMContentLoaded", function () {
   const moodChoices = document.querySelectorAll(".moodChoice");//気分画像
   const selectedMoodValue = document.getElementById("selectedMoodValue");//選択された気分画像
 
+//moodModalクリックするとモーダル開く
   selectedMoodImg.addEventListener("click", function () {
     moodModal.style.display = "flex";
   });
