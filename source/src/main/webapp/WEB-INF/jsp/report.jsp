@@ -17,9 +17,32 @@
 <!-- ヘッダー -->
 <%@ include file="header.jsp" %>
 
-<div class="report_container">
-<h1>今週の記録</h1>
-</div>
+<main>
+	<div class="report-container">
+		<h2 class="section-title">今週の記録</h2>
+		
+		<!-- 折れ線グラフ -->
+		<div id="chart" class="chart-area">
+		<!-- 描画されるエリア -->
+		
+		</div>
+		
+		<!-- テキスト -->
+		<div class="report-info">
+	      <p>今週の平均疲労度は <strong>${averageFatigueLevel}</strong> でした</p>
+	      <p>最も疲れた日は <strong>${mostFatiguedDay}</strong></p>
+	      <p>ガチャは <strong>${gachaCount}</strong> 回で</p>
+	      <p>ご褒美は</p>
+	      <div class="rewards"> <%-- ご褒美一覧 --%>
+	        <c:forEach var="reward" items="${weeklyReward}"> <%-- Javaのリストを繰り返し表示 --%>
+	          <p>${reward}</p>
+	        </c:forEach>
+	       </div>
+	       <p>でしたね</p>
+	       <p>来週も健やかに過ごしましょう</p>
+		</div>
+	</div>
+</main>
 
 
 </body>
