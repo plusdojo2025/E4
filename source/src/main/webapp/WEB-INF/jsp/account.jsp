@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <title>アカウント情報</title>
   <!-- 全体共通CSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <!-- ホーム専用のCSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css"> 
   <!-- アカウント情報専用のCSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css">
 </head>
