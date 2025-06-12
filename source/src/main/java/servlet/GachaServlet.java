@@ -1,102 +1,83 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dao.RewardsDAO;
+import dao.MoodRecordDAO;
+import model.MoodRecord;
 
 @WebServlet("/GachaServlet")
 public class GachaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // ガチャ画面表示(疲労度によって色を変える処理)
+    // 今日の気分（疲労度）を取得するメソッド
+    private int getTodayMood(int userId) {
+        MoodRecordDAO dao = new MoodRecordDAO();
+        List<MoodRecord> records = dao.findAllByUser(userId);
+        Date today = Date.valueOf(LocalDate.now());
+
+        for (MoodRecord record : records) {
+            if (today.equals(record.getRecord_date())) {
+                return record.getMood();
+            }
+        }
+        return 1; // デフォルト疲労度1(テスト用)
+    }
+
+    // 疲労度に応じた封筒画像を取得
     private String[] getEnvelopeImages(int mood) {
-        String closedImage = "";
-        String openedImage = "";
+        String closeImage;
+        String openImage;
 
         if (mood == 1) {
-            closedImage = "img/binsen_close_red.png";
-            openedImage = "img/binsen_open_red.png";
-        } else if (mood >= 2 && mood <= 4) {
-            closedImage = "img/binsen_close_yellow.png";
-            openedImage = "img/binsen_open_yellow.png";
-        } else if (mood == 5) {
-            closedImage = "img/binsen_close_blue.png";
-            openedImage = "img/binsen_open_blue.png";
+            // 疲労度低 → 赤
+            closeImage = "binsen_close_red.png";
+            openImage = "binsen_open_red.png";
+        } else if (2 <= mood && mood <= 4) {
+            // 疲労度中 → 黄
+            closeImage = "binsen_close_yellow.png";
+            openImage = "binsen_open_yellow.png";
         } else {
-            closedImage = "img/binsen_close_red.png";
-            openedImage = "img/binsen_open_red.png";
+            // 疲労度高（5）→ 青
+            closeImage = "binsen_close_blue.png";
+            openImage = "binsen_open_blue.png";
         }
-        return new String[] { closedImage, openedImage };
+
+        return new String[] { closeImage, openImage };
     }
 
-    // ガチャ画面表示（初期表示）
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    	// セッションの取得とログインチェック
+//        HttpSession session = request.getSession(false);
+//        if (session == null || session.getAttribute("user_id") == null) {
+//            response.sendRedirect("LoginServlet");
+//            return;
+//        }
+        
+        // ログインIDと今日の気分取得
+        
+        int userId = 1;  // テスト用の固定ID(あとで消す)
+        
+//        int userId = (int) session.getAttribute("user_id");
+        int todayMood = getTodayMood(userId);
 
-        // 例えばセッションなどから疲労度を取得。無ければデフォルト1
-        HttpSession session = request.getSession(false);
-        int mood = 1;
-        if (session != null && session.getAttribute("fatigueLevel") != null) {
-            mood = (int) session.getAttribute("fatigueLevel");
-        }
+        String[] images = getEnvelopeImages(todayMood);
 
-        String[] images = getEnvelopeImages(mood);
         request.setAttribute("closedImage", images[0]);
         request.setAttribute("openedImage", images[1]);
 
-        request.getRequestDispatcher("/WEB-INF/jsp/gacha.jsp").forward(request, response);
-    }
-
-    // ガチャの処理
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect("LoginServlet");
-            return;
-        }
-        int userId = (int) session.getAttribute("userId");
-
-        // パラメータから mood を取得（POSTで送られてくる前提）
-        int mood = 1;
-        try {
-            mood = Integer.parseInt(request.getParameter("mood"));
-        } catch (NumberFormatException e) {
-            mood = 1; // デフォルト
-        }
-
-        // mood によって rarity を決定
-        int rarity;
-        if (mood == 1) {
-            rarity = 3;
-        } else if (mood <= 4) {
-            rarity = 2;
-        } else {
-            rarity = 1;
-        }
-
-        // ガチャを引く
-        RewardsDAO rewardsDao = new RewardsDAO();
-        String rewardItem = rewardsDao.taikinGacha(rarity, userId);
-
-        // 疲労度に応じた封筒画像を決定
-        String[] images = getEnvelopeImages(mood);
-
-        // JSPに結果と画像パスを渡す
-        request.setAttribute("rewardItem", rewardItem);
-        request.setAttribute("closedImage", images[0]);
-        request.setAttribute("openedImage", images[1]);
-
-        request.getRequestDispatcher("/WEB-INF/jsp/gacha.jsp").forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/gacha.jsp");
+        dispatcher.forward(request, response);
     }
 }

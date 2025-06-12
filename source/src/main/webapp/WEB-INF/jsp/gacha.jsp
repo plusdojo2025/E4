@@ -19,8 +19,8 @@
 
     <!-- ① 初期表示：封筒（閉じ） -->
     <div class="envelope" onclick="openEnvelope()">
-   <img id="envelope-closed" src="${pageContext.request.contextPath}/${closedImage}" alt="封筒" width="120" />
-<img id="envelope-opened" src="${pageContext.request.contextPath}/${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
+    <img id="envelope-closed" src="${pageContext.request.contextPath}/${closedImage}" alt="封筒" width="120" />
+    <img id="envelope-opened" src="${pageContext.request.contextPath}/${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
     </div>   
     <div class="tap-msg">画面をタップ！</div>
 
