@@ -35,13 +35,13 @@
 			<!-- テキスト -->
 			<div class="report-info">
 				<p>
-					今週の平均疲労度は <strong>${averageFatigueLevel}</strong> でした
+					今週の平均疲労度は <strong>${fatigueLevel}</strong> でした
 				</p>
 				<p>
-					最も疲れた日は <strong>${mostFatiguedDay}</strong>
+					最も疲れた日は <strong>${tiredDay}</strong>
 				</p>
 				<p>
-					ガチャは <strong>${gachaCount}</strong> 回で
+					ガチャは <strong>${Gacha}</strong> 回で
 				</p>
 				<p>ご褒美は</p>
 				<div class="rewards">
@@ -56,7 +56,6 @@
 			</div>
 		</div>
 	</main>
-
 
 </body>
 </html>
