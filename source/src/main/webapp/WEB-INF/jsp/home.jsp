@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -8,23 +8,13 @@
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
 <title>ホーム</title>
-<<<<<<< HEAD
-  <!-- 全体共通CSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <!-- ヘッダーのCSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-  <!-- ホーム専用のCSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
-</head>
-<body>
 
-<!-- ヘッダー -->
-<%@ include file="header.jsp" %>
-
-=======
 <!-- 全体共通CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
+<!-- ヘッダーのCSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/header.css">
 <!-- ホーム専用のCSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/home.css">
@@ -50,16 +40,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="week" items="${calender}">
+			<c:forEach var="week" items="${calwithmood}">
 				<tr>
 					<c:forEach var="day" items="${week}">
-						<td class="${day == '' ? 'empty' : day}">${day}</td>
+						<td
+							class="${empty day[0] ? 'emptyday' : ''} ${empty day[1] ? '' : 'mood' += day[1]}">
+							${day[0]}</td>
 					</c:forEach>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
->>>>>>> f2095c6727a901a57aa0fffbe2a82fc07344f667
 
 
 </body>

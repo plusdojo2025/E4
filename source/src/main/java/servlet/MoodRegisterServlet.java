@@ -3,78 +3,84 @@ package servlet;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import model.MoodRecord;
 
 @WebServlet("/MoodRegisterServlet")
 public class MoodRegisterServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp").forward(request, response);
-        int userId = 1; // 本来はセッション等から取得
-        Date today = Date.valueOf(LocalDate.now());
+	// 気分登録画面の表示
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        MoodRecordDAO dao = new MoodRecordDAO();
-        
-        }
-     
+		// ログインチェック
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/E4/LoginServlet");
+			return;
+		}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+		// 現在時刻を取得（時:分表示用）
+		LocalTime now = LocalTime.now();
+		String currentTime = now.format(DateTimeFormatter.ofPattern("H : mm"));
 
-        request.setCharacterEncoding("UTF-8");
+		// 画面に渡す
+		request.setAttribute("currentTime", currentTime);
 
-        try {
-            int userId = 1;
-            String moodStr = request.getParameter("mood");
-            String comment = request.getParameter("comment");
+		// JSPへフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
+		dispatcher.forward(request, response);
+	}
 
-            int mood = (moodStr != null && !moodStr.isEmpty()) ? Integer.parseInt(moodStr) : 0;
-            Date today = Date.valueOf(LocalDate.now());
+	// 気分登録処理
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 
-            // バリデーション
-            if (mood == 0) {
-                request.setAttribute("error", "気分は必須です。");
-            } else if (comment != null && comment.length() > 140) {
-                request.setAttribute("error", "コメントは140文字以内で入力してください。");
-            }
+		// ログインチェック
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user_id") == null) {
+			response.sendRedirect("/E4/LoginServlet");
+			return;
+		}
 
-            if (request.getAttribute("error") != null) {
-                MoodRecord record = new MoodRecord();
-                record.setMood(mood);
-                record.setComment(comment);
-                request.setAttribute("record", record);
-                request.getRequestDispatcher("mood_record.jsp").forward(request, response);
-                return;
-            }
+		// セッションからuser_id取得
+		Integer userId = (Integer) session.getAttribute("user_id");
 
-            MoodRecord record = new MoodRecord();
-            record.setUser_id(userId);
-            record.setRecord_date(today);
-            record.setMood(mood);
-            record.setComment(comment);
+		// パラメータ取得
+		int mood = Integer.parseInt(request.getParameter("mood"));
+		String comment = request.getParameter("comment");
 
-            MoodRecordDAO dao = new MoodRecordDAO();
-            dao.insert(record);
+		// 登録レコード生成
+		MoodRecord record = new MoodRecord();
+		record.setUser_id(userId);
+		record.setRecord_date(Date.valueOf(LocalDate.now()));
+		record.setMood(mood);
+		record.setComment(comment);
 
-            request.setAttribute("record", record);
-            request.getRequestDispatcher("mood_record.jsp").forward(request, response);
+		// 登録実行
+		MoodRecordDAO dao = new MoodRecordDAO();
+		boolean success = dao.insert(record);
 
-        } catch (Exception e) {
-            String comment = request.getParameter("comment");
-            MoodRecord record = new MoodRecord();
-            record.setComment(comment);
-            request.setAttribute("record", record);
-            request.getRequestDispatcher("mood_record.jsp").forward(request, response);
-        }
-    }
+		// 成功・失敗（ご褒美表示は今後追加）
+		if (success) {
+			response.sendRedirect("MoodRegisterServlet");
+		} else {
+			request.setAttribute("error", "気分の登録に失敗しました");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 }

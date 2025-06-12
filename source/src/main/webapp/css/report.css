@@ -1,1 +1,34 @@
 @charset "UTF-8";
+
+.report-container {
+	max-width: 90%;
+	margin: 30px auto;
+	padding: 20px;
+	background: white;
+	border-radius: 30px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.section-title {
+	color: #94cc6b;
+	font-size: 1.5em;
+	margin-bottom: 15px;
+}
+
+.chart-area {
+	width: 90%;
+	margin: 0 auto 20px;
+}
+
+.report-info p {
+	font-size: 1em;
+	color: #666;
+	margin: 8px 0;
+}
+
+.rewards p {
+	color: #888;
+	font-size: 0.95em;
+	margin: 3px 0;
+}

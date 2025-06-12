@@ -1,27 +1,22 @@
-//すべてのHTMLが読み込まれた後に、処理を実行
-window.addEventListener("DOMContentLoaded", function () {
-  const selectedMoodImg = document.getElementById("selectedMoodImg");//押したらモーダル開く
-  const moodModal = document.getElementById("moodModal");//モーダル本体
-  const modalCloseBtn = document.getElementById("modalClose");//閉じるボタン
-  const moodChoices = document.querySelectorAll(".moodChoice");//気分画像
-  const selectedMoodValue = document.getElementById("selectedMoodValue");//選択された気分画像
+export class ModalController {
+  constructor() {//ｊｓｐから取得
+    this.moodButton = document.getElementById("moodSelectButton");//モーダル開く画像ボタン
+    this.modal = document.getElementById("moodSelectModal");//モーダル本体
+    this.closeButton = document.getElementById("closeModal");//閉じるボタン
 
-//moodModalクリックするとモーダル開く
-  selectedMoodImg.addEventListener("click", function () {
-    moodModal.style.display = "flex";
-  });
+    this.setupEvents();
+  }
 
-  modalCloseBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    moodModal.style.display = "none";
-  });
-
-   moodChoices.forEach(function (img) {
-    img.addEventListener("click", function () {
-      const mood = img.getAttribute("data-mood");
-      selectedMoodValue.value = mood;
-      selectedMoodImg.src = "images/mood_" + mood + ".png";
-      moodModal.style.display = "none";
-    });
-  });
-});
+  setupEvents() {
+    if (this.moodButton && this.modal && this.closeButton) {//それぞれのボタンがクリックされた時の処理
+    
+        this.moodButton.addEventListener("click", () => {//moodSelectButtonクリック
+        this.modal.classList.remove("hidden");//hidden(非表示)を外して表示
+      });
+		// モーダルを閉じる処理（✕ボタン）
+        this.closeButton.addEventListener("click", () => {//×ボタンを押したとき
+        this.modal.classList.add("hidden");//hidden（非表示）を追加して非表示に
+      });
+    }
+  }
+}
