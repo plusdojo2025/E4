@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +10,14 @@
 <title>ホーム</title>
 
 <!-- 全体共通CSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <!-- ヘッダーのCSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-  <!-- ホーム専用のCSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/common.css">
+<!-- ヘッダーのCSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/header.css">
+<!-- ホーム専用のCSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/home.css">
 </head>
 <body>
 
@@ -40,13 +43,15 @@
 			<c:forEach var="week" items="${calwithmood}">
 				<tr>
 					<c:forEach var="day" items="${week}">
-						<td class="${day[0] == '' ? 'empty' : day[0]} 
-						${day[1] == '' ? 'empty' : day[1]}">${day[0]}</td>
+						<td
+							class="${empty day[0] ? 'emptyday' : ''} ${empty day[1] ? '' : 'mood' += day[1]}">
+							${day[0]}</td>
 					</c:forEach>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
+
 </body>
 </html>

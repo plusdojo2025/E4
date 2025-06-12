@@ -38,8 +38,32 @@ public class HomeServlet extends HttpServlet {
 		List<List<String>> calendar = generateCalendar(year, month);
 		List<MoodRecord> moodRecords = dao.findAllByUser(1);
 		List<Map<String, String>> calwithmood = mapCalendarWithMood(calendar, moodRecords);
+		
+		List<String[]> flatList = new ArrayList<>();
 
-		request.setAttribute("calwithmood", calwithmood);
+		for (Map<String, String> map : calwithmood) {
+		    for (Map.Entry<String, String> entry : map.entrySet()) {
+		        flatList.add(new String[]{entry.getKey(), entry.getValue()});
+		    }
+		}
+
+		// 週ごとにグループ化
+		List<List<String[]>> calwithmoodGrouped = new ArrayList<>();
+		List<String[]> week = new ArrayList<>();
+
+		for (String[] day : flatList) {
+		    week.add(day);
+		    if (week.size() == 7) {
+		        calwithmoodGrouped.add(new ArrayList<>(week));
+		        week.clear();
+		    }
+		}
+		if (!week.isEmpty()) {
+		    calwithmoodGrouped.add(week);
+		}
+
+		// JSPに渡す
+		request.setAttribute("calwithmood", calwithmoodGrouped);
 
 		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
