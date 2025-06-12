@@ -1,9 +1,10 @@
+//すべてのHTMLが読み込まれた後に、処理を実行
 window.addEventListener("DOMContentLoaded", function () {
-  const selectedMoodImg = document.getElementById("selectedMoodImg");
-  const moodModal = document.getElementById("moodModal");
-  const modalCloseBtn = document.getElementById("modalClose");
-  const moodChoices = document.querySelectorAll(".moodChoice");
-  const selectedMoodValue = document.getElementById("selectedMoodValue");
+  const selectedMoodImg = document.getElementById("selectedMoodImg");//押したらモーダル開く
+  const moodModal = document.getElementById("moodModal");//モーダル本体
+  const modalCloseBtn = document.getElementById("modalClose");//閉じるボタン
+  const moodChoices = document.querySelectorAll(".moodChoice");//気分画像
+  const selectedMoodValue = document.getElementById("selectedMoodValue");//選択された気分画像
 
   selectedMoodImg.addEventListener("click", function () {
     moodModal.style.display = "flex";
