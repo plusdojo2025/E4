@@ -74,4 +74,21 @@ public class UserDAO {
 		}
 		return null;
 	}
+
+	public User selectByEmail(String email) {
+		String sql = "SELECT id, email, password FROM users WHERE email = ?";
+		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setString(1, email);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

@@ -38,8 +38,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", new User(email, ""));
 
-			// メニューサーブレットにリダイレクトする
-			response.sendRedirect("/E4/MenuServlet");
+			response.sendRedirect("/E4/HomeServlet");
 		} else { // ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 			// request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。",
