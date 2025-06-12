@@ -12,17 +12,14 @@
 			<!-- 全体共通CSS -->
 			<link rel="stylesheet"
 				href="${pageContext.request.contextPath}/css/common.css">
+			<!-- ヘッダーCSS -->
+  				<link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
 			<!-- ホーム専用のCSS -->
 			<link rel="stylesheet"
 				href="${pageContext.request.contextPath}/css/home.css">
 	</head>
 <body>
-		<header class="header_1">
-			<div class="titlelogo">
-				<a href=""><img src="images/menu.png" alt="メニューバー"></a> <a
-					href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
-			</div>
-		</header>
+		<%@ include file="header.jsp" %>
 <!---------------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑共通↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------------------------------->
 
 	 <!-- カレンダーから日付を持ってくる -->
