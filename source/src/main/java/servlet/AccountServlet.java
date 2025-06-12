@@ -40,7 +40,7 @@ public class AccountServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// セッションスコープを破棄する
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		session.invalidate();
 
 		// ログインページにリダイレクトする
