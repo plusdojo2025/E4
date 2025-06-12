@@ -39,17 +39,14 @@ public class GachaServlet extends HttpServlet {
         String openImage;
 
         if (mood == 1) {
-            // 疲労度低 → 赤
-            closeImage = "binsen_close_red.png";
-            openImage = "binsen_open_red.png";
+            closeImage = "/img/binsen_close_red.png";
+            openImage = "/img/binsen_open_red.png";
         } else if (2 <= mood && mood <= 4) {
-            // 疲労度中 → 黄
-            closeImage = "binsen_close_yellow.png";
-            openImage = "binsen_open_yellow.png";
+            closeImage = "/img/binsen_close_yellow.png";
+            openImage = "/img/binsen_open_yellow.png";
         } else {
-            // 疲労度高（5）→ 青
-            closeImage = "binsen_close_blue.png";
-            openImage = "binsen_open_blue.png";
+            closeImage = "/img/binsen_close_blue.png";
+            openImage = "/img/binsen_open_blue.png";
         }
 
         return new String[] { closeImage, openImage };
@@ -58,7 +55,7 @@ public class GachaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-    	// セッションの取得とログインチェック
+    	// セッションの取得とログインチェック(テスト時コメントアウト)
 //        HttpSession session = request.getSession(false);
 //        if (session == null || session.getAttribute("user_id") == null) {
 //            response.sendRedirect("LoginServlet");

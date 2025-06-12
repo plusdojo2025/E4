@@ -1,1 +1,83 @@
 @charset "UTF-8";
+
+/* 親コンテナ */
+.gacha-container {
+  background-color: #fff;
+  padding: 100px 40px;
+  width: 90%;
+  max-width: 380px;
+  margin: 80px auto;
+  text-align: center;
+  border-radius: 20px;
+  min-height: 400px;
+  box-shadow: 0 12px 24px rgba(100, 150, 100, 0.2);
+}
+
+/* 封筒画像まわり */
+.envelope {
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* タップメッセージ */
+.tap-msg {
+  font-size: 1.1rem;
+  color: #94cc6b;
+}
+
+/* 画面全体を覆う半透明の背景 */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: none;
+}
+
+/* モーダル本体 */
+#reward-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 16px;
+  z-index: 999;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  display: none;
+}
+
+/* モーダル内の見出し */
+#reward-modal h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #94cc6b;
+}
+
+/* モーダル内のご褒美テキスト */
+#reward-modal p {
+  font-size: 1.2rem;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* モーダルの閉じるボタン */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: #000;
+}
