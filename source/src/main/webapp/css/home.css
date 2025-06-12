@@ -1,1 +1,30 @@
 @charset "UTF-8";
+
+table {
+	text-align: center;
+}
+
+.mood1 {
+	background-color: blue;
+	border-radius: 1em;
+}
+
+.mood2 {
+	background-color: green;
+	border-radius: 1em;
+}
+
+.mood3 {
+	background-color: yellow;
+	border-radius: 1em;
+}
+
+.mood4 {
+	background-color: orange;
+	border-radius: 1em;
+}
+
+.mood5 {
+	background-color: red;
+	border-radius: 1em;
+}
