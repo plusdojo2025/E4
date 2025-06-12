@@ -1,14 +1,12 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,116 +19,112 @@ import model.MoodRecord;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    private static final int USER_ID = 1; // TODO: セッションから取得するように変更
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		MoodRecordDAO dao = new MoodRecordDAO();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        LocalDate today = LocalDate.now();
+        
+        // 当月のムードレコードを取得
+        List<MoodRecord> currentMonthRecords = getCurrentMonthMoodRecords(today);
+        
+        // カレンダーを生成し、週ごとにグループ化
+        List<List<String[]>> weeklyCalendar = createWeeklyCalendarWithMood(today, currentMonthRecords);
+        
+        request.setAttribute("calwithmood", weeklyCalendar);
+        request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
+    }
 
-		LocalDate today = LocalDate.now();
-		int year = today.getYear();
-		int month = today.getMonthValue();
+    /**
+     * 指定された月のムードレコードを取得
+     */
+    private List<MoodRecord> getCurrentMonthMoodRecords(LocalDate date) {
+        MoodRecordDAO dao = new MoodRecordDAO();
+        List<MoodRecord> allRecords = dao.findAllByUser(USER_ID);
+        
+        return allRecords.stream()
+            .filter(record -> {
+                LocalDate recordDate = record.getRecord_date().toLocalDate();
+                return recordDate.getYear() == date.getYear() && 
+                       recordDate.getMonthValue() == date.getMonthValue();
+            })
+            .collect(Collectors.toList());
+    }
 
-//		HttpSession session = request.getSession(false);
-//		User user = (User) session.getAttribute("user");
-//		String email = user.getUserId();
+    /**
+     * カレンダーを生成し、ムード情報をマッピングして週ごとにグループ化
+     */
+    private List<List<String[]>> createWeeklyCalendarWithMood(LocalDate date, List<MoodRecord> moodRecords) {
+        // ムードマップを作成
+        Map<String, Integer> moodMap = moodRecords.stream()
+            .collect(Collectors.toMap(
+                record -> String.valueOf(record.getRecord_date().toLocalDate().getDayOfMonth()),
+                MoodRecord::getMood,// メソッド参照、valueの部分
+                (existing, replacement) -> replacement // 最新のムードで上書き
+            ));
 
-		List<List<String>> calendar = generateCalendar(year, month);
-		List<MoodRecord> moodRecords = dao.findAllByUser(1);
-		List<Map<String, String>> calwithmood = mapCalendarWithMood(calendar, moodRecords);
-		
-		List<String[]> flatList = new ArrayList<>();
+        // カレンダーを生成
+        List<List<String>> calendar = generateCalendar(date.getYear(), date.getMonthValue());
+        
+        // フラットなリストを作成
+        List<String[]> flatList = new ArrayList<>();
+        for (List<String> week : calendar) {
+            for (String day : week) {
+                String moodValue = day.isEmpty() ? "" : 
+                    moodMap.containsKey(day) ? String.valueOf(moodMap.get(day)) : "";
+                flatList.add(new String[]{day, moodValue});
+            }
+        }
 
-		for (Map<String, String> map : calwithmood) {
-		    for (Map.Entry<String, String> entry : map.entrySet()) {
-		        flatList.add(new String[]{entry.getKey(), entry.getValue()});
-		    }
-		}
+        // 週ごとにグループ化
+        List<List<String[]>> weeklyGroups = new ArrayList<>();
+        for (int i = 0; i < flatList.size(); i += 7) {
+            int endIndex = Math.min(i + 7, flatList.size());
+            weeklyGroups.add(flatList.subList(i, endIndex));
+        }
 
-		// 週ごとにグループ化
-		List<List<String[]>> calwithmoodGrouped = new ArrayList<>();
-		List<String[]> week = new ArrayList<>();
+        return weeklyGroups;
+    }
 
-		for (String[] day : flatList) {
-		    week.add(day);
-		    if (week.size() == 7) {
-		        calwithmoodGrouped.add(new ArrayList<>(week));
-		        week.clear();
-		    }
-		}
-		if (!week.isEmpty()) {
-		    calwithmoodGrouped.add(week);
-		}
+    /**
+     * カレンダーを生成（年と月を指定）
+     */
+    private List<List<String>> generateCalendar(int year, int month) {
+        List<List<String>> calendar = new ArrayList<>();
+        
+        YearMonth yearMonth = YearMonth.of(year, month);
+        int daysInMonth = yearMonth.lengthOfMonth();
+        LocalDate firstDay = yearMonth.atDay(1);
+        int firstDayOfWeek = firstDay.getDayOfWeek().getValue(); // 月=1, 日=7
 
-		// JSPに渡す
-		request.setAttribute("calwithmood", calwithmoodGrouped);
+        List<String> week = new ArrayList<>();
 
-		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
-	}
+        // 月の最初の週の空欄を追加
+        for (int i = 1; i < firstDayOfWeek; i++) {
+            week.add("");
+        }
 
-	public static List<Map<String, String>> mapCalendarWithMood(List<List<String>> calendar,
-			List<MoodRecord> moodRecords) {
-		Map<String, Integer> moodMap = new HashMap<>();
+        // 各日を追加
+        for (int day = 1; day <= daysInMonth; day++) {
+            week.add(String.valueOf(day));
+            
+            if (week.size() == 7) {
+                calendar.add(new ArrayList<>(week));
+                week.clear();
+            }
+        }
 
-		for (MoodRecord record : moodRecords) {
-			Date date = record.getRecord_date();
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-			int dateNum = cal.get(Calendar.DAY_OF_MONTH); 
-			// 最新のmoodで上書き
-			moodMap.put(String.valueOf(dateNum), record.getMood());
-		}
+        // 月の最後の週の空欄を追加
+        if (!week.isEmpty()) {
+            while (week.size() < 7) {
+                week.add("");
+            }
+            calendar.add(week);
+        }
 
-		List<Map<String, String>> result = new ArrayList<>();
-
-		for (List<String> week : calendar) {
-			for (String dayStr : week) {
-				Map<String, String> cell = new HashMap<>();
-				
-				if (dayStr.isEmpty()) {
-					cell.put("", "");
-				} else {
-					String moodStr = moodMap.containsKey(dayStr) ? String.valueOf(moodMap.get(dayStr)) : "";
-					cell.put(dayStr, moodStr);
-				}
-				result.add(cell);
-			}
-		}
-		return result;
-	}
-
-	public static List<List<String>> generateCalendar(int year, int month) {
-		List<List<String>> calendar = new ArrayList<>();
-
-		YearMonth ym = YearMonth.of(year, month);
-		int daysInMonth = ym.lengthOfMonth();
-		LocalDate firstDay = ym.atDay(1);
-		int firstDayOfWeek = firstDay.getDayOfWeek().getValue(); // 月=1, 日=7
-
-		List<String> week = new ArrayList<>();
-
-		// 最初の週の空欄
-		for (int i = 1; i < firstDayOfWeek; i++) {
-			week.add("");
-		}
-
-		for (int day = 1; day <= daysInMonth; day++) {
-			week.add(String.valueOf(day));
-
-			if (week.size() == 7) {
-				calendar.add(week);
-				week = new ArrayList<>();
-			}
-		}
-
-		// 最後の週の空欄
-		if (!week.isEmpty()) {
-			while (week.size() < 7) {
-				week.add("");
-			}
-			calendar.add(week);
-		}
-
-		return calendar;
-	}
+        return calendar;
+    }
 }
