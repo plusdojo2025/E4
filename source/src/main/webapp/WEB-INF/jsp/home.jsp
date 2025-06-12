@@ -8,26 +8,13 @@
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
 <title>ホーム</title>
-<<<<<<< HEAD
-  <!-- 全体共通CSS -->
+
+<!-- 全体共通CSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
   <!-- ヘッダーのCSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
   <!-- ホーム専用のCSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
-</head>
-<body>
-
-<!-- ヘッダー -->
-<%@ include file="header.jsp" %>
-
-=======
-<!-- 全体共通CSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/common.css">
-<!-- ホーム専用のCSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/home.css">
 </head>
 <body>
 
@@ -50,17 +37,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="week" items="${calender}">
+			<c:forEach var="week" items="${calwithmood}">
 				<tr>
 					<c:forEach var="day" items="${week}">
-						<td class="${day == '' ? 'empty' : day}">${day}</td>
+						<td class="${day[0] == '' ? 'empty' : day[0]} 
+						${day[1] == '' ? 'empty' : day[1]}">${day[0]}</td>
 					</c:forEach>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
->>>>>>> f2095c6727a901a57aa0fffbe2a82fc07344f667
-
-
+	
 </body>
 </html>
