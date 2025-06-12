@@ -21,6 +21,22 @@ export class ModalController {
         this.closeButton.addEventListener("click", () => {//×ボタンを押したとき
         this.modal.classList.add("hidden");//hidden（非表示）を追加して非表示に
       });
+      
+      
+      //  気分画像のクリックで画像差し替え
+    const moodImages = this.modal.querySelectorAll(".mood-image"); // モーダル内の気分画像
+    const selectedMood = document.getElementById("selectedMood"); // 表示されているメイン画像
+
+    moodImages.forEach(image => {
+      image.addEventListener("click", () => {
+        if (selectedMood) {
+          selectedMood.src = image.src; // 画像を差し替える
+          //this.modal.classList.add("hidden"); // モーダルを閉じる
+        }
+      });
+    });
+    
+    
     }
   }
 }
