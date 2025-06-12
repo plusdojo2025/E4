@@ -1,1 +1,49 @@
 @charset "UTF-8";
+
+/* メインのカード */
+.account-main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px 20px;
+}
+
+.account-card{
+	background-color: white;
+	border-radius: 40px;
+	padding: 40px;
+	width: 90%;
+	max-width: 400px;
+	text-align: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.account-title {
+	font-size: 1.4em;
+	color: #76c25b;
+	margin-bottom: 20px;
+}
+
+.account-label {
+	margin-bottom: 8px;
+	font-size: 0.95em;
+	color: #333;
+}
+
+.account-email {
+	margin-bottom: 24px;
+	color: #333;
+	font-family:'Courier New', Courier, monospace;
+}
+
+/* ログアウトボタン */
+.logout-botton {
+	padding: 10px 24px;
+	font-size: 1em;
+	color: white;
+	background-color: #76c25b;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
