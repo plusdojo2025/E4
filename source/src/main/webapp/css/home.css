@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* ヘッダー */
 .header_1 {
   display: flex;
   align-items: center;
@@ -34,22 +35,25 @@
   filter: brightness(0.8);
 }
 
-/* ロゴ画像（中央） */
 .titlelogo a:last-child img {
   height: 80px;
   object-fit: contain;
 }
 
-/* スマホ対応 */
+/* メイン部分ここから */
+
+/* スマホ対応ここから */
 @media screen and (max-width: 480px) {
+	
+/* ヘッダー */
   .header_1 {
-    height: 80px; 
+    height: 85px; 
     padding: 4px 12px; 
   }
 
   .titlelogo a:first-child {
     left: 8px;
-    top: 12px; 
+    top: 25px; 
   }
 
   .titlelogo a:first-child img {
@@ -58,5 +62,6 @@
 
   .titlelogo a:last-child img {
     height: 50px;  
+    margin-top: 15px;
   }
 }
