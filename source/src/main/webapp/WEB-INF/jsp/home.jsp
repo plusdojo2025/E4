@@ -21,12 +21,8 @@
 </head>
 <body>
 
-	<header class="header_1">
-		<div class="titlelogo">
-			<a href=""><img src="images/menu.png" alt="メニューバー"></a> <a
-				href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
-		</div>
-	</header>
+	<!-- ヘッダー -->
+	<%@ include file="header.jsp"%>
 	<table>
 		<thead>
 			<tr>
