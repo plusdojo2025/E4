@@ -1,5 +1,71 @@
 @charset "UTF-8";
 
+/* ヘッダー */
+.header_1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: white;
+  position: relative;
+  height: 120px;
+}
+
+.titlelogo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.titlelogo a:first-child {
+  position: absolute;
+  left: 16px;
+  top: 50px;
+}
+
+.titlelogo a:first-child img {
+  height: 24px;
+  width: auto;
+  transition: filter 0.3s ease;
+}
+
+.titlelogo a:first-child img:hover {
+  filter: brightness(0.8);
+}
+
+.titlelogo a:last-child img {
+  height: 80px;
+  object-fit: contain;
+}
+
+/* メイン部分ここから */
+
+/* スマホ対応ここから */
+@media screen and (max-width: 480px) {
+	
+/* ヘッダー */
+  .header_1 {
+    height: 85px; 
+    padding: 4px 12px; 
+  }
+
+  .titlelogo a:first-child {
+    left: 8px;
+    top: 25px; 
+  }
+
+  .titlelogo a:first-child img {
+    height: 20px;   
+  }
+
+  .titlelogo a:last-child img {
+    height: 50px;  
+    margin-top: 15px;
+  }
+}
+
 /* メインのカード */
 .account-main {
 	display: flex;
