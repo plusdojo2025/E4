@@ -56,8 +56,8 @@ public class MoodRegisterServlet extends HttpServlet {
 //		}
 
 		// セッションからuser_id取得
-		int userId = 1;
-		//Integer userId = (Integer) session.getAttribute("user_id");
+		int userId = 1;/*テストのため仮置き、後で消す*/
+		//Integer userId = (Integer) session.getAttribute("user_id");/*後でコメントアウト取り消す*/
 
 		// パラメータ取得
 		int mood = Integer.parseInt(request.getParameter("mood"));
