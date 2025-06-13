@@ -53,6 +53,24 @@ function openEnvelope() {
     document.getElementById("overlay").style.display = "block";
     document.getElementById("reward-modal").style.display = "block";
 }
+
+// アニメーション
+function openEnvelope() {
+    // 封筒切り替え
+    document.getElementById("envelope-closed").style.display = "none";
+    const opened = document.getElementById("envelope-opened");
+    opened.style.display = "inline";
+
+    opened.classList.add("opened-smooth");
+
+    // モーダル表示
+    setTimeout(() => {
+        document.getElementById("overlay").style.display = "block";
+        const modal = document.getElementById("reward-modal");
+        modal.style.display = "block";
+        modal.classList.add("show");
+    }, 800);
+}
 </script>
 
 </body>
