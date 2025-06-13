@@ -73,6 +73,7 @@
 	      var day = match[1];
 	      td.style.cursor = "pointer";
 	      td.addEventListener("click", function() {
+	    	  // baseURLを埋め込みたいのでjspにJSを書く
 	    	const baseURL = "${pageContext.request.contextPath}";
 	        window.location.href = baseURL + "/MoodRegisterServlet?day=" + day;
 	      });

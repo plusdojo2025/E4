@@ -15,7 +15,12 @@ import model.Rewards;
 public class RewardsDAO {
 	// 気分記録画面用、その日引いたご褒美を取得するメソッド
 	public List<Rewards> getTodayRewards(int user_id, Date todayDate) {
-		String sql = "SELECT user_id, gacha_time, gacha_id FROM rewards_result WHERE user_id = ? AND gacha_time = ?";
+		String sql = """
+				SELECT user_id, gacha_time, gacha_item 
+				FROM rewards_result AS r INNER JOIN rewards_collection AS c
+				ON r.gacha_id = c.id
+				WHERE user_id = ? AND gacha_time = ?
+				""";
 		List<Rewards> list = new ArrayList<>();
 
 		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -23,7 +28,7 @@ public class RewardsDAO {
 			pstmt.setDate(2, todayDate);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					list.add(new Rewards(rs.getInt("user_id"), rs.getDate("gacha_time"), rs.getInt("gacha_id")));
+					list.add(new Rewards(rs.getInt("user_id"), rs.getDate("gacha_time"), rs.getString("gacha_item")));
 				}
 			}
 		} catch (SQLException e) {
@@ -32,10 +37,15 @@ public class RewardsDAO {
 		}
 		return list;
 	}
-
+	
 	// 今週のレポート用、今週のご褒美を取得するメソッド
 	public List<Rewards> getWeeklyRewards(int user_id, Date weekStartDate, Date weekEndDate) {
-		String sql = "SELECT user_id, gacha_time, gacha_id FROM rewards_result WHERE user_id = ? AND gacha_time BETWEEN ? AND ?";
+		String sql =  """
+				SELECT user_id, gacha_time, gacha_item 
+				FROM rewards_result AS r INNER JOIN rewards_collection AS c
+				ON r.gacha_id = c.id
+				WHERE user_id = ? AND gacha_time BETWEEN ? AND ?
+				""";
 		List<Rewards> list = new ArrayList<>();
 		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, user_id);
@@ -43,7 +53,7 @@ public class RewardsDAO {
 			pstmt.setDate(3, weekEndDate);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
-					list.add(new Rewards(rs.getInt("user_id"), rs.getDate("gacha_time"), rs.getInt("gacha_id")));
+					list.add(new Rewards(rs.getInt("user_id"), rs.getDate("gacha_time"), rs.getString("gacha_item")));
 				}
 			}
 		} catch (SQLException e) {
