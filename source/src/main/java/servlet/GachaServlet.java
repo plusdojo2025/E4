@@ -25,7 +25,7 @@ public class GachaServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        int userId = 2; // テスト用に仮置き
+        int userId = 1; // テスト用に仮置き(本番は必ず消す)
 
         // 実運用ではセッションからユーザーID取得を有効にする
         /*
@@ -52,11 +52,22 @@ public class GachaServlet extends HttpServlet {
         // 今日のご褒美が既に引かれているかチェック
         List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, today);
 
-        if (!todayRewards.isEmpty()) {
-            // すでに引いた場合
+        // ★ クエリパラメータで強制的に「alreadyDrawn」をtrueにする
+        String forceDrawn = request.getParameter("forceDrawn");
+        boolean alreadyDrawn = false;
+        if ("1".equals(forceDrawn)) {
+            alreadyDrawn = true;
+        } else {
+            alreadyDrawn = !todayRewards.isEmpty();
+        }
+
+        if (alreadyDrawn) {
             request.setAttribute("alreadyDrawn", true);
-            // ご褒美名を取得（DAOの拡張が望ましい）
-            request.setAttribute("rewardItem", getGachaItemNameById(todayRewards.get(0).getGacha_id()));
+            if (!todayRewards.isEmpty()) {
+                request.setAttribute("rewardItem", todayRewards.get(0).getGacha_item());
+            } else {
+                request.setAttribute("rewardItem", "ご褒美が見つかりませんでした");
+            }
         } else {
             // 引いていなければガチャを引く
             String rewardItem;
@@ -87,14 +98,6 @@ public class GachaServlet extends HttpServlet {
             }
         }
         return 3; // デフォルト気分
-    }
-
-    /**
-     * ご褒美IDから名前を取得する簡易メソッド（DAOに拡張推奨）
-     */
-    private String getGachaItemNameById(int gachaId) {
-        // 現状はID表示のみの簡易対応
-        return "ご褒美ID:" + gachaId;
     }
 
     /**

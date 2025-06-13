@@ -16,7 +16,23 @@
 /* 封筒画像まわり */
 .envelope {
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+/* 封筒画像をもっと大きく */
+.envelope img {
+  width: 250px;          /* 画像幅を大きく */
+  max-width: 90vw;       /* 画面幅に合わせて縮小も可能 */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* 開いた封筒画像も同じサイズ */
+#envelope-opened {
+  width: 250px;
+  max-width: 90vw;
+  height: auto;
 }
 
 /* タップメッセージ */
@@ -80,4 +96,19 @@
 
 .close-btn:hover {
   color: #000;
+}
+
+/* ガチャ終了時の文字 */
+.gacha-container p {
+  color: #a3b18a;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.gacha-container .envelope img {
+  width: 250px !important;
+  max-width: 90vw;
+  height: auto;
+  transition: transform 0.3s ease;
 }

@@ -16,7 +16,14 @@
 
 <c:choose>
   <c:when test="${alreadyDrawn}">
-    <p>本日の退勤ガチャは終了しました</p>
+    <div class="gacha-container">
+      <p>本日の退勤ガチャは終了しました</p>
+      <div class="tap-msg">引いたご褒美はこちら！</div>
+      <div class="envelope" onclick="openEnvelope()">
+          <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" />
+          <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
+      </div>
+    </div>
   </c:when>
   <c:otherwise>
     <div class="gacha-container">
@@ -29,18 +36,20 @@
   </c:otherwise>
 </c:choose>
 
+<!-- モーダル（どちらの状態でも表示できるように外に出して共通化） -->
 <div class="overlay" id="overlay" style="display:none;"></div>
 <div class="modal" id="reward-modal" style="display:none;">
-    <div class="close-btn" onclick="location.href='HomeServlet'">×</div>
+    <div class="close-btn" onclick="location.href='GachaServlet?forceDrawn=1'">×</div>
     <h2>今日のご褒美</h2>
-    <p><%= request.getAttribute("rewardItem") != null ? request.getAttribute("rewardItem") : "ご褒美が見つかりませんでした" %></p>
+    <p>
+      <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
+    </p>
 </div>
 
 <script>
 function openEnvelope() {
     document.getElementById("envelope-closed").style.display = "none";
     document.getElementById("envelope-opened").style.display = "inline";
-
     document.getElementById("overlay").style.display = "block";
     document.getElementById("reward-modal").style.display = "block";
 }
