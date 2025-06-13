@@ -38,14 +38,24 @@
 		<!-- 選択された気分差し込み用 -->
 		 <input type="hidden" name="mood" id="moodInput" value="">
 	 </div>
+	 
 	 <div id="commentArea">
 	 	 <textarea name="commentArea" placeholder="ひとこと記録しませんか？※140字以内"></textarea>
 	 </div>
+	 
 	 <div id="registerButton">
 	 	 <button type="submit" name="registerButton">登録</button>
 	 </div>
 	 
 	 </form>
+	 
+	 <p>今日のご褒美</p>
+	 <!-- ガチャ結果表示 -->
+	 
+	 <!-- ログ表示 -->
+	 <div>
+	 	<ul id="moodLogList"></ul>
+	 </div>
 	 
 	 
 	 

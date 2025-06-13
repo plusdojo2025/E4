@@ -42,6 +42,41 @@ export class ModalController {
         }
       });
     });
+    
+    
+    const form = document.querySelector("form");
+    const moodLogList = document.getElementById("moodLogList");
+
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); // フォーム送信を止める（DB保存はしない）
+
+  // 現在時刻を取得 (HH:mm形式)
+  function zeroPad(num, length) {
+  return ('0'.repeat(length) + num).slice(-length);
+}
+
+  
+  const now = new Date();
+  const hh = zeroPad(now.getHours(), 2);
+const mm = zeroPad(now.getMinutes(), 2);
+  const currentTime = `${hh}:${mm}`;
+
+  // 選択された気分画像のsrcを取得
+  const moodSrc = selectedMoodImg.src;
+
+  // ログに追加するli要素を作成
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <span class="recordTimelist">${currentTime}</span>
+    <img src="${moodSrc}" alt="選択された気分" style="width: 40px; vertical-align: middle; margin-left: 10px;">
+  `;
+
+  moodLogList.appendChild(li);
+});
+    
+    
+    
   }
 }
 }
