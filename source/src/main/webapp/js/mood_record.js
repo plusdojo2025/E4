@@ -44,38 +44,51 @@ export class ModalController {
     });
     
     
-    const form = document.querySelector("form");
-    const moodLogList = document.getElementById("moodLogList");
+    const form = document.querySelector("form");//<form>取得
+    const moodLogList = document.getElementById("moodLogList");//ログ追加場所取得
 
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault(); // フォーム送信を止める（DB保存はしない）
+form.addEventListener("submit", (event) => {//登録ボタンが押された場合
+  //event.preventDefault(); // フォーム送信を止める（DB保存はしない）
 
   // 現在時刻を取得 (HH:mm形式)
+  //時刻の表示方法をそろえるための関数
   function zeroPad(num, length) {
   return ('0'.repeat(length) + num).slice(-length);
 }
 
-  
-  const now = new Date();
-  const hh = zeroPad(now.getHours(), 2);
-const mm = zeroPad(now.getMinutes(), 2);
-  const currentTime = `${hh}:${mm}`;
+  const now = new Date();//現在時刻取得
+  const hh = zeroPad(now.getHours(), 2);//時
+  const mm = zeroPad(now.getMinutes(), 2);//分
+  const currentTime = `${hh}:${mm}`;//最終的な表示方法
 
-  // 選択された気分画像のsrcを取得
-  const moodSrc = selectedMoodImg.src;
+  const moodSrc = selectedMoodImg.src;//選択された気分画像
 
   // ログに追加するli要素を作成
-  const li = document.createElement("li");
+  const li = document.createElement("li");//新しく追加するための<li>作成
+  //時間と画像を入れる
   li.innerHTML = `
     <span class="recordTimelist">${currentTime}</span>
-    <img src="${moodSrc}" alt="選択された気分" style="width: 40px; vertical-align: middle; margin-left: 10px;">
+    <img src="${moodSrc}" alt="気分" style="width: 50px; vertical-align: middle; margin-left: 10px;">
   `;
-
+//moodLogListに追加
   moodLogList.appendChild(li);
 });
-    
-    
+
+//気分とコメントが未入力だった場合
+document.querySelector("form").addEventListener("submit", function(e) {
+    const mood = document.getElementById("moodInput").value;
+    const comment = document.querySelector("textarea").value;
+
+    if (!mood) {
+      alert("気分登録は必須です");
+      e.preventDefault();
+    } else if (comment.length > 140) {
+      alert("140文字以内で入力してください。");
+      e.preventDefault();
+    }
+  });
+
     
   }
 }
