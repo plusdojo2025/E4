@@ -18,11 +18,15 @@
 <!-- ホーム専用のCSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/home.css">
+
+<!-- <script src="${pageContext.request.contextPath}/js/home.js"></script> -->
 </head>
 <body>
 
 	<!-- ヘッダー -->
 	<%@ include file="header.jsp"%>
+
+	<h2>${thisMonth}月</h2>
 	<table>
 		<thead>
 			<tr>
@@ -39,15 +43,40 @@
 			<c:forEach var="week" items="${calwithmood}">
 				<tr>
 					<c:forEach var="day" items="${week}">
-						<td
-							class="${empty day[0] ? 'emptyday' : ''} ${empty day[1] ? '' : 'mood' += day[1]}">
-							${day[0]}</td>
+						<%
+						Object[] d = (Object[]) pageContext.findAttribute("day");
+						String cls = "";
+
+						if (d[0] == "") {
+							cls = "emptyday";
+						} else {
+							cls = "day" + d[0];
+							if (d[1] != null) {
+								cls += " mood" + d[1];
+							}
+						}
+						%>
+						<td class="<%=cls%>">${day[0]}</td>
 					</c:forEach>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-
+	<script>
+	"use strict";
+	window.addEventListener("DOMContentLoaded", function () {
+	  document.querySelectorAll("td").forEach(function(td) {
+	    var match = td.className.match(/day(\d+)/);
+	    if (match) {
+	      var day = match[1];
+	      td.style.cursor = "pointer";
+	      td.addEventListener("click", function() {
+	    	const baseURL = "${pageContext.request.contextPath}";
+	        window.location.href = baseURL + "/MoodRegisterServlet?day=" + day;
+	      });
+	    }
+	  });
+	});
+</script>
 </body>
 </html>

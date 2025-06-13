@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .report-container {
-	max-width: 90%;
+	max-width: 70%;
 	margin: 30px auto;
 	padding: 20px;
 	background: white;
@@ -12,8 +12,8 @@
 
 .section-title {
 	color: #94cc6b;
-	font-size: 1.5em;
-	margin-bottom: 15px;
+	font-size: 1.4em;
+	margin-bottom: 30px;
 }
 
 .chart-area {
