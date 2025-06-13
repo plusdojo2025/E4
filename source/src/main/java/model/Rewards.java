@@ -6,16 +6,16 @@ import java.sql.Date;
 public class Rewards implements Serializable {
 	private int user_id;
 	private Date gacha_time;
-	private int gacha_id;
+	private String gacha_item;
 
 	public Rewards() {
-		this(0, Date.valueOf(java.time.LocalDate.now()), 0);
+		this(0, Date.valueOf(java.time.LocalDate.now()), "");
 	}
 
-	public Rewards(int user_id, Date gacha_time, int gacha_id) {
+	public Rewards(int user_id, Date gacha_time, String gacha_item) {
 		this.user_id = user_id;
 		this.gacha_time = gacha_time;
-		this.gacha_id = gacha_id;
+		this.gacha_item = gacha_item;
 	}
 
 	public int getUser_id() {
@@ -34,11 +34,11 @@ public class Rewards implements Serializable {
 		this.gacha_time = gacha_time;
 	}
 
-	public int getGacha_id() {
-		return gacha_id;
+	public String getGacha_item() {
+		return gacha_item;
 	}
 
-	public void setGacha_id(int gacha_id) {
-		this.gacha_id = gacha_id;
+	public void setGacha_item(String gacha_item) {
+		this.gacha_item = gacha_item;
 	}
 }
