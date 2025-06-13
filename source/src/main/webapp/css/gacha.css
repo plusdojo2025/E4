@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* 親コンテナ */
+/* ====== 親コンテナ ====== */
 .gacha-container {
   background-color: #fff;
   padding: 100px 40px;
@@ -13,26 +13,20 @@
   box-shadow: 0 12px 24px rgba(100, 150, 100, 0.2);
 }
 
-/* 封筒画像まわり */
+/* ====== 封筒画像まわり ====== */
 .envelope {
   cursor: pointer;
   margin-bottom: 30px;
   display: inline-block;
 }
 
-/* 封筒画像をもっと大きく */
-.envelope img {
-  width: 250px;          /* 画像幅を大きく */
-  max-width: 90vw;       /* 画面幅に合わせて縮小も可能 */
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-/* 開いた封筒画像も同じサイズ */
+/* 封筒画像（開閉共通サイズ） */
+.envelope img,
 #envelope-opened {
   width: 250px;
   max-width: 90vw;
   height: auto;
+  transition: transform 0.3s ease;
 }
 
 /* タップメッセージ */
@@ -41,7 +35,7 @@
   color: #94cc6b;
 }
 
-/* 画面全体を覆う半透明の背景 */
+/* ====== モーダル＆背景 ====== */
 #overlay {
   position: fixed;
   top: 0;
@@ -53,7 +47,6 @@
   display: none;
 }
 
-/* モーダル本体 */
 #reward-modal {
   position: fixed;
   top: 50%;
@@ -69,21 +62,18 @@
   display: none;
 }
 
-/* モーダル内の見出し */
 #reward-modal h2 {
   margin-top: 0;
   font-size: 1.8rem;
   color: #94cc6b;
 }
 
-/* モーダル内のご褒美テキスト */
 #reward-modal p {
   font-size: 1.2rem;
   margin: 20px 0;
   color: #333;
 }
 
-/* モーダルの閉じるボタン */
 .close-btn {
   position: absolute;
   top: 10px;
@@ -98,7 +88,7 @@
   color: #000;
 }
 
-/* アニメーション用 keyframes */
+/* ====== アニメーション ====== */
 @keyframes envelopeBounceSmooth {
   0%   { transform: scale(0.9) rotate(0deg); opacity: 0; }
   20%  { transform: scale(1.05) rotate(2deg); opacity: 1; }
@@ -108,7 +98,6 @@
   100% { transform: scale(1) rotate(0deg); }
 }
 
-/* 適用時に使うクラス */
 .envelope img.opened-smooth {
   animation: envelopeBounceSmooth 0.8s ease forwards;
   transform-origin: center center;
@@ -125,27 +114,44 @@
   }
 }
 
-/* 封筒開いたときのアニメーション */
 .envelope.opened {
   animation: envelopeBounce 0.6s ease forwards;
 }
 
-/* モーダル登場のアニメーション */
 .modal.show {
   animation: modalFadeIn 0.4s ease forwards;
 }
 
-/* ガチャ終了時の文字 */
+@keyframes floatUpDown {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.floating {
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+
+/* ====== 封筒の影 ====== */
+.envelope-shadow {
+  width: 120px;
+  height: 20px;
+  bottom: -15px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 80%);
+  border-radius: 50%;
+  margin: -15px auto 30px;
+  animation: shadowScale 2s ease-in-out infinite;
+}
+
+@keyframes shadowScale {
+  0%, 100% { transform: scaleX(1); opacity: 0.3; }
+  50% { transform: scaleX(0.8); opacity: 0.1; }
+}
+
+/* ====== ガチャ終了メッセージ ====== */
 .gacha-container p {
   color: #a3b18a;
   font-weight: bold;
   font-size: 1.3rem;
   margin-bottom: 10px;
-}
-
-.gacha-container .envelope img {
-  width: 250px !important;
-  max-width: 90vw;
-  height: auto;
-  transition: transform 0.3s ease;
 }

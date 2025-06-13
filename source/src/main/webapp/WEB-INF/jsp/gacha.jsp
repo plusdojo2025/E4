@@ -19,16 +19,19 @@
     <div class="gacha-container">
       <p>本日の退勤ガチャは終了しました</p>
       <div class="tap-msg">引いたご褒美はこちら！</div>
+      <div class="envelope-wrapper">
       <div class="envelope" onclick="openEnvelope()">
-          <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" />
-          <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
-      </div>
+       <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" class="floating" />
+       <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
+     </div>
+     <div class="envelope-shadow"></div>
+     </div>
     </div>
   </c:when>
   <c:otherwise>
     <div class="gacha-container">
       <div class="envelope" onclick="openEnvelope()">
-          <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" />
+          <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" class="floating"/>
           <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
       </div>   
       <div class="tap-msg">画面をタップ！</div>
