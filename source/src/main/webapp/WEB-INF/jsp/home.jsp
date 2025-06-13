@@ -26,6 +26,7 @@
 	<!-- ヘッダー -->
 	<%@ include file="header.jsp"%>
 
+<div class="homecontainer">
 	<h2>${thisMonth}月</h2>
 	<table>
 		<thead>
@@ -62,6 +63,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<script>
 	"use strict";
 	window.addEventListener("DOMContentLoaded", function () {
