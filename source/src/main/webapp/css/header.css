@@ -1,6 +1,137 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
+/* ハンバーガーメニュー */
+.menu-wrapper {
+  position: absolute;
+  left: 16px;
+  top: 50px;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger-menu,
+.hamburger-menu:after,
+.hamburger-menu:before {
+  width: 30px;
+  height: 4px;
+  background: #A8E185; 
+  display: block;
+  content: "";
+}
+
+
+.hamburger-menu {
+  position: relative;
+  transform: translateY(8px);
+  transition: background 0ms 300ms;
+}
+
+.hamburger-menu.active {
+  background: rgba(0, 0, 0, 0);
+}
+
+.hamburger-menu:before {
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  transition: bottom 300ms 300ms ease, transform 300ms ease;
+}
+
+.hamburger-menu:after {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  transition: top 300ms 300ms ease, transform 300ms ease;
+}
+
+.hamburger-menu.active:after {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.hamburger-menu.active:before {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* 背景の暗転 */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 900;
+  display: none;
+}
+
+/* メニュー本体 */
+.menu-items {
+  position: absolute;
+  top: 50px;
+  left: 16px;
+  z-index: 1002;
+  pointer-events: none;
+}
+
+.menu-entry {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  color: white;
+  z-index: 1002;
+}
+
+.menu-items.open .menu-entry {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/*メニューの位置。修正の求む、特にスマホ画面が気になる・・・*/
+.menu-items.open .entry1 {
+  transform: translate(85px, -43px);
+}
+.menu-items.open .entry2 {
+  transform: translate(65px, 29px);
+}
+.menu-items.open .entry3 {
+  transform: translate(20px, 100px);
+}
+
+/* 丸い白背景のアイコン */
+.menu-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.menu-icon img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+/* ラベル */
+.menu-label {
+  margin-left: 10px;
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  color: white;
+  white-space: nowrap;
+  line-height: 50px;
+}
 
 /* ヘッダー */
 .header_1 {
@@ -21,49 +152,41 @@
   gap: 16px;
 }
 
-.titlelogo a:first-child {
-  position: absolute;
-  left: 16px;
-  top: 50px;
-}
-
-.titlelogo a:first-child img {
-  height: 24px;
-  width: auto;
-  transition: filter 0.3s ease;
-}
-
-.titlelogo a:first-child img:hover {
-  filter: brightness(0.8);
-}
-
 .titlelogo a:last-child img {
   height: 80px;
   object-fit: contain;
 }
 
-/* メイン部分ここから */
-
 /* スマホ対応 */
 @media screen and (max-width: 480px) {
-	
-/* ヘッダー */
   .header_1 {
-    height: 85px; 
-    padding: 4px 12px; 
+    height: 85px;
+    padding: 4px 12px;
   }
 
-  .titlelogo a:first-child {
+  .menu-wrapper {
     left: 8px;
-    top: 25px; 
+    top: 25px;
   }
 
-  .titlelogo a:first-child img {
-    height: 20px;   
+  .hamburger-menu,
+  .hamburger-menu:after,
+  .hamburger-menu:before {
+    width: 24px;
+    height: 3px;
   }
 
   .titlelogo a:last-child img {
-    height: 50px;  
+    height: 50px;
     margin-top: 15px;
+  }
+
+  .menu-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .menu-label {
+    font-size: 13px;
   }
 }
