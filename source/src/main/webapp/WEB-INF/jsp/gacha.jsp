@@ -29,8 +29,6 @@
   </c:otherwise>
 </c:choose>
 
-<p>contextPath: <%= request.getContextPath() %></p>
-
 <div class="overlay" id="overlay" style="display:none;"></div>
 <div class="modal" id="reward-modal" style="display:none;">
     <div class="close-btn" onclick="location.href='HomeServlet'">×</div>

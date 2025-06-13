@@ -25,7 +25,7 @@ public class GachaServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        int userId = 1; // テスト用に仮置き
+        int userId = 2; // テスト用に仮置き
 
         // 実運用ではセッションからユーザーID取得を有効にする
         /*
