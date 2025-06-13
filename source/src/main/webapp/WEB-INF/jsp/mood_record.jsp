@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,59 +29,76 @@
 	 <!-- カレンダーから日付を持ってくる -->
 	 
 	 
-	 <form>
-	 <!-- mood_new.pngを押すことでモーダルを開く -->
-	 <div id=moodSelectButton>
-		 <img id="selectedMood"
-					src="${pageContext.request.contextPath}/images/mood_new.png" alt="今日の気分は？"
-					style="width: 100px; height: auto;"><!-- 絶対パス -->
-		<!-- 選択された気分差し込み用 -->
-		 <input type="hidden" name="mood" id="moodInput" value="">
-	 </div>
-	 
-	 <div id="commentArea">
-	 	 <textarea name="commentArea" placeholder="ひとこと記録しませんか？※140字以内"></textarea>
-	 </div>
-	 
-	 <div id="registerButton">
-	 	 <button type="submit" name="registerButton">登録</button>
-	 </div>
+	 <form action="MoodRegisterServlet" method="post">
+		 <!-- mood_new.pngを押すことでモーダルを開く -->
+		 <div id="moodSelectButton">
+		 
+	  <c:choose>
+			  <c:when test="${not empty param.mood}">
+				  <img id="selectedMood"
+					         src="${pageContext.request.contextPath}/images/mood_${param.mood}.png"
+					         alt="今日の気分" style="width: 100px; height: auto;">
+			  </c:when>
+		      <c:otherwise>
+				  <img id="selectedMood"
+							 src="${pageContext.request.contextPath}/images/mood_new.png" alt="今日の気分は？"
+							 style="width: 100px; height: auto;"><!-- 絶対パス -->
+			  </c:otherwise>
+	  </c:choose>	
+						
+	<!-- 選択された気分差し込み用 -->
+			 <input id="moodInput" type="hidden" name="mood" value="${param.mood}">
+		 </div>
+		 
+		 <div id="commentArea">
+		 	 <textarea name="comment" placeholder="ひとこと記録しませんか？※140字以内">${param.comment}</textarea>
+		 </div>
+		 
+		 <div id="registerButton">
+		 	 <button type="submit" name="registerButton">登録</button>
+		 </div>
 	 
 	 </form>
 	 
-	 <p>今日のご褒美</p>
-	 <!-- ガチャ結果表示 -->
-	 
-	 <!-- ログ表示 -->
-	 <div>
-	 	<ul id="moodLogList"></ul>
-	 </div>
-	 
-	 
-	 
-	 
-	 <!-- モーダル本体 -->
-	 <div id="moodSelectModal"  class="hidden">
-		 <div class="modal-content">
+		 <p>今日のご褒美</p>
+		 <!-- ガチャ結果表示 -->
 		 
-		 <!--  ✕ボタン -->
-	     <span id="closeModal" class="close-button">&times;</span>
-	     
-			 <p>お疲れ様です！</p>
-			 <p>今の気分はいかがですか？</p>
-				 <div><!-- 絶対パス -->
-					<img class="mood-image" data-mood="1" src="${pageContext.request.contextPath}/images/mood_1.png" alt="気分1" style="width: 100px; height: auto;">
-					<img class="mood-image" data-mood="2" src="${pageContext.request.contextPath}/images/mood_2.png" alt="気分2" style="width: 100px; height: auto;">
-					<img class="mood-image" data-mood="3" src="${pageContext.request.contextPath}/images/mood_3.png" alt="気分3" style="width: 100px; height: auto;">
-					<img class="mood-image" data-mood="4" src="${pageContext.request.contextPath}/images/mood_4.png" alt="気分4" style="width: 100px; height: auto;">
-					<img class="mood-image" data-mood="5" src="${pageContext.request.contextPath}/images/mood_5.png" alt="気分5" style="width: 100px; height: auto;">
-				 </div>
-				 <div>
-					 <p>BAD</p>
-					 <p>GOOD</p>
-				 </div>
-		 </div>	 	
-	 </div>
+		 <!-- ログ表示 -->
+		 <div>
+		 	<ul id="moodLogList"></ul>
+		 </div>
+	 
+	 <c:forEach var="record" items="${moodList}">
+  <div class="mood-log-entry">
+    <img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分${record.mood}" style="width: 60px;">
+    <span>${record.created_at}</span>
+    <p>${record.comment}</p>
+  </div>
+</c:forEach>
+	 
+	 
+		 <!-- モーダル本体 -->
+		 <div id="moodSelectModal"  class="hidden">
+			 <div class="modal-content">
+			 
+			 <!--  ✕ボタン -->
+		     <span id="closeModal" class="close-button">&times;</span>
+		     
+				 <p>お疲れ様です！</p>
+				 <p>今の気分はいかがですか？</p>
+					 <div><!-- 絶対パス -->
+						<img class="mood-image" data-mood="1" src="${pageContext.request.contextPath}/images/mood_1.png" alt="気分1" style="width: 100px; height: auto;">
+						<img class="mood-image" data-mood="2" src="${pageContext.request.contextPath}/images/mood_2.png" alt="気分2" style="width: 100px; height: auto;">
+						<img class="mood-image" data-mood="3" src="${pageContext.request.contextPath}/images/mood_3.png" alt="気分3" style="width: 100px; height: auto;">
+						<img class="mood-image" data-mood="4" src="${pageContext.request.contextPath}/images/mood_4.png" alt="気分4" style="width: 100px; height: auto;">
+						<img class="mood-image" data-mood="5" src="${pageContext.request.contextPath}/images/mood_5.png" alt="気分5" style="width: 100px; height: auto;">
+					 </div>
+					 <div>
+						 <p>BAD</p>
+						 <p>GOOD</p>
+					 </div>
+			 </div>	 	
+		 </div>
 	 
 	 
 	 
