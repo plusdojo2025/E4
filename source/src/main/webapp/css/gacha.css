@@ -98,6 +98,43 @@
   color: #000;
 }
 
+/* アニメーション用 keyframes */
+@keyframes envelopeBounceSmooth {
+  0%   { transform: scale(0.9) rotate(0deg); opacity: 0; }
+  20%  { transform: scale(1.05) rotate(2deg); opacity: 1; }
+  40%  { transform: scale(0.98) rotate(-1deg); }
+  60%  { transform: scale(1.02) rotate(1deg); }
+  80%  { transform: scale(0.99) rotate(0deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* 適用時に使うクラス */
+.envelope img.opened-smooth {
+  animation: envelopeBounceSmooth 0.8s ease forwards;
+  transform-origin: center center;
+}
+
+@keyframes modalFadeIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 封筒開いたときのアニメーション */
+.envelope.opened {
+  animation: envelopeBounce 0.6s ease forwards;
+}
+
+/* モーダル登場のアニメーション */
+.modal.show {
+  animation: modalFadeIn 0.4s ease forwards;
+}
+
 /* ガチャ終了時の文字 */
 .gacha-container p {
   color: #a3b18a;
