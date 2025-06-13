@@ -43,6 +43,7 @@ public class HomeServlet extends HttpServlet {
 		// カレンダーを生成し、週ごとにグループ化
 		List<List<String[]>> weeklyCalendar = createWeeklyCalendarWithMood(today, currentMonthRecords);
 
+		request.setAttribute("thisMonth", today.getMonthValue());
 		request.setAttribute("calwithmood", weeklyCalendar);
 		request.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(request, response);
 	}
