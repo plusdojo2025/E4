@@ -1,25 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <title>退勤ガチャ</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/gacha.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/gacha.css">
 </head>
 <body>
 
 <%@ include file="header.jsp" %>
 
-<div class="gacha-container">
-    <div class="envelope" onclick="openEnvelope()">
-        <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" />
-        <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
-    </div>   
-    <div class="tap-msg">画面をタップ！</div>
-</div>
+<c:choose>
+  <c:when test="${alreadyDrawn}">
+    <p>本日の退勤ガチャは終了しました</p>
+  </c:when>
+  <c:otherwise>
+    <div class="gacha-container">
+      <div class="envelope" onclick="openEnvelope()">
+          <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" />
+          <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
+      </div>   
+      <div class="tap-msg">画面をタップ！</div>
+    </div>
+  </c:otherwise>
+</c:choose>
 
 <p>contextPath: <%= request.getContextPath() %></p>
 

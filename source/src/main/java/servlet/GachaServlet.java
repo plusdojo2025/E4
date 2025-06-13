@@ -25,15 +25,17 @@ public class GachaServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        int userId = 1; // テストの際は１を仮置き
+        int userId = 1; // テスト用に仮置き
 
-        // セッションからユーザーIDを取得する場合はこちらを使用
-//        if (session == null || session.getAttribute("user_id") == null) {
-//            response.sendRedirect("LoginServlet");
-//            return;
-//        } else {
-//            userId = (int) session.getAttribute("user_id");
-//        }
+        // 実運用ではセッションからユーザーID取得を有効にする
+        /*
+        if (session == null || session.getAttribute("user_id") == null) {
+            response.sendRedirect("LoginServlet");
+            return;
+        } else {
+            userId = (int) session.getAttribute("user_id");
+        }
+        */
 
         int mood = getTodayMood(userId);
 
@@ -51,12 +53,12 @@ public class GachaServlet extends HttpServlet {
         List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, today);
 
         if (!todayRewards.isEmpty()) {
-            // ご褒美は既に引いている場合、最初のご褒美を表示
+            // すでに引いた場合
             request.setAttribute("alreadyDrawn", true);
-            // ご褒美IDだけでなく名前がほしい場合はDAOの拡張が必要です
+            // ご褒美名を取得（DAOの拡張が望ましい）
             request.setAttribute("rewardItem", getGachaItemNameById(todayRewards.get(0).getGacha_id()));
         } else {
-            // 今日まだ引いていなければガチャを実行
+            // 引いていなければガチャを引く
             String rewardItem;
             try {
                 rewardItem = rewardsDAO.taikinGacha(mood, userId);
@@ -73,7 +75,7 @@ public class GachaServlet extends HttpServlet {
     }
 
     /**
-     * 今日の気分をMoodRecordDAOから取得
+     * 今日の気分をMoodRecordDAOから取得するメソッド
      */
     private int getTodayMood(int userId) {
         MoodRecordDAO moodDao = new MoodRecordDAO();
@@ -84,23 +86,19 @@ public class GachaServlet extends HttpServlet {
                 return r.getMood();
             }
         }
-        return 3; // デフォルトの気分（無記録時）
+        return 3; // デフォルト気分
     }
 
     /**
-     * ご褒美IDからご褒美名を取得するメソッド（RewardsDAOにないのでここで簡易実装例）
-     * もしDAOで取得できるメソッドがあればそちらを使ってください。
+     * ご褒美IDから名前を取得する簡易メソッド（DAOに拡張推奨）
      */
     private String getGachaItemNameById(int gachaId) {
-        RewardsDAO rewardsDAO = new RewardsDAO();
-        // ここはDAOにgachaId→gachaItem名を取るメソッドがない場合は別途実装が必要
-        // 例として全件取得して探すなどの処理を想定（効率悪いので本番ではDAO拡張推奨）
-        // ここでは簡略化のため「ご褒美ID:◯◯」と表示するだけにします。
+        // 現状はID表示のみの簡易対応
         return "ご褒美ID:" + gachaId;
     }
 
     /**
-     * 気分ごとに便箋画像のパスを返す
+     * 気分(mood)に応じて便箋画像のパスを返す
      */
     private String[] getEnvelopeImages(int mood) {
         switch (mood) {
