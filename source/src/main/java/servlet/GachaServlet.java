@@ -30,11 +30,10 @@ public class GachaServlet extends HttpServlet {
         // 実運用ではセッションからユーザーID取得を有効にする
         /*
         if (session == null || session.getAttribute("user_id") == null) {
-            response.sendRedirect("/E4/LoginServlet");
+            response.sendRedirect("LoginServlet");
             return;
         } else {
-        	User user = (User) session.getAttribute("user");
-        	int userId = user.getId();
+            userId = (int) session.getAttribute("user_id");
         }
         */
 
@@ -54,16 +53,16 @@ public class GachaServlet extends HttpServlet {
         List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, today);
 
         // ★ クエリパラメータで強制的に「alreadyDrawn」をtrueにする(テスト時コメントアウト)
-//        String forceDrawn = request.getParameter("forceDrawn");
-//        boolean alreadyDrawn = false;
-//        if ("1".equals(forceDrawn)) {
-//            alreadyDrawn = true;
-//        } else {
-//            alreadyDrawn = !todayRewards.isEmpty();
-//        }
+        String forceDrawn = request.getParameter("forceDrawn");
+        boolean alreadyDrawn = false;
+        if ("1".equals(forceDrawn)) {
+            alreadyDrawn = true;
+        } else {
+            alreadyDrawn = !todayRewards.isEmpty();
+        }
         
      // ↓ テスト中は毎回引けるように固定(本番では必ず消す)
-        boolean alreadyDrawn = false;
+//        boolean alreadyDrawn = false;
 
         if (alreadyDrawn) {
             request.setAttribute("alreadyDrawn", true);
