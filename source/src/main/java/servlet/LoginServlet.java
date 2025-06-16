@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		// ログイン処理を行う
 		UserDAO dao = new UserDAO();
 		if (dao.isRegisteredUser(new User(email, pw))) { // ログイン成功
-			// セッションスコープにIDを格納する
+			// セッションスコープにUser情報を格納する
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", dao.selectByEmail(email));
 
