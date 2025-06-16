@@ -45,17 +45,16 @@ public class MoodRegisterServlet extends HttpServlet {
 		 // DAOで登録済みログ一覧を取得
 		String dayStr = request.getParameter("day");
 		List<MoodRecord> moodList;
+		
+		LocalDate selectedDate = LocalDate.now(); // デフォルトは今日
 
 		if (dayStr != null && !dayStr.trim().isEmpty()) {
-	    	
 	    	try {
 	    	//今月・今年の年月と組み合わせてDateを作る
-            LocalDate today = LocalDate.now();
-            int day = Integer.parseInt(dayStr);//dayStrをintに変換
-            
-            // ここでtargetDateを作成
-            LocalDate targetDate = LocalDate.of(today.getYear(), today.getMonth(), day);
-            Date sqlDate = Date.valueOf(targetDate);
+	    		 int day = Integer.parseInt(dayStr);
+	                selectedDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
+	                Date sqlDate = Date.valueOf(selectedDate);
+
             
             //年月のday取得
             DailyMoodDAO dailyDao = new DailyMoodDAO();
@@ -96,22 +95,26 @@ public class MoodRegisterServlet extends HttpServlet {
 			request.setAttribute("registeredComment", commentParam);
 		}
 		
+		
+		
 		// 今日のご褒美情報を取得し、JSPに渡す
         RewardsDAO rewardsDAO = new RewardsDAO();
-        Date todayDate = Date.valueOf(LocalDate.now());
-        List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, todayDate);
-
-        if (todayRewards.isEmpty()) {
+        Date todayDate = Date.valueOf(selectedDate);
+        List<Rewards> rewards = rewardsDAO.getTodayRewards(userId, todayDate);
+        
+//---------和田追加---------↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓------↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓------↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        if (rewards.isEmpty()) {
             // 今日まだ引いていない
-            request.setAttribute("rewardItem", "まだご褒美はありません");
-            request.setAttribute("alreadyDrawn", false);
+        	  request.setAttribute("rewardItem", "まだご褒美はありません");
+              request.setAttribute("alreadyDrawn", false);
         } else {
             // 今日すでに引いている
-            request.setAttribute("rewardItem", todayRewards.get(0).getGacha_item());
-            request.setAttribute("alreadyDrawn", true);
-        }
+        	 request.setAttribute("rewardItem", rewards.get(0).getGacha_item());
+             request.setAttribute("alreadyDrawn", true);
+         }
+//-----------------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------↑↑↑↑↑↑↑↑↑↑↑
 		
-		
+        
 		// JSPへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
 		dispatcher.forward(request, response);
