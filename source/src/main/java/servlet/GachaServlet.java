@@ -27,7 +27,6 @@ public class GachaServlet extends HttpServlet {
         int userId = 1; // テスト用に仮置き(本番は必ず消す)
 
         // 実運用ではセッションからユーザーID取得を有効にする
-<<<<<<< HEAD
         /*
         if (session == null || session.getAttribute("user_id") == null) {
             response.sendRedirect("LoginServlet");
@@ -36,7 +35,6 @@ public class GachaServlet extends HttpServlet {
             userId = (int) session.getAttribute("user_id");
         }
         */
-=======
         
 //        HttpSession session = request.getSession(false);
 //        if (session == null || session.getAttribute("user_id") == null) {
@@ -47,7 +45,6 @@ public class GachaServlet extends HttpServlet {
 //        	int userId = user.getId();
 //        }
 //        
->>>>>>> 1228f842cdba2e5899a9860cdbdc937595e5d546
 
         int mood = getTodayMood(userId);
 
