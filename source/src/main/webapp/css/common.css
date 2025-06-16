@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+html, body {
+  overflow-x: hidden; 
+}
+
 /* 背景色　*/
 body {
   margin: 0;
