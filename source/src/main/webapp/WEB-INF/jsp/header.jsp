@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>しごおわ日和</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-  <script src="${pageContext.request.contextPath}/js/header.js" defer></script>
-</head>
-<body>
+<!--  これはjspの一部に読み込まれるファイルなのでbodyとかheaderとかは書けません -->
 
+　 <script src="${pageContext.request.contextPath}/js/header.js" defer></script>
   <header class="header_1">
     <div class="titlelogo">
       <div class="menu-wrapper" id="menuToggle">
@@ -44,6 +37,3 @@
       <span class="menu-label">レポート確認</span>
     </a>
   </div>
-
-</body>
-</html>
