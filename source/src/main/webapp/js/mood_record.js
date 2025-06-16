@@ -38,58 +38,93 @@ export class ModalController {
         if (selectedMoodImg && moodInput) {//選択がnull出ないことを確認
           selectedMoodImg.src = img.src;//選択された気分画像を、 mood_new.pngにコピー
           moodInput.value = moodValue;//気分番号をhidden inputにセット
-          this.modal.classList.add("hidden");
+          this.modal.classList.add("hidden");//モーダル閉じる
         }
       });
     });
+   }
     
-    
-    const form = document.querySelector("form");//<form>取得
-    const moodLogList = document.getElementById("moodLogList");//ログ追加場所取得
+    //const form = document.querySelector("form");//<form>取得
+    //const moodLogList = document.getElementById("moodLogList");//ログ追加場所取得
 
 
-form.addEventListener("submit", (event) => {//登録ボタンが押された場合
-  //event.preventDefault(); // フォーム送信を止める（DB保存はしない）
-
+//form.addEventListener("submit", (event) => {//登録ボタンが押された場合
+  
   // 現在時刻を取得 (HH:mm形式)
   //時刻の表示方法をそろえるための関数
-  function zeroPad(num, length) {
-  return ('0'.repeat(length) + num).slice(-length);
-}
+ // function zeroPad(num, length) {
+ // return ('0'.repeat(length) + num).slice(-length);
+//}
 
-  const now = new Date();//現在時刻取得
-  const hh = zeroPad(now.getHours(), 2);//時
-  const mm = zeroPad(now.getMinutes(), 2);//分
-  const currentTime = `${hh}:${mm}`;//最終的な表示方法
+  //const now = new Date();//現在時刻取得
+ // const hh = zeroPad(now.getHours(), 2);//時
+ // const mm = zeroPad(now.getMinutes(), 2);//分
+  //const currentTime = `${hh}:${mm}`;//最終的な表示方法
 
-  const moodSrc = selectedMoodImg.src;//選択された気分画像
+ // const moodSrc = selectedMoodImg.src;//選択された気分画像
 
   // ログに追加するli要素を作成
-  const li = document.createElement("li");//新しく追加するための<li>作成
+ // const li = document.createElement("li");//新しく追加するための<li>作成
   //時間と画像を入れる
-  li.innerHTML = `
-    <span class="recordTimelist">${currentTime}</span>
-    <img src="${moodSrc}" alt="気分" style="width: 50px; vertical-align: middle; margin-left: 10px;">
-  `;
-//moodLogListに追加
-  moodLogList.appendChild(li);
-});
+  //li.innerHTML = `
+    //<span class="recordTimelist">${currentTime}</span>
+    //<img src="${moodSrc}" alt="気分" style="width: 50px; vertical-align: middle; margin-left: 10px;">
+//  `;
+////moodLogListに追加
+  //moodLogList.appendChild(li);
+//});
+
+//新しい気分が上に追加
+//request.setAttribute("moodList", moodList);
+
 
 //気分とコメントが未入力だった場合
 document.querySelector("form").addEventListener("submit", function(e) {
     const mood = document.getElementById("moodInput").value;
     const comment = document.querySelector("textarea").value;
-
-    if (!mood) {
-      alert("気分登録は必須です");
-      e.preventDefault();
-    } else if (comment.length > 140) {
-      alert("140文字以内で入力してください。");
-      e.preventDefault();
-    }
-  });
-
+    const errorMessageDiv = document.getElementById("errorMessage");
     
+     const selectedMoodImg = document.getElementById("selectedMood");
+      const moodLogList = document.getElementById("moodLogList");
+      
+     errorMessageDiv.textContent = ""; // 前のエラーを消す
+
+     // 気分が選ばれていない
+      if (!mood) {
+        errorMessageDiv.textContent = "気分登録は必須です";
+        e.preventDefault(); // フォーム送信キャンセル
+        return;
+      }
+
+      // コメントが140文字を超えている
+      if (comment.length > 140) {
+        errorMessageDiv.textContent = "140文字以内で入力してください。";
+        e.preventDefault(); // フォーム送信キャンセル
+        return;
+      }
+      
+      // ▼ログをその場で画面上に追加（上に表示）
+
+      // 現在時刻をHH:mmで取得
+      const now = new Date();
+      const hh = zeroPad(now.getHours(), 2);//時
+	  const mm = zeroPad(now.getMinutes(), 2);//分
+      const time = `${hh}:${mm}`;//時と分結合
+
+      // ログ表示用の要素作成
+      const logDiv = document.createElement("div");//divクラス作成
+      logDiv.classList.add("mood_log_entry"); // CSS調整用クラス名
+      //<div>の中身HTML
+      logDiv.innerHTML = `
+        <span>${time}</span>　
+        <img src="${selectedMoodImg.src}" alt="気分" style="width: 60px; height: auto; vertical-align: middle; margin: 0 10px;">
+        <p>${comment}</p>
+      `;
+
+      // 作ったHTMLをmoodLogListの先頭に追加（新しい順）
+      if (moodLogList) {
+        moodLogList.insertBefore(logDiv, moodLogList.firstChild);
+      }
+    });
   }
-}
 }

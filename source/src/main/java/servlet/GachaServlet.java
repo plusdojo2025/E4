@@ -30,10 +30,11 @@ public class GachaServlet extends HttpServlet {
         // 実運用ではセッションからユーザーID取得を有効にする
         /*
         if (session == null || session.getAttribute("user_id") == null) {
-            response.sendRedirect("LoginServlet");
+            response.sendRedirect("/E4/LoginServlet");
             return;
         } else {
-            userId = (int) session.getAttribute("user_id");
+        	User user = (User) session.getAttribute("user");
+        	int userId = user.getId();
         }
         */
 
