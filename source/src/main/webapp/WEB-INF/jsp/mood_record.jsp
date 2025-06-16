@@ -48,6 +48,7 @@
 					<textarea name="comment" placeholder="ひとこと記録しませんか？※140字以内">${registeredComment}</textarea>
 				</div>
 
+				<input type = "hidden" name = "day" value = "${selectedDay}">
 				<!-- 登録ボタン -->
 				<div class="submit-area">
 					<button type="submit" name="registerButton">登録</button>
