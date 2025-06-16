@@ -146,6 +146,7 @@
   height: 120px;
   width: 100vw;
   box-sizing: border-box;
+  margin-top: -2em;
 }
 
 .titlelogo {
