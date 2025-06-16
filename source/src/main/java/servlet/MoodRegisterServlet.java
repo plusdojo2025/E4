@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 //--------和田追加----------------------------
+import java.util.Collections;
 import java.util.List;
 
 //-------------------------------------------
@@ -44,6 +45,8 @@ public class MoodRegisterServlet extends HttpServlet {
 		 // DAOで登録済みログ一覧を取得
 	    MoodRecordDAO dao = new MoodRecordDAO();
 	    List<MoodRecord> moodList = dao.findAllByUser(userId);
+	 // 新しい順に並べる 
+	    Collections.reverse(moodList);
 	    request.setAttribute("moodList", moodList);
 		//----------------------------------------------------
 
@@ -90,7 +93,12 @@ public class MoodRegisterServlet extends HttpServlet {
 		if (success) {
 			//-------------和田追加----------------
 			//response.sendRedirect("MoodRegisterServlet");
-			doGet(request, response);
+	
+			// 入力内容をリクエストスコープに保存（再表示用）
+		    request.setAttribute("registeredMood", mood);
+		    request.setAttribute("registeredComment", comment);
+		    doGet(request, response);
+
 			//----------------------------------
 		} else {
 			request.setAttribute("error", "気分の登録に失敗しました");

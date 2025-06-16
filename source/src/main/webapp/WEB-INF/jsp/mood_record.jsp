@@ -34,9 +34,9 @@
 		 <div id="moodSelectButton">
 		 
 	  <c:choose>
-			  <c:when test="${not empty param.mood}">
+			  <c:when test="${not empty registeredMood}">
 				  <img id="selectedMood"
-					         src="${pageContext.request.contextPath}/images/mood_${param.mood}.png"
+					         src="${pageContext.request.contextPath}/images/mood_${registeredMood}.png"
 					         alt="今日の気分" style="width: 100px; height: auto;">
 			  </c:when>
 		      <c:otherwise>
@@ -47,16 +47,17 @@
 	  </c:choose>	
 						
 	<!-- 選択された気分差し込み用 -->
-			 <input id="moodInput" type="hidden" name="mood" value="${param.mood}">
+			 <input id="moodInput" type="hidden" name="mood" value="${registeredMood}">
 		 </div>
 		 
 		 <div id="commentArea">
-		 	 <textarea name="comment" placeholder="ひとこと記録しませんか？※140字以内">${param.comment}</textarea>
+		 	 <textarea name="comment" placeholder="ひとこと記録しませんか？※140字以内">${registeredComment}</textarea>
 		 </div>
 		 
 		 <div id="registerButton">
 		 	 <button type="submit" name="registerButton">登録</button>
 		 </div>
+		 <div id="errorMessage"></div>
 	 
 	 </form>
 	 
@@ -66,15 +67,14 @@
 		 <!-- ログ表示 -->
 		 <div>
 		 	<ul id="moodLogList"></ul>
-		 </div>
-	 
-	 <c:forEach var="record" items="${moodList}">
-  <div class="mood-log-entry">
-    <img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分${record.mood}" style="width: 60px;">
-    <span>${record.created_at}</span>
-    <p>${record.comment}</p>
-  </div>
-</c:forEach>
+		</div>
+	<c:forEach var="record" items="${moodList}">
+		    <div class="mood-log-entry">
+			  	<span>${record.created_at}</span>
+			    <img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分" style="width: 20%; height: auto;"/>
+			    <p>${record.comment}</p>
+		  </div>
+	</c:forEach>
 	 
 	 
 		 <!-- モーダル本体 -->

@@ -36,7 +36,7 @@ public class MoodRecordDAO {
 	// 日時から時刻だけを切り出して使うならtime、日時を丸ごと使うならcreated_at
 	public List<MoodRecord> findAllByUser(int userId) {
 		List<MoodRecord> list = new ArrayList<>();
-		String sql = "SELECT * FROM mood_records WHERE user_id = ? ORDER BY created_at";
+		String sql = "SELECT * FROM mood_records WHERE user_id = ? ORDER BY created_at DESC";
 
 		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
