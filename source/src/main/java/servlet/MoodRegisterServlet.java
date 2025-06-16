@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-//--------和田追加----------------------------
-import java.util.Collections;
 import java.util.List;
 
 //-------------------------------------------
@@ -46,7 +44,6 @@ public class MoodRegisterServlet extends HttpServlet {
 	    MoodRecordDAO dao = new MoodRecordDAO();
 	    List<MoodRecord> moodList = dao.findAllByUser(userId);
 	 // 新しい順に並べる 
-	    Collections.reverse(moodList);
 	    request.setAttribute("moodList", moodList);
 		//----------------------------------------------------
 

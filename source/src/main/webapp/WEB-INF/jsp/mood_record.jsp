@@ -69,7 +69,7 @@
 		 	<ul id="moodLogList"></ul>
 		</div>
 	<c:forEach var="record" items="${moodList}">
-		    <div class="mood-log-entry">
+		    <div class="mood_log_entry">
 			  	<span>${record.created_at}</span>
 			    <img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分" style="width: 20%; height: auto;"/>
 			    <p>${record.comment}</p>

@@ -84,6 +84,9 @@ document.querySelector("form").addEventListener("submit", function(e) {
     const comment = document.querySelector("textarea").value;
     const errorMessageDiv = document.getElementById("errorMessage");
     
+     const selectedMoodImg = document.getElementById("selectedMood");
+      const moodLogList = document.getElementById("moodLogList");
+      
      errorMessageDiv.textContent = ""; // 前のエラーを消す
 
      // 気分が選ばれていない
@@ -99,12 +102,29 @@ document.querySelector("form").addEventListener("submit", function(e) {
         e.preventDefault(); // フォーム送信キャンセル
         return;
       }
-      // ログ一覧の先頭に追加（上に表示）
-      moodLogList.insertBefore(logDiv, moodLogList.firstChild);
-  });
+      
+      // ▼ログをその場で画面上に追加（上に表示）
 
+      // 現在時刻をHH:mmで取得
+      const now = new Date();
+      const hh = zeroPad(now.getHours(), 2);//時
+	  const mm = zeroPad(now.getMinutes(), 2);//分
+      const time = `${hh}:${mm}`;//時と分結合
 
-	
-    
+      // ログ表示用の要素作成
+      const logDiv = document.createElement("div");//divクラス作成
+      logDiv.classList.add("mood_log_entry"); // CSS調整用クラス名
+      //<div>の中身HTML
+      logDiv.innerHTML = `
+        <span>${time}</span>　
+        <img src="${selectedMoodImg.src}" alt="気分" style="width: 60px; height: auto; vertical-align: middle; margin: 0 10px;">
+        <p>${comment}</p>
+      `;
+
+      // 作ったHTMLをmoodLogListの先頭に追加（新しい順）
+      if (moodLogList) {
+        moodLogList.insertBefore(logDiv, moodLogList.firstChild);
+      }
+    });
   }
 }
