@@ -185,3 +185,11 @@
 	transition: color 0.2s ease;
 }
 
+/* 気分登録の上の日付 */
+.selected-date {
+  margin: 10px 0;
+  text-align: center;
+  color: #666;
+  font-size: 30px;
+}
+

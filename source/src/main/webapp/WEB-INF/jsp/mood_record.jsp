@@ -20,6 +20,13 @@
 	<main>
 		<div class="mood-container">
 
+			 <!--  選択された日付を表示 -->
+  			<c:if test="${not empty selectedDay}">
+			    <div class="selected-date">
+			      <p style="font-weight:bold; font-size: 1.2em;">${selectedDay} </p>
+			    </div>
+			 </c:if>
+			
 			<!-- 気分登録フォーム -->
 			<form action="MoodRegisterServlet" method="post" class="mood-form">
 				
@@ -53,7 +60,7 @@
 			<!-- 今日のご褒美 -->
 			<div class="reward-section">
 				<h3>今日のご褒美</h3>
-				<!-- （ここにご褒美の内容を入れる場合、今後拡張可能） -->
+				<!-- （ここにご褒美の内容を入れる） -->
 			</div>
 
 			<!-- 気分ログ -->
