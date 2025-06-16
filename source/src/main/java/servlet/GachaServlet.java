@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
@@ -24,19 +23,20 @@ public class GachaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
+        
         int userId = 1; // テスト用に仮置き(本番は必ず消す)
 
         // 実運用ではセッションからユーザーID取得を有効にする
-        /*
-        if (session == null || session.getAttribute("user_id") == null) {
-            response.sendRedirect("/E4/LoginServlet");
-            return;
-        } else {
-        	User user = (User) session.getAttribute("user");
-        	int userId = user.getId();
-        }
-        */
+        
+//        HttpSession session = request.getSession(false);
+//        if (session == null || session.getAttribute("user_id") == null) {
+//            response.sendRedirect("/E4/LoginServlet");
+//            return;
+//        } else {
+//        	User user = (User) session.getAttribute("user");
+//        	int userId = user.getId();
+//        }
+//        
 
         int mood = getTodayMood(userId);
 
