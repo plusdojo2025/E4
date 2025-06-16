@@ -32,7 +32,7 @@ public class MoodRecordDAO {
 		}
 	}
 
-	// 指定ユーザーの気分記録をcreated_atの昇順で取得する
+	// 指定ユーザーの気分記録をcreated_atの降順で取得する
 	// created_atにしたのはCURRENT_TIMESTAMPを使うならtimeだと時：分；秒しか取得出来ず、年月日と時:分:秒（日時すべて）を取得出来ないからです。
 	// 日時から時刻だけを切り出して使うならtime、日時を丸ごと使うならcreated_at
 	public List<MoodRecord> findAllByUser(int userId) {
