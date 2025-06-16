@@ -61,7 +61,14 @@
 			<!-- 今日のご褒美 -->
 			<div class="reward-section">
 				<h3>今日のご褒美</h3>
-				<!-- （ここにご褒美の内容を入れる） -->
+					<c:choose>
+						 <c:when test="${alreadyDrawn}">
+						    <p>今日のご褒美: ${rewardItem}</p>
+						 </c:when>
+						 <c:otherwise>
+						    <p>まだご褒美はありません</p>
+						 </c:otherwise>
+					</c:choose>
 			</div>
 
 			<!-- 気分ログ -->
