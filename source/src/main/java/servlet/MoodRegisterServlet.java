@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-//-------------------------------------------
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DailyMoodDAO;
 import dao.MoodRecordDAO;
+import dao.RewardsDAO;
 import model.MoodRecord;
+import model.Rewards;
 
 @WebServlet("/MoodRegisterServlet")
 public class MoodRegisterServlet extends HttpServlet {
@@ -94,6 +95,22 @@ public class MoodRegisterServlet extends HttpServlet {
 		if (commentParam != null) {
 			request.setAttribute("registeredComment", commentParam);
 		}
+		
+		// 今日のご褒美情報を取得し、JSPに渡す
+        RewardsDAO rewardsDAO = new RewardsDAO();
+        Date todayDate = Date.valueOf(LocalDate.now());
+        List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, todayDate);
+
+        if (todayRewards.isEmpty()) {
+            // 今日まだ引いていない
+            request.setAttribute("rewardItem", "まだご褒美はありません");
+            request.setAttribute("alreadyDrawn", false);
+        } else {
+            // 今日すでに引いている
+            request.setAttribute("rewardItem", todayRewards.get(0).getGacha_item());
+            request.setAttribute("alreadyDrawn", true);
+        }
+		
 		
 		// JSPへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
