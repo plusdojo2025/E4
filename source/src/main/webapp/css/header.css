@@ -144,12 +144,17 @@
   background-color: white;
   position: relative;
   height: 120px;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
 .titlelogo {
   display: flex;
   align-items: center;
   gap: 16px;
+  max-width: 100%;  
+  overflow-wrap: break-word;
+  white-space: nowrap;
 }
 
 .titlelogo a:last-child img {

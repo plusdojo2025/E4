@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 横スクロールを防止 */
+}
+
 /* 背景色　*/
 body {
   margin: 0;

@@ -88,9 +88,7 @@ public class GachaServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    /**
-     * 今日の気分をMoodRecordDAOから取得するメソッド
-     */
+    // 今日の気分をMoodRecordDAOから取得するメソッド
     private int getTodayMood(int userId) {
         MoodRecordDAO moodDao = new MoodRecordDAO();
         Date today = new Date(System.currentTimeMillis());

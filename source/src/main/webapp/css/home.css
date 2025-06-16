@@ -1,45 +1,115 @@
 @charset "UTF-8";
 
+/* カレンダー全体のコンテナ */
 .homecontainer {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: 2em 1em;
 }
 
+/* 月の見出し */
 h2 {
-	color: white;
+	color: #fff;
+	font-size: 2.4rem;
+	margin-bottom: 1.2em;
 }
 
+/* カレンダーの白い枠 */
 table {
-	background-color: white;
-	padding: 2em;
+	border-collapse: separate;
+	border-spacing: 0.5em;
+	background-color: #fff;
+	padding: 1.5em 1em;
 	border-radius: 2em;
-	width: 25em;
-	height: 24em;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* 曜日ヘッダー */
+th {
+	color: #888;
+	font-weight: normal;
+	font-size: 1rem;
+	padding: 0.4em;
+}
+
+/* 日付セル */
+td {
+	width: 2.5em;
+	height: 2.5em;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 50%;
+	font-size: 1rem;
+	color: #888;
+	background-color: #f3f3f3;
+	transition: transform 0.2s;
+	cursor: pointer;
+}
+
+/* 空白セル */
+.emptyday {
+	background-color: transparent;
+	cursor: default;
+}
+
+/* ホバー時（通常日） */
+td:hover:not(.emptyday):not([class*="mood"]) {
+	background-color: #dcdcdc;
+	color: #555;
+	transform: scale(1.05);
+}
+
+/* mood別の色（①〜⑤） */
 .mood1 {
-	background-color: blue;
-	border-radius: 10em;
+	background-color: #45A0E8; /* 青 */
+	color: #fff;
 }
-
 .mood2 {
-	background-color: green;
-	border-radius: 10em;
+	background-color: #6AB960; /* 緑 */
+	color: #fff;
 }
-
 .mood3 {
-	background-color: yellow;
-	border-radius: 10em;
+	background-color: #F5D147; /* 黄 */
+	color: #fff;
 }
-
 .mood4 {
-	background-color: orange;
-	border-radius: 10em;
+	background-color: #F19E2F; /* 橙 */
+	color: #fff;
+}
+.mood5 {
+	background-color: #FE5E48; /* 赤 */
+	color: #fff;
 }
 
-.mood5 {
-	background-color: red;
-	border-radius: 10em;
+/* クリック時のアニメ */
+td:active {
+	transform: scale(0.92);
+}
+
+/* モバイル向けレスポンシブ対応 */
+@media screen and (max-width: 600px) {
+	.homecontainer {
+		padding: 2em 0.5em;
+	}
+
+	table {
+		width: 100%;
+		max-width: 360px; /* カレンダーの最大幅を指定 */
+		padding: 2em 1em;
+		border-radius: 2em;
+		margin: 0 auto;
+	}
+
+	td, th {
+		width: 2.8em;
+		height: 2.8em;
+		font-size: 0.9rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+		margin-bottom: 1em;
+	}
 }
