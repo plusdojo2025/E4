@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
@@ -26,21 +25,19 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-    	// セッションの取得（ログイン情報の確認）
-    	HttpSession session = request.getSession(false);
-    	
     	int userId = 1; // テスト用に仮置き
- /*   	
-    	if (session == null || session.getAttribute("user") == null) {
-    		// セッションなしはログインページへ
-    		response.sendRedirect("/E4/LoginServlet");
-    		return;
-    	}
-   	
-    	 // ログインユーザー情報を取得
-        User user = (User) session.getAttribute("user");
-        int userId = user.getId();
-*/
+    	
+    	// セッションの取得（ログイン情報の確認）
+//    	HttpSession session = request.getSession(false);
+//    	if (session == null || session.getAttribute("user") == null) {
+//    		// セッションなしはログインページへ
+//    		response.sendRedirect("/E4/LoginServlet");
+//    		return;
+//    	}
+//    	 // ログインユーザー情報を取得
+//        User user = (User) session.getAttribute("user");
+//        int userId = user.getId();
+        
         // 今週の開始日（月曜日）と終了日（金曜日）を計算
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
