@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,8 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
+
+    	
     	int userId = 1; // テスト用に仮置き
     	
     	// セッションの取得（ログイン情報の確認）
@@ -37,7 +40,7 @@ public class ReportServlet extends HttpServlet {
 //    	 // ログインユーザー情報を取得
 //        User user = (User) session.getAttribute("user");
 //        int userId = user.getId();
-        
+
         // 今週の開始日（月曜日）と終了日（金曜日）を計算
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
@@ -52,12 +55,37 @@ public class ReportServlet extends HttpServlet {
         RewardsDAO rewardsDao = new RewardsDAO();
 
         // 今週の月曜～金曜の間の記録を取得
-        List<MoodRecord> moodList = moodDao.findAllByUser(userId);
-		List<Rewards> rewardList = rewardsDao.getWeeklyRewards(userId, weekStartDate, weekEndDate);
+        List<MoodRecord> allMoodList = moodDao.findAllByUser(userId);
         
-        // リクエストスコープにセット
-        request.setAttribute("moodList", moodList);
-		request.setAttribute("rewardList", rewardList);
+        //  moodList に絞り込む
+        List<MoodRecord> weekMoodList = allMoodList.stream()
+            .filter(m -> !m.getRecord_date().before(weekStartDate) && !m.getRecord_date().after(weekEndDate))
+            .collect(Collectors.toList());
+
+        // 平均疲労度を計算 
+        double fatigueLevel = weekMoodList.stream()
+            .mapToInt(MoodRecord::getMood)
+            .average()
+            .orElse(0);
+
+        // 最も疲れた日を計算（気分が最小値の日）
+        MoodRecord mostTired = weekMoodList.stream()
+            .min((m1, m2) -> Integer.compare(m1.getMood(), m2.getMood()))
+            .orElse(null);
+        String tiredDay = mostTired != null ? mostTired.getRecord_date().toString() : "該当なし";
+
+        // 今週のご褒美を取得
+		List<Rewards> rewardList = rewardsDao.getWeeklyRewards(userId, weekStartDate, weekEndDate);
+
+        // ガチャ回数を rewardList.size() で取得 
+        int gachaCount = rewardList.size();
+
+        // JSPに渡す変数名を JSP と一致させる
+        request.setAttribute("moodList", weekMoodList);        // グラフ用
+		request.setAttribute("weeklyReward", rewardList);      // ご褒美一覧
+		request.setAttribute("fatigueLevel", fatigueLevel);    // 平均疲労度
+		request.setAttribute("tiredDay", tiredDay);            // 最も疲れた日
+		request.setAttribute("Gacha", gachaCount);             // ガチャ回数
 		request.setAttribute("weekStart", weekStartDate);
 		request.setAttribute("weekEnd", weekEndDate);
     	
