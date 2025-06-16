@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,7 @@
 				<h3>今日のご褒美</h3>
 					<c:choose>
 						 <c:when test="${alreadyDrawn}">
-						    <p>今日のご褒美: ${rewardItem}</p>
+						    <p>${rewardItem}</p>
 						 </c:when>
 						 <c:otherwise>
 						    <p>まだご褒美はありません</p>
@@ -77,9 +78,11 @@
 
 				<c:forEach var="record" items="${moodList}">
 					<div class="mood-log-entry">
-						<span class="log-date">${record.created_at}</span>
+						<span class="log-date">
+  							<fmt:formatDate value="${record.created_at}" pattern="HH:mm" />
+						</span>
 						<img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分" class="log-mood-img" />
-						<p class="log-comment">${record.comment}</p>
+						<!--  <p class="log-comment">${record.comment}</p>-->
 					</div>
 				</c:forEach>
 			</div>
