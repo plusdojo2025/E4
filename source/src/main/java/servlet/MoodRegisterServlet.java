@@ -28,12 +28,10 @@ public class MoodRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// ログインチェック
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("user_id") == null) {
-//			response.sendRedirect("/E4/LoginServlet");
-//			return;
-//		}
+
+//    	HttpSession session = request.getSession(false);
+//      User user = (User) session.getAttribute("user");
+//      int userId = user.getId();
 
 		// 現在時刻を取得（時:分表示用）
 		LocalTime now = LocalTime.now();
@@ -107,16 +105,12 @@ public class MoodRegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		// ログインチェック
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("user_id") == null) {
-//			response.sendRedirect("/E4/LoginServlet");
-//			return;
-//		}
+//    	HttpSession session = request.getSession(false);
+//      User user = (User) session.getAttribute("user");
+//      int userId = user.getId();
 
 		// セッションからuser_id取得
 		int userId = 1;/*テストのため仮置き、後で消す*/
-		//Integer userId = (Integer) session.getAttribute("user_id");/*後でコメントアウト取り消す*/
 
 		// パラメータ取得
 		int mood = Integer.parseInt(request.getParameter("mood"));

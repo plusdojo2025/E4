@@ -30,16 +30,10 @@ public class ReportServlet extends HttpServlet {
     	
     	int userId = 1; // テスト用に仮置き
     	
-    	// セッションの取得（ログイン情報の確認）
+    	// セッションの取得（ログイン情報の取得）
 //    	HttpSession session = request.getSession(false);
-//    	if (session == null || session.getAttribute("user") == null) {
-//    		// セッションなしはログインページへ
-//    		response.sendRedirect("/E4/LoginServlet");
-//    		return;
-//    	}
-//    	 // ログインユーザー情報を取得
-//        User user = (User) session.getAttribute("user");
-//        int userId = user.getId();
+//      User user = (User) session.getAttribute("user");
+//      int userId = user.getId();
 
         // 今週の開始日（月曜日）と終了日（金曜日）を計算
         LocalDate today = LocalDate.now();
