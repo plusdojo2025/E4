@@ -20,12 +20,6 @@ public class AccountServlet extends HttpServlet {
 
 		// セッションの取得（ログイン情報の確認）
 		HttpSession session = request.getSession(false);
-		
-		if (session == null || session.getAttribute("user") == null) {
-			// セッションなしはログインページへ
-			response.sendRedirect("/E4/LoginServlet");
-			return;
-		}
 
 		// ユーザー情報（メールアドレス）を取得
 		User user = (User) session.getAttribute("user");
@@ -45,7 +39,7 @@ public class AccountServlet extends HttpServlet {
 		session.invalidate();
 
 		// ログインページにリダイレクトする
-		response.sendRedirect("/E4/LoginServlet");
+		response.sendRedirect(request.getContextPath() + "/LoginServlet");
 
 	}
 }

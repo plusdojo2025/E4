@@ -28,10 +28,6 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("user") == null) {
-			response.sendRedirect("/E4/LoginServlet");
-			return;
-		}
 		User user = (User) session.getAttribute("user");
 		int userId = user.getId();
 

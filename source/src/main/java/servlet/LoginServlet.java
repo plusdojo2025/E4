@@ -38,11 +38,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", dao.selectByEmail(email));
 
-			response.sendRedirect("/E4/HomeServlet");
+			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 		} else { // ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 			// request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。",
-			// "/E4/LoginServlet"));
+			// request.getContextPath()+"/LoginServlet"));
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");

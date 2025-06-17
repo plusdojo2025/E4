@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-//-------------------------------------------
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DailyMoodDAO;
 import dao.MoodRecordDAO;
+import dao.RewardsDAO;
 import model.MoodRecord;
+import model.Rewards;
 
 @WebServlet("/MoodRegisterServlet")
 public class MoodRegisterServlet extends HttpServlet {
@@ -28,12 +29,10 @@ public class MoodRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// ログインチェック
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("user_id") == null) {
-//			response.sendRedirect("/E4/LoginServlet");
-//			return;
-//		}
+
+//    	HttpSession session = request.getSession(false);
+//      User user = (User) session.getAttribute("user");
+//      int userId = user.getId();
 
 		// 現在時刻を取得（時:分表示用）
 		LocalTime now = LocalTime.now();
@@ -46,17 +45,16 @@ public class MoodRegisterServlet extends HttpServlet {
 		 // DAOで登録済みログ一覧を取得
 		String dayStr = request.getParameter("day");
 		List<MoodRecord> moodList;
+		
+		LocalDate selectedDate = LocalDate.now(); // デフォルトは今日
 
 		if (dayStr != null && !dayStr.trim().isEmpty()) {
-	    	
 	    	try {
 	    	//今月・今年の年月と組み合わせてDateを作る
-            LocalDate today = LocalDate.now();
-            int day = Integer.parseInt(dayStr);//dayStrをintに変換
-            
-            // ここでtargetDateを作成
-            LocalDate targetDate = LocalDate.of(today.getYear(), today.getMonth(), day);
-            Date sqlDate = Date.valueOf(targetDate);
+	    		 int day = Integer.parseInt(dayStr);
+	                selectedDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
+	                Date sqlDate = Date.valueOf(selectedDate);
+
             
             //年月のday取得
             DailyMoodDAO dailyDao = new DailyMoodDAO();
@@ -97,6 +95,26 @@ public class MoodRegisterServlet extends HttpServlet {
 			request.setAttribute("registeredComment", commentParam);
 		}
 		
+		
+		
+		// 今日のご褒美情報を取得し、JSPに渡す
+        RewardsDAO rewardsDAO = new RewardsDAO();
+        Date todayDate = Date.valueOf(selectedDate);
+        List<Rewards> rewards = rewardsDAO.getTodayRewards(userId, todayDate);
+        
+//---------和田追加---------↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓------↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓------↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+        if (rewards.isEmpty()) {
+            // 今日まだ引いていない
+        	  request.setAttribute("rewardItem", "まだご褒美はありません");
+              request.setAttribute("alreadyDrawn", false);
+        } else {
+            // 今日すでに引いている
+        	 request.setAttribute("rewardItem", rewards.get(0).getGacha_item());
+             request.setAttribute("alreadyDrawn", true);
+         }
+//-----------------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--------↑↑↑↑↑↑↑↑↑↑↑
+		
+        
 		// JSPへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
 		dispatcher.forward(request, response);
@@ -107,16 +125,12 @@ public class MoodRegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		// ログインチェック
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("user_id") == null) {
-//			response.sendRedirect("/E4/LoginServlet");
-//			return;
-//		}
+//    	HttpSession session = request.getSession(false);
+//      User user = (User) session.getAttribute("user");
+//      int userId = user.getId();
 
 		// セッションからuser_id取得
 		int userId = 1;/*テストのため仮置き、後で消す*/
-		//Integer userId = (Integer) session.getAttribute("user_id");/*後でコメントアウト取り消す*/
 
 		// パラメータ取得
 		int mood = Integer.parseInt(request.getParameter("mood"));
