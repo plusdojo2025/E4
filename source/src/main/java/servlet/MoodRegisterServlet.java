@@ -45,7 +45,7 @@ public class MoodRegisterServlet extends HttpServlet {
 		String dayStr = request.getParameter("day");
 		List<MoodRecord> moodList;
 		
-		LocalDate selectedDate = null(); // デフォルトは今日
+		LocalDate selectedDate = LocalDate.now(); // デフォルトは今日
 
 		if (dayStr != null && !dayStr.trim().isEmpty()) {
 	    	try {
@@ -70,8 +70,9 @@ public class MoodRegisterServlet extends HttpServlet {
         MoodRecordDAO dao = new MoodRecordDAO();
         moodList = dao.findAllByUser(userId);
     }
-	
-	    
+		//当日以外の画面表示
+		boolean isToday = selectedDate.equals(LocalDate.now());
+		request.setAttribute("isToday", isToday);
 	    
 	 // 新しい順に表示
 	    request.setAttribute("moodList", moodList);
