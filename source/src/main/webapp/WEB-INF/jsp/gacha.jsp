@@ -54,7 +54,14 @@
 
 <script>
 // 初回ガチャ用の封筒開封＋モーダル演出
+let alreadyOpened = false;
+
 function openEnvelope() {
+    // すでに開いていたら何もしない
+    if (alreadyOpened) return;
+
+    alreadyOpened = true; // フラグを立てる
+
     document.getElementById("envelope-closed").style.display = "none";
     const opened = document.getElementById("envelope-opened");
     opened.style.display = "inline";
@@ -67,8 +74,7 @@ function openEnvelope() {
         modal.classList.add("show");
     }, 800);
 }
-
-// 藤野追加 モーダル閉じる
+//藤野追加 モーダル閉じる
 function closeModal() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("reward-modal").style.display = "none";
