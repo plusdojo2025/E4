@@ -22,7 +22,7 @@
 
 <main class="login-container">
     <h2>ログイン</h2>
-	<form action="<c:url value='/LoginServlet'/>" method="post" class="">
+	<form action="${pageContext.request.contextPath}/LoginServlet" method="post" class="">
         <input type="text" name="email" placeholder="メールアドレス" required><br>
         <input type="password" name="password" placeholder="PW" required><br>
         <p class="">※英数字混合8文字以上</p>
