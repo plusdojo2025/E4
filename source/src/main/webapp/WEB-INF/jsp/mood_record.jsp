@@ -8,11 +8,11 @@
 	<title>気分登録</title>
 
 	<!-- 共通CSS -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
+	<link rel="stylesheet" href="<c:url value='/css/common.css' />">
+	<link rel="stylesheet" href="<c:url value='/css/header.css' />">
 
 	<!-- 気分登録専用CSS -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mood_record.css">
+	<link rel="stylesheet" href="<c:url value='/css/mood_record.css' />">
 </head>
 <body>
 
@@ -31,17 +31,17 @@
 			<!-- 気分登録フォーム -->
 		<div id="formArea">
 			<c:if test="${isToday}">
-			<form action="MoodRegisterServlet" method="post" class="mood-form">
+			<form action="<c:url value='/MoodRegisterServlet.java' />" method="post" class="mood-form">
 				
 				<!-- 気分選択ボタン（画像） -->
 			
 				<div class="mood-select-area" id="moodSelectButton">
 					<c:choose>
 						<c:when test="${not empty registeredMood}">
-							<img id="selectedMood" src="${pageContext.request.contextPath}/images/mood_${registeredMood}.png" alt="今日の気分" class="mood-selected-img">
+							<img id="selectedMood" src="<c:url value='/images/mood_${registeredMood}.png' />" alt="今日の気分" class="mood-selected-img">
 						</c:when>
 						<c:otherwise>
-							<img id="selectedMood" src="${pageContext.request.contextPath}/images/mood_new.png" alt="今日の気分は？" class="mood-selected-img">
+							<img id="selectedMood" src="<c:url value='/images/mood_new.png' />" alt="今日の気分は？" class="mood-selected-img">
 						</c:otherwise>
 					</c:choose>
 					<input type="hidden" id="moodInput" name="mood" value="${registeredMood}">
@@ -87,7 +87,7 @@
 						<span class="log-date">
   							<fmt:formatDate value="${record.created_at}" pattern="HH:mm" />
 						</span>
-						<img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分" class="log-mood-img" />
+						<img src="<c:url value='/images/mood_${record.mood}.png' />" alt="気分" class="log-mood-img" />
 						<p class="log-comment">${record.comment}</p>
 					</div>
 				</c:forEach>
@@ -103,7 +103,7 @@
 
 					<div class="mood-options">
 						<c:forEach begin="1" end="5" var="i">
-							<img class="mood-image" data-mood="${i}" src="${pageContext.request.contextPath}/images/mood_${i}.png" alt="気分${i}">
+							<img class="mood-image" data-mood="${i}" src="<c:url value='/images/mood_${i}.png' />" alt="気分${i}">
 						</c:forEach>
 					</div>
 
@@ -118,10 +118,8 @@
 	</main>
 
 	<!-- モーダル制御用JS -->
-	<script type="module">
-		import { ModalController } from './js/mood_record.js';
-		new ModalController();
-	</script>
+	
+	<script src="<c:url value='/js/mood_record.js' />"></script>
 
 </body>
 </html>

@@ -116,7 +116,7 @@ public class MoodRegisterServlet extends HttpServlet {
 		
         
 		// JSPへフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/mood_record.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -188,7 +188,7 @@ public class MoodRegisterServlet extends HttpServlet {
 			//----------------------------------
 		} else {
 			request.setAttribute("error", "気分の登録に失敗しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/mood_record.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
