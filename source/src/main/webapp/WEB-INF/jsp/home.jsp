@@ -19,7 +19,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/home.css">
 
-<!-- <script src="${pageContext.request.contextPath}/js/home.js"></script> -->
+<script src="${pageContext.request.contextPath}/js/home.js"></script>
 </head>
 <body>
 
