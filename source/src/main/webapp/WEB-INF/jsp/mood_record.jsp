@@ -30,6 +30,7 @@
 			
 			<!-- 気分登録フォーム -->
 		<div id="formArea">
+			<c:if test="${isToday}">
 			<form action="MoodRegisterServlet" method="post" class="mood-form">
 				
 				<!-- 気分選択ボタン（画像） -->
@@ -61,6 +62,7 @@
 				<!-- エラーメッセージ表示 -->
 				<div id="errorMessage" class="error-message"></div>
 			</form>
+			</c:if>
 		</div>	
 
 			<!-- 今日のご褒美 -->
