@@ -41,8 +41,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-  display: none;
+  z-index: 999;
 }
 
 #reward-modal {
@@ -184,7 +183,7 @@
     max-width: 360px;
     padding: 40px 10px;
     margin: 40px auto;
-    min-height: 360px;
+    min-height: 450px;
     box-sizing: border-box;
     line-height: 1.6;
     word-break: keep-all; 
@@ -214,4 +213,13 @@
   .gacha-container p {
     font-size: 1.1rem;
   }
+}
+.gacha-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* ヘッダー分差し引き。必要に応じて調整 */
+  padding-top: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
 }
