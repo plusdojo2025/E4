@@ -17,43 +17,33 @@
 <c:choose>
   <c:when test="${alreadyDrawn}">
     <div class="gacha-container">
-      <p>本日の退勤ガチャは終了しました</p>
-      <div class="tap-msg">引いたご褒美はこちら！</div>
-      <div class="envelope-wrapper">
-        <div class="envelope">
-          <img src="${openedImage}" alt="開いた封筒" width="120" class="opened-smooth" />
-        </div>
-        <div class="envelope-shadow"></div>
-      </div>
-    </div>
+      <p class="gacha-finished">本日の退勤ガチャは終了しました</p>
 
-    <!-- モーダルを最初から表示 -->
-    <div class="overlay" id="overlay" style="display:block;"></div>
-    <div class="modal" id="reward-modal" style="display:block;" class="show">
-        <div class="close-btn" onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">×</div>
+      <div class="reward-message">
         <h2>今日のご褒美</h2>
-        <p>
+        <p class="reward-text">
           <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
         </p>
+      </div>
     </div>
   </c:when>
 
   <c:otherwise>
     <div class="gacha-container">
       <div class="envelope" onclick="openEnvelope()">
-          <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" class="floating"/>
-          <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
+        <img id="envelope-closed" src="${closedImage}" alt="封筒" width="120" class="floating"/>
+        <img id="envelope-opened" src="${openedImage}" alt="開いた封筒" width="120" style="display:none;" />
       </div>   
       <div class="tap-msg">画面をタップ！</div>
 
       <!-- モーダル（初回は非表示） -->
       <div class="overlay" id="overlay" style="display:none;"></div>
       <div class="modal" id="reward-modal" style="display:none;">
-          <div class="close-btn" onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">×</div>
-          <h2>今日のご褒美</h2>
-          <p>
-            <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
-          </p>
+        <div class="close-btn" onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">×</div>
+        <h2>今日のご褒美</h2>
+        <p>
+          <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
+        </p>
       </div>
     </div>
   </c:otherwise>
