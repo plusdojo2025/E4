@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DailyMoodDAO;
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
 import model.MoodRecord;
@@ -57,7 +56,7 @@ public class MoodRegisterServlet extends HttpServlet {
 
             
             //年月のday取得
-            DailyMoodDAO dailyDao = new DailyMoodDAO();
+	        MoodRecordDAO dailyDao = new MoodRecordDAO();
             moodList = dailyDao.findByUserDate(userId, sqlDate);
             
 	    } catch(Exception e) {
