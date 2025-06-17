@@ -23,10 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (formArea) formArea.style.display = "block"; // 今日なら表示
     }
   }
+ 
 });
 
 //モーダル操作
-export class ModalController {
+class ModalController {
   constructor() {//ｊｓｐから取得
     this.moodButton = document.getElementById("moodSelectButton");//モーダル開く画像ボタン
     this.modal = document.getElementById("moodSelectModal");//モーダル本体
@@ -141,7 +142,7 @@ document.querySelector("form").addEventListener("submit", function(e) {
 
       // ログ表示用の要素作成
       const logDiv = document.createElement("div");//divクラス作成
-      logDiv.classList.add("mood_log_entry"); // CSS調整用クラス名
+      logDiv.classList.add("mood-log-entry"); // CSS調整用クラス名
       //<div>の中身HTML
       logDiv.innerHTML = `
         <span>${time}</span>　

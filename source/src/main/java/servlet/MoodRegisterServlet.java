@@ -81,7 +81,8 @@ public class MoodRegisterServlet extends HttpServlet {
 		//---------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑---------↑↑↑↑↑↑↑↑↑↑↑↑↑↑-----------↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	    
 		// 画面に渡す
-	    request.setAttribute("selectedDay", dayStr);//日付
+//	    request.setAttribute("selectedDate", dayStr);//日付
+	    request.setAttribute("selectedDate", selectedDate.toString());
 		request.setAttribute("currentTime", currentTime);//現在時刻
 
 		// リダイレクト後の mood/comment 表示用
@@ -116,7 +117,7 @@ public class MoodRegisterServlet extends HttpServlet {
 		
         
 		// JSPへフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/mood_record.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -166,29 +167,18 @@ public class MoodRegisterServlet extends HttpServlet {
 		// 成功・失敗（ご褒美表示は今後追加）
 		if (success) {
 			//-------------和田追加----------------
-			//response.sendRedirect("MoodRegisterServlet");
-			//response.sendRedirect("MoodRegisterServlet?day=" + dayStr);
-			
+		
 			// --- パラメータをURLに含めてリダイレクト ---
 						String redirectURL = "MoodRegisterServlet?day=" + dayStr +
 							"&mood=" + mood +
 							"&comment=" + URLEncoder.encode(comment, "UTF-8");
 
 						response.sendRedirect(redirectURL);
-			
-			// 入力内容をリクエストスコープに保存（再表示用）
-		   // request.setAttribute("registeredMood", mood);
-		    //request.setAttribute("registeredComment", comment);
-		    
-		 // dayパラメータも引き継ぐ
-		    //request.setAttribute("day", dayStr);
-		    
-		   // doGet(request, response);
 
 			//----------------------------------
 		} else {
 			request.setAttribute("error", "気分の登録に失敗しました");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/mood_record.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/mood_record.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

@@ -31,7 +31,7 @@
 			<!-- 気分登録フォーム -->
 		<div id="formArea">
 			<c:if test="${isToday}">
-			<form action="<c:url value='/MoodRegisterServlet.java' />" method="post" class="mood-form">
+			<form action="<c:url value='/MoodRegisterServlet' />" method="post" class="mood-form">
 				
 				<!-- 気分選択ボタン（画像） -->
 			
@@ -96,7 +96,7 @@
 			<!-- モーダル -->
 			<div id="moodSelectModal" class="modal hidden">
 				<div class="modal-content">
-					<span class="close-button" onclick="closeModal()">×</span>
+					<!-- <span class="close-button" onclick="closeModal()">×</span> -->
 					<span id="closeModal" class="close-button">&times;</span>
 					<p>お疲れ様です！</p>
 					<p>今の気分はいかがですか？</p>
