@@ -82,7 +82,7 @@
   							<fmt:formatDate value="${record.created_at}" pattern="HH:mm" />
 						</span>
 						<img src="${pageContext.request.contextPath}/images/mood_${record.mood}.png" alt="気分" class="log-mood-img" />
-						<!--  <p class="log-comment">${record.comment}</p>-->
+						<p class="log-comment">${record.comment}</p>
 					</div>
 				</c:forEach>
 			</div>
