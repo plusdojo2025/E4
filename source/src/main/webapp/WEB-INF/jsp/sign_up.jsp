@@ -19,7 +19,7 @@
 </header>
 
 <main class="signup-container">
-	<form action="<c:url value='/SignUpServlet' />" method="post">
+	<form action="${pageContext.request.contextPath}/SignUpServlet" method="post">
 	<h2>新規登録</h2>
 		<input type="text" name="email" placeholder="メールアドレス"><br>
 		<input type="text" name="password" placeholder="PW"><br>

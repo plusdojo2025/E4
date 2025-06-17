@@ -39,11 +39,13 @@ public class SignUpServlet extends HttpServlet {
 		if (registeredUser != null) {
 			// 登録成功 → 成功メッセージを表示
 			// request.setAttribute("resultTitle", "登録成功");
-			request.setAttribute("nextUrl", request.getContextPath() + "/LoginServlet");
+//			request.setAttribute("nextUrl", request.getContextPath() + "/LoginServlet");
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
 		} else {
 			// 登録失敗（たとえばすでに同じemailがあるなど）
 			// request.setAttribute("resultTitle", "登録失敗");
-			request.setAttribute("nextUrl", request.getContextPath() + "/SignUpServlet");
+//			request.setAttribute("nextUrl", request.getContextPath() + "/SignUpServlet");
+			response.sendRedirect(request.getContextPath() + "/SignUpServlet");
 		}
 	}
 
