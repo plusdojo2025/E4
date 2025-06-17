@@ -39,7 +39,10 @@
       <!-- モーダル（初回は非表示） -->
       <div class="overlay" id="overlay" style="display:none;"></div>
       <div class="modal" id="reward-modal" style="display:none;">
+        <!-- 藤野変更 homeServletに飛ぶようになっていたため
         <div class="close-btn" onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">×</div>
+        -->
+        <div class="close-btn" onclick="closeModal()">×</div>
         <h2>今日のご褒美</h2>
         <p>
           <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
@@ -63,6 +66,12 @@ function openEnvelope() {
         modal.style.display = "block";
         modal.classList.add("show");
     }, 800);
+}
+
+// 藤野追加 モーダル閉じる
+function closeModal() {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("reward-modal").style.display = "none";
 }
 </script>
 
