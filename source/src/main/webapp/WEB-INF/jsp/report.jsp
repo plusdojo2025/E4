@@ -32,7 +32,7 @@
 		<div class="report-container">
 			<h2 class="section-title">今週の記録</h2>
 
-			<!-- 折れ線グラフ -->
+			<!-- 折れ線グラフ（スクロールラッパー） -->
 			<div class="chart-area">
 				<canvas id="chart"></canvas>
 			</div>
@@ -60,7 +60,7 @@
 		</div>
 	</main>
 
-	<!-- グラフ用データをJSONで渡す　jsファイルには書けない -->
+	<!-- グラフ用データをJSONで渡す -->
 	<script>
 		const labels = [
 			<c:forEach var="mood" items="${moodList}" varStatus="status">

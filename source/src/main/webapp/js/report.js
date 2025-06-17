@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const ctx = document.getElementById('chart').getContext('2d');
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
 
    // ここは色固定でもいい。一旦色変えてる
   const moodColors = {
@@ -11,6 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const pointColors = data.map(mood => moodColors[mood] || "#888");
+
+  const perPointWidth = 60;
+  const baseWidth = 600;
+  const calcWidth = Math.max(baseWidth, data.length * perPointWidth);
+  const fixedHeight = 400; 
+
+  canvas.width = calcWidth;
+  canvas.height = fixedHeight;
 
   const config = {
     type: 'line',
@@ -29,9 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      aspectRatio: 2,
+      responsive: false, 
+      maintainAspectRatio: false, 
       scales: {
         y: {
           min: 0,
@@ -40,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             stepSize: 1,
             precision: 0
           },
-          grace: 0.5, // 上端に少し余白を追加
+          grace: 0.5,
           title: {
             display: true,
             text: '疲労度'
@@ -48,7 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         x: {
           reverse: true,
-          offset: true, // 両端に余白をつける これが超重要……
+          offset: true,
+          ticks: {
+            autoSkip: false,
+            maxRotation: 0,
+            minRotation: 0
+          },
           title: {
             display: true,
             text: '登録時間 (HH:mm)'
