@@ -136,11 +136,26 @@ public class MoodRegisterServlet extends HttpServlet {
 		int mood = Integer.parseInt(request.getParameter("mood"));
 		String comment = request.getParameter("comment");
 		String dayStr = request.getParameter("day");
+		
+		//dayをDateに変換（登録と絞り込みをDateで行うため）
+		LocalDate recordDate;
+	    try {
+	        if (dayStr != null && !dayStr.trim().isEmpty()) {
+	            int day = Integer.parseInt(dayStr);
+	            LocalDate now = LocalDate.now();
+	            recordDate = LocalDate.of(now.getYear(), now.getMonth(), day);
+	        } else {
+	            recordDate = LocalDate.now();
+	        }
+	    } catch (Exception e) {
+	        recordDate = LocalDate.now();
+	    }
 
 		// 登録レコード生成
 		MoodRecord record = new MoodRecord();
 		record.setUser_id(userId);
-		record.setRecord_date(Date.valueOf(LocalDate.now()));
+//		record.setRecord_date(Date.valueOf(LocalDate.now()));
+		record.setRecord_date(Date.valueOf(recordDate)); // 
 		record.setMood(mood);
 		record.setComment(comment);
 
