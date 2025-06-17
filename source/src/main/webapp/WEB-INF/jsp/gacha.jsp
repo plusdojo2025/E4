@@ -14,46 +14,46 @@
 <body>
 
 <%@ include file="header.jsp" %>
-
-<c:choose>
-  <c:when test="${alreadyDrawn}">
-    <div class="gacha-container">
-      <p class="gacha-finished">本日の退勤ガチャは終了しました</p>
-
-      <div class="reward-message">
-        <h2>今日のご褒美</h2>
-        <p class="reward-text">
-          <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
-        </p>
-      </div>
-    </div>
-  </c:when>
-
-  <c:otherwise>
-    <div class="gacha-container">
-      <div class="envelope" onclick="openEnvelope()">
-        <img id="envelope-closed" src="<c:url value='${closedImage}' />" alt="封筒" width="120" class="floating"/>
-		<img id="envelope-opened" src="<c:url value='${openedImage}' />" alt="開いた封筒" width="120" style="display:none;" />
-      </div>   
-      <div class="tap-msg">画面をタップ！</div>
-
-      <!-- モーダル（初回は非表示） -->
-      <div class="overlay" id="overlay" style="display:none;"></div>
-      <div class="modal" id="reward-modal" style="display:none;">
-        <!-- 藤野変更 homeServletに飛ぶようになっていたため
-        <div class="close-btn" onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">×</div>
-        <div class="close-btn" onclick="closeModal()">×</div>
-        -->
-        <div class="close-btn" onclick="redirectToGacha()">×</div>
-        <h2>今日のご褒美</h2>
-        <p>
-          <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
-        </p>
-      </div>
-    </div>
-  </c:otherwise>
-</c:choose>
-
+<div class="gacha-wrapper">
+	<c:choose>
+	  <c:when test="${alreadyDrawn}">
+	    <div class="gacha-container">
+	      <p class="gacha-finished">本日の退勤ガチャは終了しました</p>
+	
+	      <div class="reward-message">
+	        <h2>今日のご褒美</h2>
+	        <p class="reward-text">
+	          <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
+	        </p>
+	      </div>
+	    </div>
+	  </c:when>
+	
+	  <c:otherwise>
+	    <div class="gacha-container">
+	      <div class="envelope" onclick="openEnvelope()">
+	        <img id="envelope-closed" src="<c:url value='${closedImage}' />" alt="封筒" width="120" class="floating"/>
+			<img id="envelope-opened" src="<c:url value='${openedImage}' />" alt="開いた封筒" width="120" style="display:none;" />
+	      </div>   
+	      <div class="tap-msg">画面をタップ！</div>
+	
+	      <!-- モーダル（初回は非表示） -->
+	      <div class="overlay" id="overlay" style="display:none;"></div>
+	      <div class="modal" id="reward-modal" style="display:none;">
+	        <!-- 藤野変更 homeServletに飛ぶようになっていたため
+	        <div class="close-btn" onclick="location.href='${pageContext.request.contextPath}/HomeServlet'">×</div>
+	        <div class="close-btn" onclick="closeModal()">×</div>
+	        -->
+	        <div class="close-btn" onclick="redirectToGacha()">×</div>
+	        <h2>今日のご褒美</h2>
+	        <p>
+	          <c:out value="${rewardItem != null ? rewardItem : 'ご褒美が見つかりませんでした'}" />
+	        </p>
+	      </div>
+	    </div>
+	  </c:otherwise>
+	</c:choose>
+</div>
 <script>
 // 初回ガチャ用の封筒開封＋モーダル演出
 let alreadyOpened = false;
