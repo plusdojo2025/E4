@@ -1,3 +1,31 @@
+//日付選択に応じた画面表示切り替え
+// ゼロ埋め関数（2桁にする）※※※※消さない※※※※
+function zeroPad(num, length) {
+  return ('0'.repeat(length) + num).slice(-length);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const formArea = document.getElementById("formArea");//可変の範囲
+  const dayInput = document.getElementById("dayInput");//選択された日付hidden
+  const today = new Date();//今日の日時
+
+  const yyyy = today.getFullYear();//西暦
+  const mm = zeroPad(today.getMonth() + 1, 2); // 月（2桁）
+  const dd = zeroPad(today.getDate(), 2);      // 日（2桁）
+  const todayStr = `${yyyy}-${mm}-${dd}`;//「今日」の日付作成
+  
+  if (dayInput) {//日が選択されてる時だけ処理
+    const selectedDate = dayInput.value;//サーバーから選択された日を取得
+
+    if (selectedDate !== todayStr) {
+      if (formArea) formArea.style.display = "none";  // 今日じゃなければ非表示
+    } else {
+      if (formArea) formArea.style.display = "block"; // 今日なら表示
+    }
+  }
+});
+
+//モーダル操作
 export class ModalController {
   constructor() {//ｊｓｐから取得
     this.moodButton = document.getElementById("moodSelectButton");//モーダル開く画像ボタン

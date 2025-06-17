@@ -45,7 +45,7 @@ public class MoodRegisterServlet extends HttpServlet {
 		String dayStr = request.getParameter("day");
 		List<MoodRecord> moodList;
 		
-		LocalDate selectedDate = LocalDate.now(); // デフォルトは今日
+		LocalDate selectedDate = null(); // デフォルトは今日
 
 		if (dayStr != null && !dayStr.trim().isEmpty()) {
 	    	try {

@@ -22,16 +22,18 @@
 		<div class="mood-container">
 
 			 <!--  選択された日付を表示 -->
-  			<c:if test="${not empty selectedDay}">
+  			<c:if test="${not empty selectedDate}">
 			    <div class="selected-date">
-			      <p style="font-weight:bold; font-size: 1.2em;">${selectedDay} </p>
+			      <p style="font-weight:bold; font-size: 1.2em;">${selectedDate} </p>
 			    </div>
 			 </c:if>
 			
 			<!-- 気分登録フォーム -->
+		<div id="formArea">
 			<form action="MoodRegisterServlet" method="post" class="mood-form">
 				
 				<!-- 気分選択ボタン（画像） -->
+			
 				<div class="mood-select-area" id="moodSelectButton">
 					<c:choose>
 						<c:when test="${not empty registeredMood}">
@@ -41,15 +43,16 @@
 							<img id="selectedMood" src="${pageContext.request.contextPath}/images/mood_new.png" alt="今日の気分は？" class="mood-selected-img">
 						</c:otherwise>
 					</c:choose>
-					<input id="moodInput" type="hidden" name="mood" value="${registeredMood}">
+					<input type="hidden" id="moodInput" name="mood" value="${registeredMood}">
 				</div>
 
 				<!-- コメント入力 -->
 				<div class="comment-area">
 					<textarea name="comment" placeholder="ひとこと記録しませんか？※140字以内">${registeredComment}</textarea>
 				</div>
-
-				<input type = "hidden" name = "day" value = "${selectedDay}">
+				<!-- 選択された日付持ってくる -->
+				<input type = "hidden" id="dayInput" name = "day" value = "${selectedDate}">
+				
 				<!-- 登録ボタン -->
 				<div class="submit-area">
 					<button type="submit" name="registerButton">登録</button>
@@ -58,6 +61,7 @@
 				<!-- エラーメッセージ表示 -->
 				<div id="errorMessage" class="error-message"></div>
 			</form>
+		</div>	
 
 			<!-- 今日のご褒美 -->
 			<div class="reward-section">
