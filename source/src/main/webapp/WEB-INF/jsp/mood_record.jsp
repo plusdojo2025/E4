@@ -24,7 +24,9 @@
 			 <!--  選択された日付を表示 -->
   			<c:if test="${not empty selectedDate}">
 			    <div class="selected-date">
-			      <p style="font-weight:bold; font-size: 1.2em;">${selectedDate} </p>
+			      <p style="font-weight:bold; font-size: 1.2em;">
+			      <fmt:formatDate value="${selectedDate}" pattern="d" />日
+			      </p>
 			    </div>
 			 </c:if>
 			
@@ -67,7 +69,7 @@
 
 			<!-- 今日のご褒美 -->
 			<div class="reward-section">
-				<h3>今日のご褒美</h3>
+				<h3>ご褒美</h3>
 					<c:choose>
 						 <c:when test="${alreadyDrawn}">
 						    <p>${rewardItem}</p>

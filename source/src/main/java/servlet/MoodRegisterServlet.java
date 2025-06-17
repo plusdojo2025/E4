@@ -82,7 +82,10 @@ public class MoodRegisterServlet extends HttpServlet {
 	    
 		// 画面に渡す
 //	    request.setAttribute("selectedDate", dayStr);//日付
-	    request.setAttribute("selectedDate", selectedDate.toString());
+//	    request.setAttribute("selectedDate", selectedDate.toString());
+	    Date sqlDateForView = Date.valueOf(selectedDate);
+	    request.setAttribute("selectedDate", sqlDateForView);
+	    
 		request.setAttribute("currentTime", currentTime);//現在時刻
 
 		// リダイレクト後の mood/comment 表示用
@@ -155,7 +158,6 @@ public class MoodRegisterServlet extends HttpServlet {
 		// 登録レコード生成
 		MoodRecord record = new MoodRecord();
 		record.setUser_id(userId);
-//		record.setRecord_date(Date.valueOf(LocalDate.now()));
 		record.setRecord_date(Date.valueOf(recordDate)); // 
 		record.setMood(mood);
 		record.setComment(comment);
