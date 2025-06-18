@@ -29,10 +29,6 @@ public class MoodRegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 
-//    	HttpSession session = request.getSession(false);
-//      User user = (User) session.getAttribute("user");
-//      int userId = user.getId();
-
 		// 現在時刻を取得（時:分表示用）
 		LocalTime now = LocalTime.now();
 		String currentTime = now.format(DateTimeFormatter.ofPattern("H : mm"));
@@ -69,30 +65,6 @@ public class MoodRegisterServlet extends HttpServlet {
 		    MoodRecordDAO dao = new MoodRecordDAO();
 		    moodList = dao.findAllByUser(userId);
 		}
-
-//		if (dayStr != null && !dayStr.trim().isEmpty()) {
-//	    	try {
-//	    	//今月・今年の年月と組み合わせてDateを作る
-//	    		 int day = Integer.parseInt(dayStr);
-//	                selectedDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
-//	                Date sqlDate = Date.valueOf(selectedDate);
-//
-//            
-//            //年月のday取得
-//	        MoodRecordDAO dailyDao = new MoodRecordDAO();
-//            moodList = dailyDao.findByUserDate(userId, sqlDate);
-//            
-//	    } catch(Exception e) {
-//            //パラメーター不正時や日付エラーは例外敏江全権表示
-//            e.printStackTrace();
-//            MoodRecordDAO dao = new MoodRecordDAO();
-//            moodList = dao.findAllByUser(userId);
-//	    } 
-//	} else {
-//		 // dayパラメータが無ければ全件取得
-//        MoodRecordDAO dao = new MoodRecordDAO();
-//        moodList = dao.findAllByUser(userId);
-//    }
 		
 		
 		//当日以外の画面表示
@@ -106,8 +78,6 @@ public class MoodRegisterServlet extends HttpServlet {
 		//---------↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑---------↑↑↑↑↑↑↑↑↑↑↑↑↑↑-----------↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	    
 		// 画面に渡す
-//	    request.setAttribute("selectedDate", dayStr);//日付
-//	    request.setAttribute("selectedDate", selectedDate.toString());
 	    Date sqlDateForView = Date.valueOf(selectedDate);
 	    request.setAttribute("selectedDate", sqlDateForView);
 	    
@@ -154,9 +124,7 @@ public class MoodRegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-//    	HttpSession session = request.getSession(false);
-//      User user = (User) session.getAttribute("user");
-//      int userId = user.getId();
+
 
 		// セッションからuser_id取得
 		int userId = 1;/*テストのため仮置き、後で消す*/
