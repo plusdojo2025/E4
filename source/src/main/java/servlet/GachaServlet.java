@@ -52,6 +52,8 @@ public class GachaServlet extends HttpServlet {
 //        boolean alreadyDrawn = false;
 //        if ("1".equals(forceDrawn)) {
 //            alreadyDrawn = true;
+//    	  } else if ("0".equals(forceDrawn)) {
+//        	  alreadyDrawn = false;
 //        } else {
 //            alreadyDrawn = !todayRewards.isEmpty();
 //        }
