@@ -10,11 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
 import model.MoodRecord;
 import model.Rewards;
+import model.User;
 
 @WebServlet("/GachaServlet")
 public class GachaServlet extends HttpServlet {
@@ -23,14 +25,13 @@ public class GachaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
-        int userId = 1; // テスト用に仮置き(本番は必ず消す)
+       
 
         // 実運用ではセッションからユーザーID取得を有効にする
 
-//    	HttpSession session = request.getSession(false);
-//      User user = (User) session.getAttribute("user");
-//      int userId = user.getId();
+    	HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
 
         int mood = getTodayMood(userId);
 
