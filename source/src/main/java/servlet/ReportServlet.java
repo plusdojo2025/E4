@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +24,6 @@ public class ReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
-
     	
     	int userId = 1; // テスト用に仮置き
     	
@@ -35,14 +32,14 @@ public class ReportServlet extends HttpServlet {
 //      User user = (User) session.getAttribute("user");
 //      int userId = user.getId();
 
-        // 今週の開始日（月曜日）と終了日（金曜日）を計算
+    	// 今日を含む過去七日間の期間
         LocalDate today = LocalDate.now();
-        LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
-        LocalDate endOfWeek = today.with(DayOfWeek.FRIDAY);
+        LocalDate startOfPeriod = today.minusDays(6);
+        LocalDate endOfPeriod = today;
 
         // java.sql.Date に変換
-        Date weekStartDate = Date.valueOf(startOfWeek);
-        Date weekEndDate = Date.valueOf(endOfWeek);
+        Date startOfPeriodDay = Date.valueOf(startOfPeriod);
+        Date endOfPeriodDay = Date.valueOf(endOfPeriod);
 
         // DAOのインスタンス生成
         MoodRecordDAO moodDao = new MoodRecordDAO();
@@ -53,7 +50,8 @@ public class ReportServlet extends HttpServlet {
         
         //  moodList に絞り込む
         List<MoodRecord> weekMoodList = allMoodList.stream()
-            .filter(m -> !m.getRecord_date().before(weekStartDate) && !m.getRecord_date().after(weekEndDate))
+        	// !とbefore, afterで両端の日付を含むようにする
+        	.filter(m -> !m.getRecord_date().before(startOfPeriodDay) && !m.getRecord_date().after(endOfPeriodDay))
             .collect(Collectors.toList());
 
         // 平均疲労度を計算 
@@ -72,7 +70,7 @@ public class ReportServlet extends HttpServlet {
         String tiredDay = mostTired != null ? mostTired.getRecord_date().toString() : "該当なし";
 
         // 今週のご褒美を取得
-		List<Rewards> rewardList = rewardsDao.getWeeklyRewards(userId, weekStartDate, weekEndDate);
+		List<Rewards> rewardList = rewardsDao.getWeeklyRewards(userId, startOfPeriodDay, endOfPeriodDay);
 
         // ガチャ回数を rewardList.size() で取得 
         int gachaCount = rewardList.size();
@@ -83,8 +81,8 @@ public class ReportServlet extends HttpServlet {
 		request.setAttribute("fatigueLevel", fatigueLevelStr); // 平均疲労度（文字列）
 		request.setAttribute("tiredDay", tiredDay);            // 最も疲れた日
 		request.setAttribute("Gacha", gachaCount);             // ガチャ回数
-		request.setAttribute("weekStart", weekStartDate);
-		request.setAttribute("weekEnd", weekEndDate);
+		request.setAttribute("weekStart", startOfPeriodDay);
+		request.setAttribute("weekEnd", endOfPeriodDay);
     	
 		// report.jspにフォワード
         request.getRequestDispatcher("/WEB-INF/jsp/report.jsp").forward(request, response);
