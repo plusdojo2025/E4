@@ -48,18 +48,16 @@ public class GachaServlet extends HttpServlet {
         List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, today);
 
         // ★ クエリパラメータで強制的に「alreadyDrawn」をtrueにする(テスト時コメントアウト)
-//        String forceDrawn = request.getParameter("forceDrawn");
-//        boolean alreadyDrawn = false;
-//        if ("1".equals(forceDrawn)) {
-//            alreadyDrawn = true;
-//    	} else if ("0".equals(forceDrawn)) {
-//        	alreadyDrawn = false;
-//        } else {
-//            alreadyDrawn = !todayRewards.isEmpty();
-//        }
+        String forceDrawn = request.getParameter("forceDrawn");
+        boolean alreadyDrawn = false;
+        if ("1".equals(forceDrawn)) {
+            alreadyDrawn = true;
+        } else {
+            alreadyDrawn = !todayRewards.isEmpty();
+        }
         
      // ↓ テスト中は毎回引けるように固定(本番では必ず消す)
-        boolean alreadyDrawn = false;
+//        boolean alreadyDrawn = false;
 
         if (alreadyDrawn) {
             request.setAttribute("alreadyDrawn", true);
