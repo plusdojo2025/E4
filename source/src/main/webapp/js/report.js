@@ -1,33 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
   const ctx = document.getElementById("chart").getContext("2d");
 
-  // データとラベルはJSPから受け取り済み
-  const pointCount = labels.length;
+  // データとラベルは JSP から受け取り済み
+  // 新しい登録が右になるように逆順を修正
+  const reversedLabels = [...labels].reverse();
+  const reversedData = [...data].reverse();
+
+  const pointCount = reversedLabels.length;
 
   // キャンバス幅を件数に応じて設定
   const canvas = document.getElementById("chart");
   const minWidthPerPoint = 80; // 1点あたりの幅(px)
   const baseWidth = pointCount * minWidthPerPoint;
-  canvas.style.width = (baseWidth < 800 ? "100%" : baseWidth + "px");
+  canvas.style.width = baseWidth < 800 ? "100%" : baseWidth + "px";
   canvas.style.height = "100%";
 
-  // 修正した
-  const pointColors = data.map(value => {
-    if (value === 1) return "#40C4FF"; // 青
-    if (value === 2) return "#4CAF50"; // 緑
-    if (value === 3 || value === 4) return "#FFEB3B"; // 黄
-    if (value === 5) return "#FF5722"; // 赤
+  // 5段階に色分け（新色で統一）
+  const pointColors = reversedData.map(value => {
+    if (value === 1) return "#1E90FF"; // 青
+    if (value === 2) return "#3CB371"; // 緑
+    if (value === 3) return "#FFD700"; // 金
+    if (value === 4) return "#FFA500"; // オレンジ
+    if (value === 5) return "#FF4500"; // 赤
     return "#999"; // fallback
   });
 
-  // グラフ描画
+  // Chart.js 設定
   new Chart(ctx, {
     type: "line",
     data: {
-      labels: labels,
+      labels: reversedLabels,
       datasets: [{
         label: "疲労度",
-        data: data,
+        data: reversedData,
         tension: 0.3,
         borderColor: "#8BC34A",
         backgroundColor: "#8BC34A44",
