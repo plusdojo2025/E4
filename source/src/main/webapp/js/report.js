@@ -1,83 +1,74 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const canvas = document.getElementById('chart');
-  const ctx = canvas.getContext('2d');
+  const ctx = document.getElementById("chart").getContext("2d");
 
-   // ここは色固定でもいい。一旦色変えてる
-  const moodColors = {
-    1: "#1E90FF", // 青 
-    2: "#3CB371", // 緑
-    3: "#FFD700", // 黄
-    4: "#FFA500", // オレンジ
-    5: "#FF4500"  // 赤 
-  };
+  // データとラベルはJSPから受け取り済み
+  const pointCount = labels.length;
 
-  const pointColors = data.map(mood => moodColors[mood] || "#888");
+  // キャンバス幅を件数に応じて設定
+  const canvas = document.getElementById("chart");
+  const minWidthPerPoint = 80; // 1点あたりの幅(px)
+  const baseWidth = pointCount * minWidthPerPoint;
+  canvas.style.width = (baseWidth < 800 ? "100%" : baseWidth + "px");
+  canvas.style.height = "100%";
 
-  const perPointWidth = 60;
-  const baseWidth = 600;
-  const calcWidth = Math.max(baseWidth, data.length * perPointWidth);
-  const fixedHeight = 400; 
+  // 修正した
+  const pointColors = data.map(value => {
+    if (value === 1) return "#40C4FF"; // 青
+    if (value === 2) return "#4CAF50"; // 緑
+    if (value === 3 || value === 4) return "#FFEB3B"; // 黄
+    if (value === 5) return "#FF5722"; // 赤
+    return "#999"; // fallback
+  });
 
-  canvas.width = calcWidth;
-  canvas.height = fixedHeight;
-
-  const config = {
-    type: 'line',
+  // グラフ描画
+  new Chart(ctx, {
+    type: "line",
     data: {
       labels: labels,
       datasets: [{
-        label: '疲労度',
+        label: "疲労度",
         data: data,
-        fill: false,
-        borderColor: '#94cc6b',
-        backgroundColor: '#94cc6b',
-        tension: 0.2,
-        pointRadius: 4,
+        tension: 0.3,
+        borderColor: "#8BC34A",
+        backgroundColor: "#8BC34A44",
         pointBackgroundColor: pointColors,
-        pointHoverBackgroundColor: pointColors
+        pointBorderColor: pointColors,
+        pointRadius: 5,
+        pointHoverRadius: 7
       }]
     },
     options: {
-      responsive: false, 
-      maintainAspectRatio: false, 
+      responsive: false,
+      maintainAspectRatio: false,
       scales: {
         y: {
           min: 0,
           max: 5.5,
           ticks: {
-            stepSize: 1,
-            precision: 0
+            stepSize: 1
           },
-          grace: 0.5,
           title: {
             display: true,
-            text: '疲労度'
+            text: "疲労度"
           }
         },
         x: {
-          reverse: true,
-          offset: true,
-          ticks: {
-            autoSkip: false,
-            maxRotation: 0,
-            minRotation: 0
-          },
           title: {
             display: true,
-            text: '登録時間 (HH:mm)'
+            text: "登録時間 (HH:mm)"
           }
         }
       },
       plugins: {
-        tooltip: {
-          enabled: true
-        },
         legend: {
           display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: context => `疲労度: ${context.parsed.y}`
+          }
         }
       }
     }
-  };
-
-  new Chart(ctx, config);
+  });
 });
