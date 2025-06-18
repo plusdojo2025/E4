@@ -68,15 +68,25 @@ function openEnvelope() {
     opened.style.display = "inline";
     opened.classList.add("opened-smooth");
 
-    setTimeout(() => {
-        document.getElementById("overlay").style.display = "block";
-        const modal = document.getElementById("reward-modal");
-        modal.style.display = "block";
-        modal.classList.add("show");
-        
-        document.body.classList.add("modal-open");
-    }, 800);
+    // サーバーへガチャリクエストを送る
+    fetch("${pageContext.request.contextPath}/GachaServlet?action=draw")
+        .then(response => response.json())
+        .then(data => {
+            const rewardModal = document.getElementById("reward-modal");
+            const rewardText = rewardModal.querySelector("p");
+            rewardText.textContent = data.rewardItem || 'ご褒美が見つかりませんでした';
+
+            document.getElementById("overlay").style.display = "block";
+            rewardModal.style.display = "block";
+            rewardModal.classList.add("show");
+            document.body.classList.add("modal-open");
+        })
+        .catch(error => {
+            alert("エラーが発生しました");
+            console.error(error);
+        });
 }
+
 //藤野追加 モーダル閉じる
 /*
 function closeModal() {
