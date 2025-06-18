@@ -14,8 +14,8 @@
 /* ====== セクションタイトル ====== */
 .section-title {
 	color: #94cc6b;
-	font-size: 1.4em;
-	margin-bottom: 30px;
+	font-size: 1.0em;
+	margin-bottom: 20px;
 }
 
 /* ====== 気分選択画像 ====== */
@@ -26,7 +26,6 @@
 .mood-selected-img {
 	width: 120px;
 	cursor: pointer;
-	border: 2px solid #ccc;
 	border-radius: 50%;
 	transition: transform 0.2s ease;
 }
@@ -41,8 +40,7 @@
 	max-width: 100%;
 	height: 100px;
 	padding: 10px;
-	font-size: 1.5em;
-	border: 1px solid #ccc;
+	font-size: 1.0em;
 	border-radius: 10px;
 	resize: none;
 	background-color: #FFFDDE;
@@ -118,7 +116,7 @@
 
 .log-comment {
 	flex: 1;
-	color: #333;
+	color: #94cc6b;
 	font-size: 1em;
 }
 
@@ -191,6 +189,20 @@
   margin: 10px 0;
   text-align: center;
   color: #666;
-  font-size: 30px;
+  font-size: 20px;
 }
 
+/* スマホ表示のレスポンシブ対応 */
+@media screen and (max-width: 480px) {
+	
+	 .modal {
+    width: calc(100% - 40px);
+    padding: 20px;         
+  }
+  
+  .mood-labels p {
+	padding-top: 0.5em;
+	padding-bottom: 0.2em
+}
+}
+	

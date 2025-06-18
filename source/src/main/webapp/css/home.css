@@ -7,13 +7,14 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 2em 1em;
+	padding-bottom: 0px;
 }
 
 /* 月の見出し */
 h2 {
-	color: #fff;
-	font-size: 2.4rem;
-	margin-bottom: 1.2em;
+  color: #fff;
+  font-size: 2.4rem;
+  margin-top: 0.9em;
 }
 
 /* カレンダーの白い枠 */
@@ -21,7 +22,7 @@ table {
 	border-collapse: separate;
 	border-spacing: 0.5em;
 	background-color: #fff;
-	padding: 1.5em 1em;
+	padding: 1em 1em;
 	border-radius: 2em;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -93,23 +94,22 @@ td:active {
 	.homecontainer {
 		padding: 2em 0.5em;
 	}
-
+	
 	table {
 		width: 100%;
-		max-width: 360px; /* カレンダーの最大幅を指定 */
+		max-width: 350px;
 		padding: 2em 1em;
 		border-radius: 2em;
 		margin: 0 auto;
 	}
 
 	td, th {
-		width: 2.8em;
-		height: 2.8em;
 		font-size: 0.9rem;
+		aspect-ratio: 1 / 1;
 	}
 
 	h2 {
 		font-size: 2rem;
-		margin-bottom: 1em;
+		margin-bottom: 0.5em;
 	}
 }
