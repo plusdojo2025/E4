@@ -62,6 +62,9 @@ public class ReportServlet extends HttpServlet {
             .average()
             .orElse(0);
 
+        // 小数点以下2桁
+        String fatigueLevelStr = String.format("%.2f", fatigueLevel);
+
         // 最も疲れた日を計算（気分が最小値の日）
         MoodRecord mostTired = weekMoodList.stream()
             .min((m1, m2) -> Integer.compare(m1.getMood(), m2.getMood()))
@@ -77,7 +80,7 @@ public class ReportServlet extends HttpServlet {
         // JSPに渡す変数名を JSP と一致させる
         request.setAttribute("moodList", weekMoodList);        // グラフ用
 		request.setAttribute("weeklyReward", rewardList);      // ご褒美一覧
-		request.setAttribute("fatigueLevel", fatigueLevel);    // 平均疲労度
+		request.setAttribute("fatigueLevel", fatigueLevelStr); // 平均疲労度（文字列）
 		request.setAttribute("tiredDay", tiredDay);            // 最も疲れた日
 		request.setAttribute("Gacha", gachaCount);             // ガチャ回数
 		request.setAttribute("weekStart", weekStartDate);
