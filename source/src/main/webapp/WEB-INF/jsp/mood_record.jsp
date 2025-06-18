@@ -118,8 +118,6 @@
 
 		</div>
 	</main>
-
-	<!-- モーダル制御用JS -->
 	
 	<script src="<c:url value='/js/mood_record.js' />"></script>
 

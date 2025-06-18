@@ -64,7 +64,7 @@ class ModalController {
       
       //クリックされた時の処理
       img.addEventListener("click", () => {
-        if (selectedMoodImg && moodInput) {//選択がnull出ないことを確認
+        if (selectedMoodImg && moodInput) {//選択がnullでないことを確認
           selectedMoodImg.src = img.src;//選択された気分画像を、 mood_new.pngにコピー
           moodInput.value = moodValue;//気分番号をhidden inputにセット
           this.modal.classList.add("hidden");//モーダル閉じる

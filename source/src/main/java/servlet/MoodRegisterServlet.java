@@ -43,33 +43,58 @@ public class MoodRegisterServlet extends HttpServlet {
 		
 		 // DAOで登録済みログ一覧を取得
 		String dayStr = request.getParameter("day");
-		List<MoodRecord> moodList;
+		String registered = request.getParameter("registered");
+
 		
 		LocalDate selectedDate = LocalDate.now(); // デフォルトは今日
+		
+		if ("true".equals(registered)) {
+		    // 登録直後の戻りなら必ず今日で絞り込み
+		    selectedDate = LocalDate.now();
+		} else if (dayStr != null && !dayStr.trim().isEmpty()) {
+		    int day = Integer.parseInt(dayStr);
+		    selectedDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
+		} else {
+		    selectedDate = LocalDate.now();
+		}
+		
+		List<MoodRecord> moodList;
+		
+		try {
+		    Date sqlDate = Date.valueOf(selectedDate);
+		    MoodRecordDAO dailyDao = new MoodRecordDAO();
+		    moodList = dailyDao.findByUserDate(userId, sqlDate);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		    MoodRecordDAO dao = new MoodRecordDAO();
+		    moodList = dao.findAllByUser(userId);
+		}
 
-		if (dayStr != null && !dayStr.trim().isEmpty()) {
-	    	try {
-	    	//今月・今年の年月と組み合わせてDateを作る
-	    		 int day = Integer.parseInt(dayStr);
-	                selectedDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
-	                Date sqlDate = Date.valueOf(selectedDate);
-
-            
-            //年月のday取得
-	        MoodRecordDAO dailyDao = new MoodRecordDAO();
-            moodList = dailyDao.findByUserDate(userId, sqlDate);
-            
-	    } catch(Exception e) {
-            //パラメーター不正時や日付エラーは例外敏江全権表示
-            e.printStackTrace();
-            MoodRecordDAO dao = new MoodRecordDAO();
-            moodList = dao.findAllByUser(userId);
-	    } 
-	} else {
-		 // dayパラメータが無ければ全件取得
-        MoodRecordDAO dao = new MoodRecordDAO();
-        moodList = dao.findAllByUser(userId);
-    }
+//		if (dayStr != null && !dayStr.trim().isEmpty()) {
+//	    	try {
+//	    	//今月・今年の年月と組み合わせてDateを作る
+//	    		 int day = Integer.parseInt(dayStr);
+//	                selectedDate = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
+//	                Date sqlDate = Date.valueOf(selectedDate);
+//
+//            
+//            //年月のday取得
+//	        MoodRecordDAO dailyDao = new MoodRecordDAO();
+//            moodList = dailyDao.findByUserDate(userId, sqlDate);
+//            
+//	    } catch(Exception e) {
+//            //パラメーター不正時や日付エラーは例外敏江全権表示
+//            e.printStackTrace();
+//            MoodRecordDAO dao = new MoodRecordDAO();
+//            moodList = dao.findAllByUser(userId);
+//	    } 
+//	} else {
+//		 // dayパラメータが無ければ全件取得
+//        MoodRecordDAO dao = new MoodRecordDAO();
+//        moodList = dao.findAllByUser(userId);
+//    }
+		
+		
 		//当日以外の画面表示
 		boolean isToday = selectedDate.equals(LocalDate.now());
 		request.setAttribute("isToday", isToday);
@@ -141,6 +166,12 @@ public class MoodRegisterServlet extends HttpServlet {
 		String comment = request.getParameter("comment");
 		String dayStr = request.getParameter("day");
 		
+		//登録後の返答は今日登録した気分を表示
+		if (dayStr == null || dayStr.trim().isEmpty()) {
+		    dayStr = String.valueOf(LocalDate.now().getDayOfMonth());
+		}
+		
+		
 		//dayをDateに変換（登録と絞り込みをDateで行うため）
 		LocalDate recordDate;
 	    try {
@@ -171,7 +202,7 @@ public class MoodRegisterServlet extends HttpServlet {
 			//-------------和田追加----------------
 		
 			// --- パラメータをURLに含めてリダイレクト ---
-						String redirectURL = "MoodRegisterServlet?day=" + dayStr +
+						String redirectURL = "MoodRegisterServlet?day=" + LocalDate.now().getDayOfMonth() + "&registered=true" +
 							"&mood=" + mood +
 							"&comment=" + URLEncoder.encode(comment, "UTF-8");
 
