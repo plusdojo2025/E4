@@ -23,7 +23,7 @@
 	<h2>新規登録</h2>
 		<input type="email" name="email" placeholder="メールアドレス" required><br>
 		<input type="password" name="password" placeholder="PW" required minlength="8"><br>
-		<p>※英数字混合8文字以上</p>
+		<p>※パスワードは8文字以上</p>
 		<% if (request.getAttribute("resultTitle") != null) { %>
     		<p style="color:red;"><%= request.getAttribute("resultTitle") %></p>
 		<% } %>
