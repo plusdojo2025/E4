@@ -26,9 +26,7 @@ public class ReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-    	
-    	 // テスト用に仮置き
-    	
+    	    	
     	// セッションの取得（ログイン情報の取得）
     	HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("user");

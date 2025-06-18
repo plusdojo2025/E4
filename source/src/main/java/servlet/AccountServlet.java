@@ -18,7 +18,7 @@ public class AccountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// セッションの取得（ログイン情報の確認）
+		// セッションの取得（ログイン情報の取得）
 		HttpSession session = request.getSession(false);
 
 		// ユーザー情報（メールアドレス）を取得
