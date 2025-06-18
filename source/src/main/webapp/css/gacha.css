@@ -126,7 +126,7 @@ body.modal-open {
 .gacha-finished {
   color: #bbb;
   font-weight: normal;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   margin-top: 60px;
   margin-bottom: 0;
   text-align: center;
@@ -237,7 +237,8 @@ body.modal-open {
   }
 
   .gacha-container p {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
+    color: #94cc6b;
   }
 }
 .gacha-wrapper {
