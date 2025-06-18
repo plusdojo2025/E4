@@ -10,11 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
 import model.MoodRecord;
 import model.Rewards;
+import model.User;
 
 @WebServlet("/GachaServlet")
 public class GachaServlet extends HttpServlet {
@@ -23,14 +25,13 @@ public class GachaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
-        int userId = 1; // テスト用に仮置き(本番は必ず消す)
+       
 
         // 実運用ではセッションからユーザーID取得を有効にする
 
-//    	HttpSession session = request.getSession(false);
-//      User user = (User) session.getAttribute("user");
-//      int userId = user.getId();
+    	HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
 
         int mood = getTodayMood(userId);
 
@@ -48,18 +49,16 @@ public class GachaServlet extends HttpServlet {
         List<Rewards> todayRewards = rewardsDAO.getTodayRewards(userId, today);
 
         // ★ クエリパラメータで強制的に「alreadyDrawn」をtrueにする(テスト時コメントアウト)
-//        String forceDrawn = request.getParameter("forceDrawn");
-//        boolean alreadyDrawn = false;
-//        if ("1".equals(forceDrawn)) {
-//            alreadyDrawn = true;
-//    	} else if ("0".equals(forceDrawn)) {
-//        	alreadyDrawn = false;
-//        } else {
-//            alreadyDrawn = !todayRewards.isEmpty();
-//        }
+        String forceDrawn = request.getParameter("forceDrawn");
+        boolean alreadyDrawn = false;
+        if ("1".equals(forceDrawn)) {
+            alreadyDrawn = true;
+        } else {
+            alreadyDrawn = !todayRewards.isEmpty();
+        }
         
      // ↓ テスト中は毎回引けるように固定(本番では必ず消す)
-        boolean alreadyDrawn = false;
+//        boolean alreadyDrawn = false;
 
         if (alreadyDrawn) {
             request.setAttribute("alreadyDrawn", true);

@@ -124,7 +124,7 @@ body.modal-open {
 
 /* ====== ガチャ終了メッセージ ====== */
 .gacha-finished {
-  color: #bbb;
+  color: #94cc6b;
   font-weight: normal;
   font-size: 1.5rem;
   margin-top: 60px;
@@ -133,7 +133,7 @@ body.modal-open {
 }
 
 .reward-text {
-  color: #a3b18a;
+  color: #94cc6b;
   font-weight: bold;
   font-size: 1.3rem;
   margin-bottom: 10px;

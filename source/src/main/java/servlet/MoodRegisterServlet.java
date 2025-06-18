@@ -14,11 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
 import model.MoodRecord;
 import model.Rewards;
+import model.User;
 
 @WebServlet("/MoodRegisterServlet")
 public class MoodRegisterServlet extends HttpServlet {
@@ -28,13 +30,15 @@ public class MoodRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
+    	HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+        
 		// 現在時刻を取得（時:分表示用）
 		LocalTime now = LocalTime.now();
 		String currentTime = now.format(DateTimeFormatter.ofPattern("H : mm"));
 		
 		//-------------和田追加-------↓↓↓↓↓↓↓↓↓↓↓↓↓--------↓↓↓↓↓↓↓↓↓↓↓↓↓--------↓↓↓↓↓↓↓↓↓↓↓↓↓
-		int userId = 1;/*テストのため仮置き、後で消す*/
 		
 		
 		 // DAOで登録済みログ一覧を取得
@@ -125,9 +129,9 @@ public class MoodRegisterServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 
-
-		// セッションからuser_id取得
-		int userId = 1;/*テストのため仮置き、後で消す*/
+    	HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
 
 		// パラメータ取得
 		int mood = Integer.parseInt(request.getParameter("mood"));

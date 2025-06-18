@@ -47,7 +47,6 @@
 										<img id="selectedMood" src="<c:url value='/images/mood_${registeredMood}.png' />" alt="今日の気分" class="mood-selected-img">
 									</c:when>
 									
-									<!-- 上記以外の（画像選択されている）場合mood_newに新規の画像を表示 -->
 									<c:otherwise>
 										<img id="selectedMood" src="<c:url value='/images/mood_new.png' />" alt="今日の気分は？" class="mood-selected-img">
 									</c:otherwise>
@@ -82,12 +81,10 @@
 			<div class="reward-section">
 				<h3>ご褒美</h3>
 					<c:choose>
-						<!-- ご褒美引いた場合 -->
 						 <c:when test="${alreadyDrawn}">
 						    <p>${rewardItem}</p>
 						 </c:when>
 						 
-						 <!-- それ以外の場合 -->
 						 <c:otherwise>
 						    <p>まだご褒美はありません</p>
 						 </c:otherwise>	
