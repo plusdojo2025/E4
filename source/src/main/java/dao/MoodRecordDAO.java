@@ -94,33 +94,4 @@ public class MoodRecordDAO {
 		}
 		return list;
 	}
-
-	public List<MoodRecord> findByUserAndDate(int userId, Date date) {
-		List<MoodRecord> list = new ArrayList<>();
-		String sql = "SELECT * FROM mood_records WHERE user_id = ? AND record_date = ?";
-
-		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-			pstmt.setInt(1, userId);
-			pstmt.setDate(2, date);
-
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					MoodRecord record = new MoodRecord();
-					record.setUser_id(rs.getInt("user_id"));
-					record.setRecord_date(rs.getDate("record_date"));
-					record.setMood(rs.getInt("mood"));
-					record.setComment(rs.getString("comment"));
-					record.setCreated_at(rs.getTimestamp("created_at"));
-					list.add(record);
-				}
-			}
-
-		} catch (SQLException e) {
-			System.err.println("指定日の気分記録の取得に失敗: " + e.getMessage());
-			e.printStackTrace();
-		}
-		return list;
-	}
-
 }
