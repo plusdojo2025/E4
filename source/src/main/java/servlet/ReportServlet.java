@@ -11,11 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MoodRecordDAO;
 import dao.RewardsDAO;
 import model.MoodRecord;
 import model.Rewards;
+import model.User;
 
 @WebServlet("/ReportServlet")
 public class ReportServlet extends HttpServlet {
@@ -25,12 +27,12 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
     	
-    	int userId = 1; // テスト用に仮置き
+    	 // テスト用に仮置き
     	
     	// セッションの取得（ログイン情報の取得）
-//    	HttpSession session = request.getSession(false);
-//      User user = (User) session.getAttribute("user");
-//      int userId = user.getId();
+    	HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
 
     	// 今日を含む過去七日間の期間
         LocalDate today = LocalDate.now();
