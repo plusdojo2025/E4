@@ -73,6 +73,8 @@ function openEnvelope() {
         const modal = document.getElementById("reward-modal");
         modal.style.display = "block";
         modal.classList.add("show");
+        
+        document.body.classList.add("modal-open");
     }, 800);
 }
 //藤野追加 モーダル閉じる
@@ -82,6 +84,7 @@ function closeModal() {
     document.getElementById("reward-modal").style.display = "none";
 }*/
 function redirectToGacha() {
+	document.body.classList.remove("modal-open");
     window.location.href = '${pageContext.request.contextPath}/GachaServlet';
 }
 </script>

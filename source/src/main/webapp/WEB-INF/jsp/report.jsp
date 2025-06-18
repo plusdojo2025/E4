@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
-<title>今週の記録</title>
+<title>過去七日間の記録</title>
 
 <!-- 全体共通CSS -->
 <link rel="stylesheet"
@@ -30,7 +30,7 @@
 
 	<main>
 		<div class="report-container">
-			<h2 class="section-title">今週の記録</h2>
+			<h2 class="section-title">過去七日間の記録</h2>
 
 			<!-- 折れ線グラフ（スクロールラッパー） -->
 			<div class="chart-area">
@@ -40,7 +40,7 @@
 			<!-- テキスト情報 -->
 			<div class="report-info">
 				<p>
-					今週の平均疲労度は <strong>${fatigueLevel}</strong> でした
+					過去七日間の平均疲労度は <strong>${fatigueLevel}</strong> でした
 				</p>
 				<p>
 					最も疲れた日は <strong>${tiredDay}</strong>
@@ -55,7 +55,7 @@
 					</c:forEach>
 				</div>
 				<p>でしたね</p>
-				<p>来週も健やかに過ごしましょう</p>
+				<p>明日からも健やかに過ごしましょう</p>
 			</div>
 		</div>
 	</main>
