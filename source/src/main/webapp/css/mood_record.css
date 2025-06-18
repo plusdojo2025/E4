@@ -44,6 +44,7 @@
 	border-radius: 10px;
 	resize: none;
 	background-color: #FFFDDE;
+	border: none;
 }
 
 /* ====== 登録ボタン ====== */
@@ -149,7 +150,6 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-
 .mood-options {
 	display: flex;
 	justify-content: space-between;
@@ -188,7 +188,7 @@
 .selected-date {
   margin: 10px 0;
   text-align: center;
-  color: #666;
+  color: #888;
   font-size: 20px;
 }
 
