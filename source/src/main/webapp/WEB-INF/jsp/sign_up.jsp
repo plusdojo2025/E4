@@ -21,11 +21,11 @@
 <main class="signup-container">
 	<form action="${pageContext.request.contextPath}/SignUpServlet" method="post">
 	<h2>新規登録</h2>
-		<input type="text" name="email" placeholder="メールアドレス"><br>
-		<input type="text" name="password" placeholder="PW"><br>
+		<input type="email" name="email" placeholder="メールアドレス" required><br>
+		<input type="password" name="password" placeholder="PW" required minlength="8"><br>
 		<p>※英数字混合8文字以上</p>
-		<% if (request.getAttribute("errorMsg") != null) { %>
-    		<p style="color:red;"><%= request.getAttribute("errorMsg") %></p>
+		<% if (request.getAttribute("resultTitle") != null) { %>
+    		<p style="color:red;"><%= request.getAttribute("resultTitle") %></p>
 		<% } %>
 				<!-- このあたりにエラーメッセージ -->
 		<button type="submit" name="loginButton" value="登録">登録</button>

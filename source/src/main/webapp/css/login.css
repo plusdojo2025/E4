@@ -40,7 +40,7 @@
   width: 80%;
 }
 
-.login-container input[type="text"],
+.login-container input[type="email"],
 .login-container input[type="password"] {
   width: 80%;
   margin: 0 auto 18px;
@@ -52,7 +52,7 @@
   transition: border-color 0.3s ease;
 }
 
-.login-container input[type="text"]:focus,
+.login-container input[type="email"]:focus,
 .login-container input[type="password"]:focus {
   border-color: #7bb050;
 }
@@ -111,7 +111,7 @@
     font-size: 14px;
   }
 
-  .login-container input[type="text"],
+  .login-container input[type="email"],
   .login-container input[type="password"],
   .login-container button {
     font-size: 14px; 

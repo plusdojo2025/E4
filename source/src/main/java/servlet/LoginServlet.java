@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,13 +39,9 @@ public class LoginServlet extends HttpServlet {
 
 			response.sendRedirect(request.getContextPath() + "/HomeServlet");
 		} else { // ログイン失敗
-			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
-			// request.setAttribute("result", new Result("ログイン失敗！", "IDまたはPWに間違いがあります。",
-			// request.getContextPath()+"/LoginServlet"));
-
+			request.setAttribute("result", "メールアドレスまたはPWに間違いがあります。");
 			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-			dispatcher.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 		}
 	}
 }
