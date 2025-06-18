@@ -13,7 +13,8 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (email, password) VALUES
-  ('test@example.com', 'password');
+  ('test@example.com', 'password'),
+  ('dojouser1@plusdojo.jp', '#SEplus2025SEplus');
 
 -- 気分記録テーブル
 DROP TABLE IF EXISTS mood_records;
