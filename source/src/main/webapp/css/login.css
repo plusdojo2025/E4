@@ -99,23 +99,36 @@
 /* スマホ表示のレスポンシブ対応 */
 @media screen and (max-width: 480px) {
 	
-  .titlelogo_white img {
-  max-width: 120px;
-  margin-top: 70px;
+  .header_2 {
+    padding-top: 90px; 
+    margin-bottom: 0px;
   }
-	
+
+  .titlelogo_white img {
+    max-width: 100px;
+    margin-bottom: 0px;
+  }
+
+  .login-wrapper {
+    padding-top: 0; 
+    display: block; 
+  }
+
   .login-container {
-    margin: 40px 40px 40px 40px; 
-    padding-left: 30px;
-    padding-right: 30px;
+    margin: 20px auto 30px;
+    padding: 30px 20px;
     font-size: 14px;
+    width: 85%;    
+    max-width: 400px;     
+    box-sizing: border-box;
   }
 
   .login-container input[type="email"],
   .login-container input[type="password"],
   .login-container button {
-    font-size: 14px; 
+    font-size: 14px;
     padding: 8px 12px;
+    width: 85%
   }
 
   .login-container h2 {
