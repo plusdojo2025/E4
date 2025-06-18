@@ -1,9 +1,9 @@
-//----------------日付選択に応じた画面表示切り替え--------------//
 // ゼロ埋め関数（2桁にする）※※※※消さない※※※※
 function zeroPad(num, length) {
   return ('0' + num).slice(-length);
 }
 
+//----------------日付選択に応じた画面表示切り替え--------------//
 document.addEventListener("DOMContentLoaded", function () {
   var formArea = document.getElementById("formArea");
   var dayInput = document.getElementById("dayInput");
@@ -24,6 +24,52 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   new ModalController();
+  
+  //---------------------登録ボタン押したとき----------------------//
+document.querySelector("form").addEventListener("submit", function (e) {
+  if (!confirm("本当に登録しますか？")) {
+    e.preventDefault();
+    return;
+  }
+
+  var mood = document.getElementById("moodInput").value;
+  var comment = document.querySelector("textarea").value;
+  var errorMessageDiv = document.getElementById("errorMessage");
+  var selectedMoodImg = document.getElementById("selectedMood");
+  var moodLogList = document.getElementById("moodLogList");
+
+  errorMessageDiv.textContent = "";
+
+  var errors = [];
+
+  if (!mood) {
+    errors.push("気分登録は必須です");
+  }
+  if (comment.length > 140) {
+    errors.push("140文字以内で入力してください。");
+  }
+  if (errors.length > 0) {
+    errorMessageDiv.innerHTML = errors.join("<br>");
+    e.preventDefault();
+    return;
+  }
+
+  var now = new Date();
+  var hh = zeroPad(now.getHours(), 2);
+  var mm = zeroPad(now.getMinutes(), 2);
+  var time = hh + ":" + mm;
+
+  var logDiv = document.createElement("div");
+  logDiv.className = "mood-log-entry";
+  logDiv.innerHTML =
+    '<span>' + time + '</span>　' +
+    '<img src="' + selectedMoodImg.src + '" alt="気分" style="width: 60px; height: auto; vertical-align: middle; margin: 0 10px;">' +
+    '<p>' + comment + '</p>';
+
+  if (moodLogList) {
+    moodLogList.insertBefore(logDiv, moodLogList.firstChild);
+  }
+});  
 });
 
 //-------------------------モーダル操作-------------------------//
@@ -73,50 +119,4 @@ ModalController.prototype.setupEvents = function () {
       })(moodImages[i]);
     }
   }
-};
-
-//---------------------登録ボタン押したとき----------------------//
-document.querySelector("form").addEventListener("submit", function (e) {
-  if (!confirm("本当に登録しますか？")) {
-    e.preventDefault();
-    return;
-  }
-
-  var mood = document.getElementById("moodInput").value;
-  var comment = document.querySelector("textarea").value;
-  var errorMessageDiv = document.getElementById("errorMessage");
-  var selectedMoodImg = document.getElementById("selectedMood");
-  var moodLogList = document.getElementById("moodLogList");
-
-  errorMessageDiv.textContent = "";
-
-  var errors = [];
-
-  if (!mood) {
-    errors.push("気分登録は必須です");
-  }
-  if (comment.length > 140) {
-    errors.push("140文字以内で入力してください。");
-  }
-  if (errors.length > 0) {
-    errorMessageDiv.innerHTML = errors.join("<br>");
-    e.preventDefault();
-    return;
-  }
-
-  var now = new Date();
-  var hh = zeroPad(now.getHours(), 2);
-  var mm = zeroPad(now.getMinutes(), 2);
-  var time = hh + ":" + mm;
-
-  var logDiv = document.createElement("div");
-  logDiv.className = "mood-log-entry";
-  logDiv.innerHTML =
-    '<span>' + time + '</span>　' +
-    '<img src="' + selectedMoodImg.src + '" alt="気分" style="width: 60px; height: auto; vertical-align: middle; margin: 0 10px;">' +
-    '<p>' + comment + '</p>';
-
-  if (moodLogList) {
-    moodLogList.insertBefore(logDiv, moodLogList.firstChild);
-  }
-});
+  };
