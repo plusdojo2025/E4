@@ -53,19 +53,29 @@
 /* スマホ対応 */
 @media (max-width: 768px) {
   .report-container {
-    max-width: 90%;
-    padding: 15px;
+    max-width: 95%;
+    padding: 10px;
   }
 
   .section-title {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    margin-bottom: 20px;
   }
 
-  .report-info p {
-    font-size: 0.95em;
+  .chart-area {
+    padding: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .chart-area canvas {
-    height: 250px !important; 
+    min-width: 600px;   
+    height: 250px !important;  
+  }
+
+  .report-info p {
+    font-size: 0.9em;
+    margin: 15px 0;
   }
 }
+
