@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--  これはjspの一部に読み込まれるファイルなのでbodyとかheaderとかは書けません -->
 
 　 <script src="${pageContext.request.contextPath}/js/header.js" defer></script>
@@ -22,13 +23,29 @@
       </span>
       <span class="menu-label">アカウント情報</span>
     </a>
-
-    <a href="${pageContext.request.contextPath}/GachaServlet" class="menu-entry entry2">
+    
+    <!-- ▼ 改善済：退勤ガチャ 表示制御エリア -->
+  <a id="gachaLink" href="${pageContext.request.contextPath}/GachaServlet" class="menu-entry entry2">
+    <div class="gacha-wrapper">
       <span class="menu-icon">
         <img src="images/present_icon.png" alt="退勤ガチャ">
       </span>
-      <span class="menu-label">退勤ガチャ</span>
-    </a>
+      <span class="menu-label" id="gachaLabel">退勤ガチャ</span>
+      <!-- JSで条件により以下が追加されます -->
+      <!-- <div class="warning-text">※先に気分の登録を行ってください</div> -->
+    </div>
+  </a>
+  <!-- ▲ 改善済：退勤ガチャ 表示制御エリア -->
+    
+	    <!--  
+	      <a href="${pageContext.request.contextPath}/GachaServlet" class="menu-entry entry2">
+	      <span class="menu-icon">
+	        <img src="images/present_icon.png" alt="退勤ガチャ">
+	      </span>
+	      <span class="menu-label">退勤ガチャ</span>
+	    </a>
+	    -->
+	    
 
     <a href="${pageContext.request.contextPath}/ReportServlet" class="menu-entry entry3">
       <span class="menu-icon">

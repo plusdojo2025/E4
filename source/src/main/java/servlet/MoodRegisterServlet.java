@@ -112,12 +112,14 @@ public class MoodRegisterServlet extends HttpServlet {
 	        	 request.setAttribute("rewardItem", rewards.get(0).getGacha_item());
 	             request.setAttribute("alreadyDrawn", true);
 	         }
-
 		// JSPへフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mood_record.jsp");
 		dispatcher.forward(request, response);
+		
 			}
-
+	
+	
+	
 	// 登録ボタン処理
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

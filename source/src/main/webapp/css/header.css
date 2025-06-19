@@ -132,6 +132,29 @@
   white-space: nowrap;
   line-height: 50px;
 }
+/*------------気分追加チェック-----------------*/
+
+/* 画像と文字を暗くする用 */
+.dimmed {
+  pointer-events: none;
+  filter: brightness(50%);
+  opacity: 0.6;
+}
+
+/* ラベル文字だけ薄暗く */
+.dimmed-label {
+  color: #ccc !important;
+}
+
+/* 警告テキスト（はっきり白） */
+.warning-text {
+  color: white;
+  font-size: 0.75em;
+  margin-top: 4px;
+  display: block;
+}
+/*-------------------------------------------*/
+
 
 /* ヘッダー */
 .header_1 {
