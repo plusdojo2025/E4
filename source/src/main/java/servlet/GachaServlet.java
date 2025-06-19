@@ -122,28 +122,29 @@ public class GachaServlet extends HttpServlet {
 	private int getTodayMood(int userId) {
 		MoodRecordDAO moodDao = new MoodRecordDAO();
 		Date today = new Date(System.currentTimeMillis());
-		List<MoodRecord> records = moodDao.findAllByUser(userId);
-		for (MoodRecord r : records) {
-			if (today.equals(r.getRecord_date())) {
-				return r.getMood();
-			}
+		List<MoodRecord> records = moodDao.findByUserDate(userId, today);
+
+		if (!records.isEmpty()) {
+			// 最新の気分（created_atの降順なので先頭が最新）
+			return records.get(0).getMood();
 		}
 		return 3; // デフォルト気分
 	}
+
 
 	/**
 	 * 気分(mood)に応じて便箋画像のパスを返す
 	 */
 	private String[] getEnvelopeImages(int mood) {
 		switch (mood) {
-		case 1:
-			return new String[] { "images/binsen_close_red.png", "images/binsen_open_red.png" };
+		case 1: // 疲れている → 青
+			return new String[] { "images/binsen_close_blue.png", "images/binsen_open_blue.png" };
 		case 2:
 		case 3:
-		case 4:
+		case 4: // 普通 → 黄色
 			return new String[] { "images/binsen_close_yellow.png", "images/binsen_open_yellow.png" };
-		case 5:
-			return new String[] { "images/binsen_close_blue.png", "images/binsen_open_blue.png" };
+		case 5: // 元気 → 赤
+			return new String[] { "images/binsen_close_red.png", "images/binsen_open_red.png" };
 		default:
 			return null;
 		}
