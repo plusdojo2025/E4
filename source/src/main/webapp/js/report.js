@@ -46,24 +46,41 @@ document.addEventListener("DOMContentLoaded", function () {
       responsive: false,
       maintainAspectRatio: false,
       scales: {
-        y: {
-          min: 0,
-          max: 5.5,
-          ticks: {
-            stepSize: 1
-          },
-          title: {
-            display: true,
-            text: "疲労度"
-          }
-        },
-        x: {
-          title: {
-            display: true,
-            text: "登録時間 (HH:mm)"
-          }
-        }
+  y: {
+    min: 0,
+    max: 5.5,
+    ticks: {
+      stepSize: 1,
+      callback: function(value) {
+        const labels = {
+          1: "BAD",
+          5: "GOOD"
+        };
+        return labels[value] || "";
       },
+      font: {
+    size: 10
+    }
+    },
+    grid: {
+      color: function(context) {
+        // 0 と 5.5 の線だけ透明にして非表示にする
+        return (context.tick.value === 0 || context.tick.value === 5.5) ? 'rgba(0,0,0,0)' : '#ccc';
+      }
+    },
+    title: {
+      display: false
+    }
+  },
+  x: {
+	type: 'category', 
+    title: {
+      display: true,
+      text: "登録時間 (HH:mm)",
+      align: 'start',
+    }
+  }
+},
       plugins: {
         legend: {
           display: false

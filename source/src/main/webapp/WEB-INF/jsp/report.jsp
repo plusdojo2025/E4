@@ -40,13 +40,13 @@
 			<!-- テキスト情報 -->
 			<div class="report-info">
 				<p>
-					過去七日間の平均疲労度は <strong>${fatigueLevel}</strong> でした
+					過去七日間の平均疲労度は <strong>${fatigueLevel}</strong> でした。
 				</p>
 				<p>
 					最も疲れた日は <strong>${tiredDay}</strong>
 				</p>
 				<p>
-					ガチャは <strong>${Gacha}</strong> 回で
+					ガチャは <strong>${Gacha}</strong> 回で、
 				</p>
 				<p>ご褒美は</p>
 				<div class="rewards">
@@ -54,8 +54,8 @@
 						<p>${reward.gacha_item}</p>
 					</c:forEach>
 				</div>
-				<p>でしたね</p>
-				<p>明日からも健やかに過ごしましょう</p>
+				<p>でしたね！</p>
+				<p>明日からも健やかに過ごしましょう！</p>
 			</div>
 		</div>
 	</main>
