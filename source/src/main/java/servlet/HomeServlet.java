@@ -62,11 +62,22 @@ public class HomeServlet extends HttpServlet {
 	 */
 	private List<List<String[]>> createWeeklyCalendarWithMood(LocalDate date, List<MoodRecord> moodRecords) {
 		// ムードマップを作成
-		Map<String, Integer> moodMap = moodRecords.stream().collect(Collectors.toMap(
-				record -> String.valueOf(record.getRecord_date().toLocalDate().getDayOfMonth()), MoodRecord::getMood, // メソッド参照、valueの部分
-				(existing, replacement) -> replacement // 最新のムードで上書き
-		));
+		Map<String, MoodRecord> moodRecordMap = moodRecords.stream()
+			    .collect(Collectors.toMap(
+			        record -> String.valueOf(record.getRecord_date().toLocalDate().getDayOfMonth()),
+			        record -> record,
+			        (existing, replacement) -> {
+			            // created_atが新しい方を優先
+			            return existing.getCreated_at().after(replacement.getCreated_at()) ? existing : replacement;
+			        }
+			    ));
 
+			// そこからキーとムード値のMapに変換
+			Map<String, Integer> moodMap = moodRecordMap.entrySet().stream()
+			    .collect(Collectors.toMap(
+			        Map.Entry::getKey,
+			        e -> e.getValue().getMood()
+			    ));
 		// カレンダーを生成
 		List<List<String>> calendar = generateCalendar(date.getYear(), date.getMonthValue());
 
