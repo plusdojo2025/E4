@@ -2,7 +2,7 @@
 
 /* ====== 共通コンテナ ====== */
 .mood-container {
-	max-width: 70%;
+	max-width: 80%;
 	margin: 30px auto;
 	padding: 20px;
 	background: white;
@@ -40,11 +40,15 @@
 	max-width: 100%;
 	height: 100px;
 	padding: 10px;
-	font-size: 1.0em;
+	font-size: 0.8em;
 	border-radius: 10px;
 	resize: none;
 	background-color: #FFFDDE;
 	border: none;
+}
+
+.comment-area textarea:focus {
+  outline: 2px solid #94cc6b;
 }
 
 /* ====== 登録ボタン ====== */
@@ -80,12 +84,12 @@
 }
 
 .reward-section h3 {
-	color: #888;
+	color: #94cc6b;
 	margin-bottom: 10px;
 }
 
 .reward-section p {
-	color: #94cc6b;
+	color: #999;
 	font-size: 1.2em;
 	margin: 3px 0;
 }
@@ -107,7 +111,7 @@
 
 .log-date {
 	color: #999;
-	font-size: 1.9em;
+	font-size: 1.7em;
 	width: 100px;
 }
 
@@ -171,6 +175,7 @@
 	justify-content: space-between;
 	font-size: 0.85em;
 	color: #666;
+	margin-top: -20px;
 }
 
 /* × ボタンのスタイル */
