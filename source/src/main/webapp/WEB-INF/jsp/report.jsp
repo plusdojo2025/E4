@@ -39,25 +39,24 @@
 
 			<!-- テキスト情報 -->
 			<div class="report-info">
-				<p>
-					過去七日間の平均疲労度は <strong>${fatigueLevel}</strong> でした。
-				</p>
-				<p>
-					最も疲れた日は <strong>${tiredDay}</strong>
-				</p>
-				<p>
-					ガチャは <strong>${Gacha}</strong> 回で、
-				</p>
-				<p>ご褒美は</p>
-				<div class="rewards">
-					<c:forEach var="reward" items="${weeklyReward}">
-						<p>${reward.gacha_item}</p>
-					</c:forEach>
-				</div>
-				<p>でしたね！</p>
-				<p>明日からも健やかに過ごしましょう！</p>
+			  <p>
+			    過去七日間の平均気分値は <strong class="highlight">${fatigueLevel}</strong> でした。
+			  </p>
+			  <p>
+			    最も疲れた日は <strong class="highlight">${tiredDay}</strong>
+			  </p>
+			  <p>
+			    ガチャの回数は <strong class="highlight">${Gacha}</strong> 回で、
+			  </p>
+			  <p>引いたご褒美は</p>
+			  <div class="rewards">
+			    <c:forEach var="reward" items="${weeklyReward}">
+			      <p class="highlight">${reward.gacha_item}</p>
+			    </c:forEach>
+			  </div>
+			  <p>でしたね！</p>
+			  <p>明日からも健やかに過ごしましょう！</p>
 			</div>
-		</div>
 	</main>
 
 	<!-- グラフ用データをJSONで渡す -->

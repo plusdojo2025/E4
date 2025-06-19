@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
     data: {
       labels: reversedLabels,
       datasets: [{
-        label: "疲労度",
+        label: "気分値",
         data: reversedData,
         tension: 0.3,
         borderColor: "#8BC34A",
         backgroundColor: "#8BC34A44",
         pointBackgroundColor: pointColors,
         pointBorderColor: pointColors,
-        pointRadius: 5,
+        pointRadius: 4,
         pointHoverRadius: 7
       }]
     },

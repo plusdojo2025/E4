@@ -37,15 +37,20 @@
 
 /* テキストエリア */
 .report-info p {
-  font-size: 1em;
+  font-size: 0.9em;
   color: #888;
-  line-height: 0.8;
+  line-height: 0.9;
 }
 
 .rewards p {
   color: #94cc6b;
   font-size: 0.95em;
   margin: 3px 0;
+}
+
+.highlight {
+  color: #94cc6b;
+  font-weight: bold;
 }
 
 /* スマホ対応 */
