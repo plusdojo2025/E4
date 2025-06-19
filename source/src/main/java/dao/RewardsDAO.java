@@ -64,28 +64,48 @@ public class RewardsDAO {
 	}
 
 	// 退勤ガチャ用、レアリティごとにガチャ結果を返して、記録するメソッド
-	public String taikinGacha(int gacha_rarity, int user_id) {
-		String sql = "SELECT gacha_item FROM rewards_collection WHERE gacha_rarity = ?";
-		List<String> list = new ArrayList<>();
+	public String taikinGacha(int mood, int user_id) {
+	    int gachaRarity;
 
-		try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	    // mood に応じてガチャのレアリティ（内容カテゴリ）を決定
+	    switch (mood) {
+	        case 1:
+	            gachaRarity = 3; // 癒し系
+	            break;
+	        case 5:
+	            gachaRarity = 1; // 挑戦系
+	            break;
+	        default:
+	            gachaRarity = 2; // 標準
+	            break;
+	    }
 
-			pstmt.setInt(1, gacha_rarity);
+	    String sql = "SELECT gacha_item FROM rewards_collection WHERE gacha_rarity = ?";
+	    List<String> list = new ArrayList<>();
 
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs.next()) {
-					list.add(rs.getString("gacha_item"));
-				}
-			}
-		} catch (SQLException e) {
-			System.err.println("ガチャアイテム取得時にエラーが発生しました: " + e.getMessage());
-			e.printStackTrace();
-		}
-		int index = ThreadLocalRandom.current().nextInt(list.size());
-		String randomElement = list.get(index);
-		insertRewardsResult(user_id, randomElement);
-		return randomElement;
+	    try (Connection conn = DbConnection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setInt(1, gachaRarity);
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                list.add(rs.getString("gacha_item"));
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("ガチャアイテム取得時にエラーが発生しました: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+
+	    if (list.isEmpty()) {
+	        return "該当カテゴリのご褒美がありませんでした";
+	    }
+
+	    int index = ThreadLocalRandom.current().nextInt(list.size());
+	    String randomElement = list.get(index);
+
+	    insertRewardsResult(user_id, randomElement);
+	    return randomElement;
 	}
+
 
 	private boolean insertRewardsResult(int user_id, String gachaItem) {
 		String selectSql = "SELECT id FROM rewards_collection WHERE gacha_item = ?";
