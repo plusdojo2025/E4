@@ -40,7 +40,7 @@
 			<!-- テキスト情報 -->
 			<div class="report-info">
 			  <p>
-			    過去七日間の平均気分値は <strong class="highlight">${fatigueLevel}</strong> でした。
+			    過去7日間の平均気分値は <strong class="highlight">${fatigueLevel}</strong> でした。
 			  </p>
 			  <p>
 			    最も疲れた日は <strong class="highlight">${tiredDay}</strong>

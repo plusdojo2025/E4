@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         tooltip: {
           callbacks: {
-            label: context => `疲労度: ${context.parsed.y}`
+            label: context => `気分値: ${context.parsed.y}`
           }
         }
       }
