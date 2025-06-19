@@ -11,8 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // キャンバス幅を件数に応じて設定
   const canvas = document.getElementById("chart");
   const minWidthPerPoint = 80; // 1点あたりの幅(px)
-  const baseWidth = pointCount * minWidthPerPoint;
-  canvas.style.width = baseWidth < 800 ? "100%" : baseWidth + "px";
+  let baseWidth = pointCount * minWidthPerPoint;
+
+  if (pointCount <= 4) {
+    canvas.style.width = "100%"; // スクロールなし
+  } else {
+    canvas.style.width = baseWidth + "px"; // スクロール有効
+  }
   canvas.style.height = "100%";
 
   // 5段階に色分け（新色で統一）
@@ -46,41 +51,39 @@ document.addEventListener("DOMContentLoaded", function () {
       responsive: false,
       maintainAspectRatio: false,
       scales: {
-  y: {
-    min: 0,
-    max: 5.5,
-    ticks: {
-      stepSize: 1,
-      callback: function(value) {
-        const labels = {
-          1: "BAD",
-          5: "GOOD"
-        };
-        return labels[value] || "";
+        y: {
+          min: 0,
+          max: 5.5,
+          ticks: {
+            stepSize: 1,
+            callback: function(value) {
+              const labels = {
+                1: "BAD",
+                5: "GOOD"
+              };
+              return labels[value] || "";
+            },
+            font: {
+              size: 10
+            }
+          },
+          grid: {
+            color: function(context) {
+              // 0 と 5.5 の線だけ透明にして非表示にする
+              return (context.tick.value === 0 || context.tick.value === 5.5) ? 'rgba(0,0,0,0)' : '#ccc';
+            }
+          },
+          title: {
+            display: false
+          }
+        },
+        x: {
+          type: 'category', 
+          title: {
+            display: false
+          }
+        }
       },
-      font: {
-    size: 10
-    }
-    },
-    grid: {
-      color: function(context) {
-        // 0 と 5.5 の線だけ透明にして非表示にする
-        return (context.tick.value === 0 || context.tick.value === 5.5) ? 'rgba(0,0,0,0)' : '#ccc';
-      }
-    },
-    title: {
-      display: false
-    }
-  },
-  x: {
-	type: 'category', 
-    title: {
-      display: true,
-      text: "登録時間 (HH:mm)",
-      align: 'start',
-    }
-  }
-},
       plugins: {
         legend: {
           display: false

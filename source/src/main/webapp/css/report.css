@@ -21,27 +21,25 @@
 .chart-area {
   width: 95%;
   max-width: none;
-  margin: 0 auto 20px;
+  margin: 0 auto 40px;
   border: 1px solid #999;
   border-radius: 10px;
   padding: 10px;
   background: #f9f9f9;
+  overflow-x: auto;
   overflow-y: hidden;
-  overflow-x: visible; 
 }
 
 .chart-area canvas {
-  width: auto;  
-  min-width: 800px;  
-  height: 300px !important;
+  height: 390px !important;
   display: block;
 }
 
 /* テキストエリア */
 .report-info p {
   font-size: 1em;
-  color: #666;
-  margin: 25px 0;
+  color: #888;
+  line-height: 0.8;
 }
 
 .rewards p {

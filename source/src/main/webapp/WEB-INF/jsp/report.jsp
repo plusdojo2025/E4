@@ -62,18 +62,18 @@
 
 	<!-- グラフ用データをJSONで渡す -->
 	<script>
-		const labels = [
-			<c:forEach var="mood" items="${moodList}" varStatus="status">
-				"<fmt:formatDate value='${mood.created_at}' pattern='HH:mm' />"<c:if test="${!status.last}">,</c:if>
-			</c:forEach>
-		];
+	const labels = [
+		<c:forEach var="mood" items="${moodList}" varStatus="status">
+			["<fmt:formatDate value='${mood.created_at}' pattern='yyyy-MM-dd' />", "<fmt:formatDate value='${mood.created_at}' pattern='HH:mm' />"]<c:if test="${!status.last}">,</c:if>
+		</c:forEach>
+	];
 
-		const data = [
-			<c:forEach var="mood" items="${moodList}" varStatus="status">
-				${mood.mood}<c:if test="${!status.last}">,</c:if>
-			</c:forEach>
-		];
-	</script>
+	const data = [
+		<c:forEach var="mood" items="${moodList}" varStatus="status">
+			${mood.mood}<c:if test="${!status.last}">,</c:if>
+		</c:forEach>
+	];
+    </script>
 
 	<!-- ページ専用JS -->
 	<script src="${pageContext.request.contextPath}/js/report.js"></script>
