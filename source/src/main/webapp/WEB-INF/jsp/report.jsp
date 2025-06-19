@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
@@ -39,6 +39,7 @@
 
 			<!-- テキスト情報 -->
 			<div class="report-info">
+<<<<<<< HEAD
 			  <p>
 			    過去7日間の平均気分値は <strong class="highlight">${fatigueLevel}</strong> でした。
 			  </p>
@@ -56,7 +57,28 @@
 			  </div>
 			  <p>でしたね！</p>
 			  <p>明日からも健やかに過ごしましょう！</p>
+=======
+				<p>
+					過去七日間の平均気分値は <span class="highlight">${fatigueLevel}</span>
+					でした。
+				</p>
+				<p>
+					最も疲れた日は <span class="highlight">${tiredDay}</span>
+				</p>
+				<p>
+					ガチャの回数は <span class="highlight">${Gacha}</span> 回で、
+				</p>
+				<p>引いたご褒美は</p>
+				<div class="rewards">
+					<c:forEach var="reward" items="${weeklyReward}">
+						<p class="highlight">${reward.gacha_item}</p>
+					</c:forEach>
+				</div>
+				<p>でしたね！</p>
+				<p>明日からも健やかに過ごしましょう！</p>
+>>>>>>> 96452927c58e38c185b13e5faad1ab1d6048e090
 			</div>
+		</div>
 	</main>
 
 	<!-- グラフ用データをJSONで渡す -->
