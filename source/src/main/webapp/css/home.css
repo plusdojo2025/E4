@@ -12,9 +12,9 @@
 
 /* 月の見出し */
 h2 {
-  color: #fff;
-  font-size: 2.4rem;
-  margin-top: 0.9em;
+	color: #fff;
+	font-size: 2.4rem;
+	margin-top: 0.9em;
 }
 
 /* カレンダーの白い枠 */
@@ -25,6 +25,22 @@ table {
 	padding: 1em 1em;
 	border-radius: 2em;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+	display: inherit;
+}
+
+thead tr th {
+	width: 15%;
+}
+
+tbody {
+	aspect-ratio: 1/1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 /* 曜日ヘッダー */
@@ -67,18 +83,22 @@ td:hover:not(.emptyday):not([class*="mood"]) {
 	background-color: #45A0E8; /* 青 */
 	color: #fff;
 }
+
 .mood2 {
 	background-color: #6AB960; /* 緑 */
 	color: #fff;
 }
+
 .mood3 {
 	background-color: #F5D147; /* 黄 */
 	color: #fff;
 }
+
 .mood4 {
 	background-color: #F19E2F; /* 橙 */
 	color: #fff;
 }
+
 .mood5 {
 	background-color: #FE5E48; /* 赤 */
 	color: #fff;
@@ -94,20 +114,15 @@ td:active {
 	.homecontainer {
 		padding: 2em 0.5em;
 	}
-	
-	table {
-		width: 100%;
-		max-width: 350px;
-		padding: 2em 1em;
-		border-radius: 2em;
-		margin: 0 auto;
-	}
 
+	/*	table {
+
+    
+	}*/
 	td, th {
 		font-size: 0.9rem;
-		aspect-ratio: 1 / 1;
+		aspect-ratio: 1/1;
 	}
-
 	h2 {
 		font-size: 2rem;
 		margin-bottom: 0.5em;
