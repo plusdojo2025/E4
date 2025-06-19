@@ -238,7 +238,10 @@ body.modal-open {
 
   .gacha-container p {
     font-size: 1.4rem;
-    color: #94cc6b;
+    color: #94cc6b;   
+    white-space: normal;
+  	word-wrap: break-word;
+  	overflow-wrap: break-word;
   }
 }
 .gacha-wrapper {

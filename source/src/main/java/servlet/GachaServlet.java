@@ -58,8 +58,8 @@ public class GachaServlet extends HttpServlet {
 		
 		
 		// ↓ テスト中は毎回引けるように固定（本番では必ず消す）
-//		boolean alreadyDrawn = !todayRewards.isEmpty();
-		boolean alreadyDrawn = false;
+		boolean alreadyDrawn = !todayRewards.isEmpty();
+//		boolean alreadyDrawn = false;
 
 		request.setAttribute("alreadyDrawn", alreadyDrawn);
 
