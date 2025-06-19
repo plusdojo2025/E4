@@ -3,5 +3,5 @@ document.addEventListener("DOMContentLoaded", function() {
 	const date = today.getDate();
 
 	const todayObj = document.querySelector('.day' + date);
-	todayObj.setAttribute("style", "border: 2px dotted #888;");
+	todayObj.setAttribute("style", "outline: 2px dotted #888;");
 });
