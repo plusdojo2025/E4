@@ -21,7 +21,6 @@
   content: "";
 }
 
-
 .hamburger-menu {
   position: relative;
   transform: translateY(8px);
@@ -77,6 +76,7 @@
   pointer-events: none;
 }
 
+/* メニュー項目 */
 .menu-entry {
   display: flex;
   align-items: center;
@@ -94,7 +94,7 @@
   opacity: 1;
 }
 
-/*メニューの位置。修正の求む、特にスマホ画面が気になる・・・*/
+/* メニューの位置。スマホ画面対応 */
 .menu-items.open .entry1 {
   transform: translate(85px, -43px);
 }
@@ -125,36 +125,85 @@
 
 /* ラベル */
 .menu-label {
-  margin-left: 10px;
+  margin-left: 8px;
   font-size: 14px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.8);
   color: white;
   white-space: nowrap;
-  line-height: 50px;
+  line-height: 60spx;
 }
-/*------------気分追加チェック-----------------*/
 
-/* 画像と文字を暗くする用 */
-.dimmed {
+.gacha-tetxs {
+  margin-left: 0 ;
+  padding: 0;
+}
+
+#gachaLavel {
+  
+}
+
+/* 退勤ガチャ用ラッパー（ヘッダー用に名前変更済み） */
+.gacha-wrapper-header {
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center !important;
+  /*gap: 8px;*/
+  flex-direction: row !important;
+}
+
+/* ガチャ専用アイコン */
+.menu-icon.gacha {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  flex-shrink: 0;
+}
+.menu-icon.gacha img {
+  width: 60%;
+  height: 60%;
+}
+
+/* 薄暗くするリンク全体 */
+.dimmed-link {
   pointer-events: none;
-  filter: brightness(50%);
   opacity: 0.6;
 }
 
-/* ラベル文字だけ薄暗く */
+/* 薄暗くするラベル */
 .dimmed-label {
   color: #ccc !important;
 }
 
-/* 警告テキスト（はっきり白） */
-.warning-text {
-  color: white;
-  font-size: 0.75em;
-  margin-top: 4px;
-  display: block;
+/* 薄暗くするアイコン */
+.dimmed-icon {
+  opacity: 0.6 !important;
 }
-/*-------------------------------------------*/
 
+/* 警告テキスト：白くはっきり見せる */
+.warning-text {
+  color: #ffffff !important;        /* はっきりした白 */
+  opacity: 1 !important;             /* 完全不透明 */
+  text-shadow: none !important;     /* 影を消す */
+  background-color: transparent !important;  /* 背景なし */
+  filter: none !important;          /* フィルターなし */
+  
+  font-size: 14px;                   /* 「退勤ガチャ」と同じサイズに */
+  margin-left: 10px;                 /* 左に少し余白（アイコンの後ろに来る文字と揃える） */
+  padding: 0;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;            /* 縦位置も揃える */
+}
+
+/* ガチャ表示部の横並び固定 */
+.menu-entry.entry2 .gacha-wrapper-header {
+  flex-wrap: nowrap;
+}
+
+/* 薄暗い状態でもリンクの文字色は白 */
+.menu-entry.entry2.dimmed-link {
+  color: white !important;
+}
 
 /* ヘッダー */
 .header_1 {
@@ -179,11 +228,19 @@
   max-width: 100%;  
   overflow-wrap: break-word;
   white-space: nowrap;
+  
 }
 
 .titlelogo a:last-child img {
-  height: 80px;
+  height: 70px;
   object-fit: contain;
+  margin-top: 30px;
+}
+#gachaLink,
+#gachaLink:visited,
+#gachaLink:hover,
+#gachaLink:active {
+  text-decoration: none !important; /* 下線を消す */
 }
 
 /* スマホ対応 */
