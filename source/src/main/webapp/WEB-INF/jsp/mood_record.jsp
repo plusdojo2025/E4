@@ -88,7 +88,7 @@
 						 </c:when>
 						 
 						 <c:otherwise>
-						    <p>まだご褒美はありません</p>
+						    <p>登録されていません</p>
 						 </c:otherwise>	
 					</c:choose>
 			</div>
