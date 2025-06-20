@@ -33,7 +33,7 @@
 	
 		<div class="report-container">
 			<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ◀
+          ←
         </a>
 			<h2 class="section-title">過去七日間の記録</h2>
 

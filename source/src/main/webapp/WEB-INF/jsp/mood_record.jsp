@@ -20,7 +20,7 @@
 		<div class="mood-container">
 		
 		<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ◀
+          ←
         </a>
 
 			 <!--  選択された日付を表示 -->
