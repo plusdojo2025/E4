@@ -11,6 +11,24 @@
   border-radius: 20px;
   min-height: 400px;
   box-shadow: 0 12px 24px rgba(100, 150, 100, 0.2);
+  position: relative;
+}
+
+/* ====== ホームに戻るボタン ====== */
+.back-home-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #94cc6b;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.back-home-button:hover {
+  color:  #6FA14B;
 }
 
 /* ====== 封筒画像まわり ====== */
@@ -34,8 +52,8 @@
 }
 
 header {
-  z-index: 900; /* overlayより下にする（例：overlayは1000） */
-  position: relative; /* z-indexを効かせるには必要 */
+  z-index: 900;
+  position: relative;
 }
 
 /* ====== モーダル＆背景 ====== */
@@ -45,11 +63,10 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* 黒半透明 */
-  z-index: 1000; /* モーダルより下にする */
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
 }
 
-/* モーダル本体 */
 .modal {
   position: fixed;
   top: 50%;
@@ -58,16 +75,16 @@ header {
   background: white;
   padding: 30px;
   border-radius: 10px;
-  z-index: 1100; /* overlay より上にする */
+  z-index: 1100;
 }
 
 body.modal-open {
-  overflow: hidden; /* スクロール禁止 */
-  pointer-events: none; /* 全体を操作不可 */
+  overflow: hidden;
+  pointer-events: none;
 }
 .modal,
 .modal * {
-  pointer-events: auto; /* ただしモーダル内は操作可能 */
+  pointer-events: auto;
 }
 
 #reward-modal {
@@ -124,29 +141,37 @@ body.modal-open {
 
 /* ====== ガチャ終了メッセージ ====== */
 .gacha-finished {
-  color: #94cc6b;
-  font-weight: normal;
-  font-size: 1.5rem;
-  margin-top: 60px;
-  margin-bottom: 0;
+  color: #999 !important;
+  font-weight: bold;
+  font-size: 0.8rem !important;
+  margin-bottom: 20px;
+  margin-top: 60px !important;
   text-align: center;
 }
 
+/* 見出し「今日のご褒美」 */
+.reward-message h2 {
+  font-size: 1.3rem;
+  color: #6a994e;
+  margin-bottom: 10px;
+}
+
+/* ご褒美の内容 */
 .reward-text {
   color: #94cc6b;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 10px;
   text-align: center;
 }
 
 /* ====== アニメーション ====== */
 @keyframes envelopeBounceSmooth {
-  0%   { transform: scale(0.9) rotate(0deg); opacity: 0; }
-  20%  { transform: scale(1.05) rotate(2deg); opacity: 1; }
-  40%  { transform: scale(0.98) rotate(-1deg); }
-  60%  { transform: scale(1.02) rotate(1deg); }
-  80%  { transform: scale(0.99) rotate(0deg); }
+  0% { transform: scale(0.9) rotate(0deg); opacity: 0; }
+  20% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+  40% { transform: scale(0.98) rotate(-1deg); }
+  60% { transform: scale(1.02) rotate(1deg); }
+  80% { transform: scale(0.99) rotate(0deg); }
   100% { transform: scale(1) rotate(0deg); }
 }
 
@@ -175,8 +200,8 @@ body.modal-open {
 }
 
 @keyframes floatUpDown {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-10px); }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
 
@@ -200,19 +225,17 @@ body.modal-open {
   50% { transform: scaleX(0.8); opacity: 0.1; }
 }
 
-
-
 /* ====== スマホ対応（レスポンシブ） ====== */
 @media (max-width: 480px) {
   .gacha-container {
-    width: 90%; 
+    width: 90%;
     max-width: 360px;
     padding: 40px 10px;
     margin: 40px auto;
     min-height: 450px;
     box-sizing: border-box;
     line-height: 1.6;
-    word-break: keep-all; 
+    word-break: keep-all;
   }
 
   .tap-msg {
@@ -238,17 +261,18 @@ body.modal-open {
 
   .gacha-container p {
     font-size: 1.4rem;
-    color: #94cc6b;   
+    color: #94cc6b;
     white-space: normal;
-  	word-wrap: break-word;
-  	overflow-wrap: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
+
 .gacha-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px); /* ヘッダー分差し引き。必要に応じて調整 */
+  min-height: calc(100vh - 80px);
   padding-top: 20px;
   box-sizing: border-box;
   flex-direction: column;

@@ -8,7 +8,7 @@
   <!-- 全体共通CSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css"> 
   <!-- ヘッダーCSS -->
-   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css"> 
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css"> 
   <!-- アカウント情報専用のCSS -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css">
 </head>
@@ -17,17 +17,20 @@
 <!-- ヘッダー -->
 <%@ include file="header.jsp" %>
 
-  <main class="account-main">
-  	<div class="account-card">
-	      <h2 class="account-title">アカウント情報</h2>
-	      <div class="account-label">メールアドレス</div>
-	      <div class="account-email">${email}</div>  <!-- セッションから取得したアドレスを表示 -->
-      
-	      <form action="${pageContext.request.contextPath}/AccountServlet" method="post">
-	      	<button type="submit" class="logout-button">ログアウト</button>
-	      </form>
-    </div>
-  </main>
-  
+<main class="account-main">
+  <div class="account-card">
+    <!-- ◀ ホームに戻るボタンをカード内に移動 -->
+    <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">◀</a>
+
+    <h2 class="account-title">アカウント情報</h2>
+    <div class="account-label">メールアドレス</div>
+    <div class="account-email">${email}</div>
+
+    <form action="${pageContext.request.contextPath}/AccountServlet" method="post">
+      <button type="submit" class="logout-button">ログアウト</button>
+    </form>
+  </div>
+</main>
+
 </body>
 </html>

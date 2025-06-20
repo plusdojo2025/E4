@@ -4,11 +4,12 @@
 .mood-container {
 	max-width: 80%;
 	margin: 30px auto;
-	padding: 20px;
+	padding: 20px; /* 左右均等 */
 	background: white;
 	border-radius: 30px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	text-align: center;
+	position: relative !important;
 }
 
 /* ====== セクションタイトル ====== */
@@ -16,6 +17,28 @@
 	color: #94cc6b;
 	font-size: 1.0em;
 	margin-bottom: 20px;
+}
+
+/* ====== ホームに戻るボタン ====== */
+.back-home-button {
+	position: absolute;
+	top: 20px;
+	left: 20px;  /* 親のpaddingと合わせる */
+	text-decoration: none;
+	font-size: 1rem;
+	color: #94cc6b;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	z-index: 10;
+}
+
+.back-home-button:hover {
+	color:  #6FA14B;
+}
+
+/* ====== main内のコンテンツラッパー ====== */
+.content-wrapper {
+	margin-left: 50px; /* ボタンの幅+余裕分 */
 }
 
 /* ====== 気分選択画像 ====== */
@@ -48,7 +71,7 @@
 }
 
 .comment-area textarea:focus {
-  outline: 2px solid #94cc6b;
+	outline: 2px solid #94cc6b;
 }
 
 /* ====== 登録ボタン ====== */
@@ -191,23 +214,21 @@
 
 /* 気分登録の上の日付 */
 .selected-date {
-  margin: 10px 0;
-  text-align: center;
-  color: #888;
-  font-size: 20px;
+	margin: 10px 0;
+	text-align: center;
+	color: #888;
+	font-size: 20px;
 }
 
 /* スマホ表示のレスポンシブ対応 */
 @media screen and (max-width: 480px) {
-	
-	 .modal {
-    width: calc(100% - 40px);
-    padding: 20px;         
-  }
-  
-  .mood-labels p {
-	padding-top: 0.5em;
-	padding-bottom: 0.2em
+	.modal {
+		width: calc(100% - 40px);
+		padding: 20px;         
+	}
+
+	.mood-labels p {
+		padding-top: 0.5em;
+		padding-bottom: 0.2em;
+	}
 }
-}
-	

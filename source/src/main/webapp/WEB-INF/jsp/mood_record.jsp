@@ -4,8 +4,17 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<<<<<<< Updated upstream
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>気分登録</title>
+=======
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<title>気分登録</title>
+ <!-- 全体共通CSS -->
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+ <!-- ホーム専用のCSS -->
+ <link rel="stylesheet" href="css/mood_record.css">
+>>>>>>> Stashed changes
 
 	<!-- 共通CSS -->
 	<link rel="stylesheet" href="<c:url value='/css/common.css' />">
@@ -15,11 +24,24 @@
 	<link rel="stylesheet" href="<c:url value='/css/mood_record.css' />">
 </head>
 <body>
+<<<<<<< Updated upstream
+=======
+<header class="header_1">
+  <div class="titlelogo"> 
+     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
+     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
+  </div>          
+</header>
+>>>>>>> Stashed changes
 
 	<%@ include file="header.jsp" %>
 
 	<main>
 		<div class="mood-container">
+		
+		<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
+          ◀
+        </a>
 
 			 <!--  選択された日付を表示 -->
 			

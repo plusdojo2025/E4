@@ -8,7 +8,8 @@
 	padding: 40px 20px;
 }
 
-.account-card{
+/* アカウント情報カード本体 */
+.account-card {
 	background-color: white;
 	border-radius: 40px;
 	padding: 40px;
@@ -16,6 +17,24 @@
 	max-width: 300px;
 	text-align: center;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	position: relative; /* ◀ これを追加することで、ボタンがカード内に配置される */
+}
+
+/* ホームに戻るボタン */
+.back-home-button {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	text-decoration: none;
+	font-size: 1rem;
+	color: #94cc6b;
+	font-weight: bold;
+	transition: color 0.3s ease;
+	z-index: 10;
+}
+
+.back-home-button:hover {
+	color: #6FA14B;
 }
 
 .account-title {
@@ -46,4 +65,3 @@
 	cursor: pointer;
 	transition: background-color 0.3s;
 }
-
