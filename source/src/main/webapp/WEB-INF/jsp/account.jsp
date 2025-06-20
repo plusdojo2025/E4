@@ -19,8 +19,7 @@
 
 <main class="account-main">
   <div class="account-card">
-    <!-- ◀ ホームに戻るボタンをカード内に移動 -->
-    <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">◀</a>
+    <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">←</a>
 
     <h2 class="account-title">アカウント情報</h2>
     <div class="account-label">メールアドレス</div>

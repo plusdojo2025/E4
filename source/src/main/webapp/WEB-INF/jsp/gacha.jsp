@@ -20,7 +20,7 @@
     <c:when test="${alreadyDrawn}">
       <div class="gacha-container">
         <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ◀
+          ←
         </a>
 
         <p class="gacha-finished">本日の退勤ガチャは終了しました</p>
@@ -37,7 +37,7 @@
     <c:otherwise>
       <div class="gacha-container">
         <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ◀
+          ←
         </a>
 
         <div class="envelope" onclick="openEnvelope()">
