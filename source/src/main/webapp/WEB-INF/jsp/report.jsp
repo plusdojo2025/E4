@@ -39,27 +39,8 @@
 
 			<!-- テキスト情報 -->
 			<div class="report-info">
-<<<<<<< HEAD
-			  <p>
-			    過去7日間の平均気分値は <strong class="highlight">${fatigueLevel}</strong> でした。
-			  </p>
-			  <p>
-			    最も疲れた日は <strong class="highlight">${tiredDay}</strong>
-			  </p>
-			  <p>
-			    ガチャの回数は <strong class="highlight">${Gacha}</strong> 回で、
-			  </p>
-			  <p>引いたご褒美は</p>
-			  <div class="rewards">
-			    <c:forEach var="reward" items="${weeklyReward}">
-			      <p class="highlight">${reward.gacha_item}</p>
-			    </c:forEach>
-			  </div>
-			  <p>でしたね！</p>
-			  <p>明日からも健やかに過ごしましょう！</p>
-=======
 				<p>
-					過去七日間の平均気分値は <span class="highlight">${fatigueLevel}</span>
+					過去7日間の平均気分値は <span class="highlight">${fatigueLevel}</span>
 					でした。
 				</p>
 				<p>
@@ -76,7 +57,6 @@
 				</div>
 				<p>でしたね！</p>
 				<p>明日からも健やかに過ごしましょう！</p>
->>>>>>> 96452927c58e38c185b13e5faad1ab1d6048e090
 			</div>
 		</div>
 	</main>
