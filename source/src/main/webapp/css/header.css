@@ -138,9 +138,6 @@
   padding: 0;
 }
 
-#gachaLavel {
-  
-}
 
 /* 退勤ガチャ用ラッパー（ヘッダー用に名前変更済み） */
 .gacha-wrapper-header {
@@ -251,8 +248,8 @@
   }
 
   .menu-wrapper {
-    left: 8px;
-    top: 25px;
+    left: 25px;
+    top: 50px;
  }
 
   .hamburger-menu,
