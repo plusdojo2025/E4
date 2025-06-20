@@ -253,7 +253,7 @@
   .menu-wrapper {
     left: 8px;
     top: 25px;
-  }
+ }
 
   .hamburger-menu,
   .hamburger-menu:after,
@@ -263,8 +263,8 @@
   }
 
   .titlelogo a:last-child img {
-    height: 50px;
-    margin-top: 15px;
+   height: 50px;
+    margin-top: 30px;
   }
 
   .menu-icon {
