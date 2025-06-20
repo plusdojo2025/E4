@@ -30,10 +30,11 @@
 
 	<main>
 	
-		<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
+	
+		<div class="report-container">
+			<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
           ◀
         </a>
-		<div class="report-container">
 			<h2 class="section-title">過去七日間の記録</h2>
 
 			<!-- 折れ線グラフ（スクロールラッパー） -->

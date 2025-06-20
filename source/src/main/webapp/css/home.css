@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-<<<<<<< Updated upstream
+
 /* カレンダー全体のコンテナ */
 .homecontainer {
 	text-align: center;
@@ -114,65 +114,4 @@ td:active {
 		margin-bottom: 0.5em;
 	}
 }
-=======
-.header_1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  background-color: white;
-  position: relative;
-  height: 120px;
-}
 
-.titlelogo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-/* メニューバー */
-.titlelogo a:first-child {
-  position: absolute;
-  left: 16px;
-}
-
-.titlelogo a:first-child img {
-  height: 24px;
-  width: auto;
-  transition: filter 0.3s ease
-}
-
-.titlelogo a:first-child img:hover {
-  filter: brightness(0.8);
-}
-
-/* ロゴ画像（中央） */
-.titlelogo a:last-child img {
-  height: 100px;
-  object-fit: contain;
-}
-
-/* スマホ表示のレスポンシブ対応 */
-@media screen and (max-width: 480px) {
-  .header_1 {
-    height: 80px;  
-    padding: 8px 16px;  
-  }
-
-  .titlelogo a:first-child {
-    left: 8px;
-    top: 20px; 
-  }
-
-  .titlelogo a:first-child img {
-    height: 22px; 
-  }
-
-  .titlelogo a:last-child img {
-    height: 56px;  
-  }
-}
->>>>>>> Stashed changes

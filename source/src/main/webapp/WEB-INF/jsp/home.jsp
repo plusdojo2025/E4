@@ -23,7 +23,6 @@
 </head>
 <body>
 
-<<<<<<< Updated upstream
 	<!-- ヘッダー -->
 	<%@ include file="header.jsp"%>
 
@@ -82,14 +81,5 @@
 	  });
 	});
 </script>
-=======
-<header class="header_1">
-  <div class="titlelogo"> 
-     <a href=""><img src="images/menu.png" alt="メニューバー"></a>
-     <a href=""><img src="images/sigoowabiyori_title.png" alt="しごおわ日和"></a>
-  </div>          
-</header>
-
->>>>>>> Stashed changes
 </body>
 </html>
