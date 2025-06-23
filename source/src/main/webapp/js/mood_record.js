@@ -3,124 +3,93 @@ function zeroPad(num, length) {
 	return ('0' + num).slice(-length);
 }
 
-//----------------日付選択に応じた画面表示切り替え--------------//
-document.addEventListener("DOMContentLoaded", function() {
-	var formArea = document.getElementById("formArea");
-	var dayInput = document.getElementById("dayInput");
-	var today = new Date();
+document.addEventListener("DOMContentLoaded", function () {
+	const formArea = document.getElementById("formArea");
+	const dayInput = document.getElementById("dayInput");
+	const today = new Date();
+	const todayStr = `${today.getFullYear()}-${zeroPad(today.getMonth() + 1, 2)}-${zeroPad(today.getDate(), 2)}`;
 
-	var yyyy = today.getFullYear();
-	var mm = zeroPad(today.getMonth() + 1, 2);
-	var dd = zeroPad(today.getDate(), 2);
-	var todayStr = yyyy + "-" + mm + "-" + dd;
-
+	// 日付が一致していなければ非表示
 	if (dayInput) {
-		var selectedDate = dayInput.value;
-		if (selectedDate !== todayStr) {
-			if (formArea) formArea.style.display = "none";
-		} else {
-			if (formArea) formArea.style.display = "block";
-		}
+		const selectedDate = dayInput.value || "";
+		formArea.style.display = selectedDate === todayStr ? "block" : "none";
 	}
 
-	new ModalController();
+	initModal();
+	initFormSubmit();
+});
 
-	//---------------------登録ボタン押したとき----------------------//
-	document.querySelector("form").addEventListener("submit", function(e) {
+//------------------------- モーダル操作 -------------------------//
+function initModal() {
+	const moodButton = document.getElementById("moodSelectButton");
+	const modal = document.getElementById("moodSelectModal");
+	const closeButton = document.getElementById("closeModal");
+	const moodImages = modal?.querySelectorAll(".mood-image") || [];
+	const selectedMoodImg = document.getElementById("selectedMood");
+	const moodInput = document.getElementById("moodInput");
 
-		var mood = document.getElementById("moodInput").value;
-		var comment = document.querySelector("textarea").value;
-		var errorMessageDiv = document.getElementById("errorMessage");
-		var selectedMoodImg = document.getElementById("selectedMood");
-		var moodLogList = document.getElementById("moodLogList");
+	if (!moodButton || !modal || !closeButton) return;
 
-		errorMessageDiv.textContent = "";
+	modal.classList.add("hidden");
 
-		var errors = [];
+	moodButton.addEventListener("click", () => {
+		modal.classList.remove("hidden");
+	});
 
-		if (!mood) {
-			errors.push("気分登録は必須です");
-		}
+	closeButton.addEventListener("click", () => {
+		modal.classList.add("hidden");
+	});
 
-		if (comment.length > 140) {
-			errors.push("140文字以内で入力してください。");
-		}
+	moodImages.forEach(img => {
+		const moodValue = img.getAttribute("data-mood");
+		img.addEventListener("click", () => {
+			if (!selectedMoodImg || !moodInput) return;
+			selectedMoodImg.src = img.src;
+			moodInput.value = moodValue;
+			modal.classList.add("hidden");
+		});
+	});
+}
+
+//--------------------- 登録ボタン押したとき ----------------------//
+function initFormSubmit() {
+	const form = document.querySelector("form");
+	if (!form) return;
+
+	form.addEventListener("submit", function (e) {
+		const mood = document.getElementById("moodInput")?.value || "";
+		const comment = document.querySelector("textarea")?.value || "";
+		const errorMessageDiv = document.getElementById("errorMessage");
+		const selectedMoodImg = document.getElementById("selectedMood");
+		const moodLogList = document.getElementById("moodLogList");
+
+		const errors = [];
+		if (!mood) errors.push("気分登録は必須です");
+		if (comment.length > 140) errors.push("140文字以内で入力してください");
 
 		if (errors.length > 0) {
 			e.preventDefault();
-			errorMessageDiv.innerHTML = errors.join("<br>");
-
+			if (errorMessageDiv) errorMessageDiv.innerHTML = errors.join("<br>");
 			return;
 		}
-		
+
 		if (!confirm("本当に登録しますか？")) {
 			e.preventDefault();
 			return;
 		}
 
-		var now = new Date();
-		var hh = zeroPad(now.getHours(), 2);
-		var mm = zeroPad(now.getMinutes(), 2);
-		var time = hh + ":" + mm;
-
-		var logDiv = document.createElement("div");
+		// 気分ログ表示（フロント側での確認用）
+		const now = new Date();
+		const time = `${zeroPad(now.getHours(), 2)}:${zeroPad(now.getMinutes(), 2)}`;
+		const logDiv = document.createElement("div");
 		logDiv.className = "mood-log-entry";
-		logDiv.innerHTML =
-			'<span>' + time + '</span>　' +
-			'<img src="' + selectedMoodImg.src + '" alt="気分" style="width: 60px; height: auto; vertical-align: middle; margin: 0 10px;">' +
-			'<p>' + comment + '</p>';
+		logDiv.innerHTML = `
+			<span>${time}</span>　
+			<img src="${selectedMoodImg?.src}" alt="気分" style="width: 60px; height: auto; vertical-align: middle; margin: 0 10px;">
+			<p>${comment}</p>`;
 
 		if (moodLogList) {
 			moodLogList.insertBefore(logDiv, moodLogList.firstChild);
 		}
 	});
-});
-
-//-------------------------モーダル操作-------------------------//
-function ModalController() {
-	this.moodButton = document.getElementById("moodSelectButton");
-	this.modal = document.getElementById("moodSelectModal");
-	this.closeButton = document.getElementById("closeModal");
-
-	if (this.modal) {
-		this.modal.className += " hidden";
-	}
-
-	this.setupEvents();
 }
-
-ModalController.prototype.setupEvents = function() {
-	var self = this;
-
-	if (self.moodButton && self.modal && self.closeButton) {
-		self.moodButton.addEventListener("click", function() {
-			self.modal.className = self.modal.className.replace("hidden", "").trim();
-		});
-
-		self.closeButton.addEventListener("click", function() {
-			if (self.modal.className.indexOf("hidden") === -1) {
-				self.modal.className += " hidden";
-			}
-		});
-
-		var moodImages = self.modal.querySelectorAll(".mood-image");
-		var selectedMoodImg = document.getElementById("selectedMood");
-		var moodInput = document.getElementById("moodInput");
-
-		for (var i = 0; i < moodImages.length; i++) {
-			(function(img) {
-				var moodValue = img.getAttribute("data-mood");
-
-				img.addEventListener("click", function() {
-					if (selectedMoodImg && moodInput) {
-						selectedMoodImg.src = img.src;
-						moodInput.value = moodValue;
-						if (self.modal.className.indexOf("hidden") === -1) {
-							self.modal.className += " hidden";
-						}
-					}
-				});
-			})(moodImages[i]);
-		}
-	}
-};

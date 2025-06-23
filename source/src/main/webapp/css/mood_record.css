@@ -50,6 +50,11 @@
 	margin-left: 50px; /* ボタンの幅+余裕分 */
 }
 
+#moodSelectButton {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
 /* ====== 気分選択画像 ====== */
 .mood-select-area {
 	margin-bottom: 20px;

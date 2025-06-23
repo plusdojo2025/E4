@@ -43,7 +43,7 @@
 				<form action="<c:url value='/MoodRegisterServlet' />" method="post" class="mood-form">
 					
 					<!------------- 気分選択ボタン（画像） -------------->
-					<div class="mood-select-area" id="moodSelectButton">
+					<div class="mood-select-area" id="moodSelectButton" tabindex="0">
 					
 							<!--  気分が選択されていたらその画像を挿入 -->
 							<c:choose>
