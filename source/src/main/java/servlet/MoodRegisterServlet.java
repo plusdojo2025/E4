@@ -2,7 +2,6 @@ package servlet;
 
 //Javaの基本的ナクラスやライブラリ
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -169,10 +168,10 @@ public class MoodRegisterServlet extends HttpServlet {
 		// 成功・失敗（ご褒美表示は今後追加）
 			if (success) {
 				// --- パラメータをURLに含めてリダイレクト ---
-					String redirectURL = "MoodRegisterServlet?day=" + LocalDate.now().getDayOfMonth() + "&registered=true" +
-						"&mood=" + mood +
-						"&comment=" + URLEncoder.encode(comment, "UTF-8");
-	
+//					String redirectURL = "MoodRegisterServlet?day=" + LocalDate.now().getDayOfMonth() + "&registered=true" +
+//						"&mood=" + mood +
+//						"&comment=" + URLEncoder.encode(comment, "UTF-8");
+					String redirectURL = "MoodRegisterServlet?day=" + LocalDate.now().getDayOfMonth();
 					response.sendRedirect(redirectURL);
 			} else {
 				request.setAttribute("error", "気分の登録に失敗しました");
