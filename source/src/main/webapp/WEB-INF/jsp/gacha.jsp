@@ -19,8 +19,10 @@
 
     <c:when test="${alreadyDrawn}">
       <div class="gacha-container">
-        <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ←
+        <a href="HomeServlet" class="arrow-link">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" class="arrow-icon" width="28" height="28">
+           <path d="M18 6 L8 14 L18 22 Z" />
+         </svg>
         </a>
 
         <p class="gacha-finished">本日の退勤ガチャは終了しました</p>
@@ -36,8 +38,10 @@
 
     <c:otherwise>
       <div class="gacha-container">
-        <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ←
+        <a href="HomeServlet" class="arrow-link">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" class="arrow-icon" width="28" height="28">
+           <path d="M18 6 L8 14 L18 22 Z" />
+         </svg>
         </a>
 
         <div class="envelope" onclick="openEnvelope()">

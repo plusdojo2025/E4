@@ -19,7 +19,11 @@
 
 <main class="account-main">
   <div class="account-card">
-    <a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">←</a>
+   <a href="HomeServlet" class="arrow-link">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" class="arrow-icon" width="28" height="28">
+           <path d="M18 6 L8 14 L18 22 Z" />
+         </svg>
+        </a>
 
     <h2 class="account-title">アカウント情報</h2>
     <div class="account-label">メールアドレス</div>

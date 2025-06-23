@@ -32,9 +32,12 @@
 	
 	
 		<div class="report-container">
-			<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ←
+		<a href="HomeServlet" class="arrow-link">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" class="arrow-icon" width="28" height="28">
+           <path d="M18 6 L8 14 L18 22 Z" />
+         </svg>
         </a>
+
 			<h2 class="section-title">過去七日間の記録</h2>
 
 			<!-- 折れ線グラフ（スクロールラッパー） -->

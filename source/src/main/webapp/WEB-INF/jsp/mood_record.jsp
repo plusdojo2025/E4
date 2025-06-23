@@ -19,8 +19,10 @@
 	<main>
 		<div class="mood-container">
 		
-		<a href="${pageContext.request.contextPath}/HomeServlet" class="back-home-button">
-          ←
+		<a href="HomeServlet" class="arrow-link">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" class="arrow-icon" width="28" height="28">
+           <path d="M18 6 L8 14 L18 22 Z" />
+         </svg>
         </a>
 
 			 <!--  選択された日付を表示 -->
