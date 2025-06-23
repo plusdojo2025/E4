@@ -67,7 +67,7 @@
 </div>
 
 <script>
-// 初回ガチャ用の封筒開封＋モーダル演出
+//初回ガチャ用の封筒開封＋モーダル演出
 let alreadyOpened = false;
 
 function openEnvelope() {
@@ -79,22 +79,25 @@ function openEnvelope() {
     opened.style.display = "inline";
     opened.classList.add("opened-smooth");
 
-    fetch("${pageContext.request.contextPath}/GachaServlet?action=draw")
-        .then(response => response.json())
-        .then(data => {
-            const rewardModal = document.getElementById("reward-modal");
-            const rewardText = rewardModal.querySelector("p");
-            rewardText.textContent = data.rewardItem || 'ご褒美が見つかりませんでした';
+    // アニメーション終了イベントでfetch・モーダル表示を実行
+    opened.addEventListener("animationend", () => {
+        fetch("${pageContext.request.contextPath}/GachaServlet?action=draw")
+            .then(response => response.json())
+            .then(data => {
+                const rewardModal = document.getElementById("reward-modal");
+                const rewardText = rewardModal.querySelector("p");
+                rewardText.textContent = data.rewardItem || 'ご褒美が見つかりませんでした';
 
-            document.getElementById("overlay").style.display = "block";
-            rewardModal.style.display = "block";
-            rewardModal.classList.add("show");
-            document.body.classList.add("modal-open");
-        })
-        .catch(error => {
-            alert("エラーが発生しました");
-            console.error(error);
-        });
+                document.getElementById("overlay").style.display = "block";
+                rewardModal.style.display = "block";
+                rewardModal.classList.add("show");
+                document.body.classList.add("modal-open");
+            })
+            .catch(error => {
+                alert("エラーが発生しました");
+                console.error(error);
+            });
+    }, { once: true });
 }
 
 function redirectToGacha() {
