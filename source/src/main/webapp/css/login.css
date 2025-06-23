@@ -36,6 +36,10 @@
   color: #94cc6b;
 }
 
+.login-container form{
+	width: 50%;
+}
+
 .login-container button {
   width: 80%;
 }
