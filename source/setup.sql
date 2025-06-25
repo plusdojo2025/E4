@@ -31,7 +31,7 @@ CREATE TABLE mood_records (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- ご褒美マスタ（全件保持）
+-- ご褒美マスタ
 DROP TABLE IF EXISTS rewards_collection;
 CREATE TABLE rewards_collection (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -61,17 +61,17 @@ INSERT INTO rewards_collection (gacha_item, gacha_rarity) VALUES
 ('晩御飯をお惣菜にしよう', 2),
 ('プリンを買う', 2),
 ('好きな動画やアニメを見る', 2),
-('漫画を1話だけ読む',2),
-('ジャズを流しておうちカフェ',2),
+('漫画を1話だけ読む', 2),
+('ジャズを流しておうちカフェ', 2),
 ('散歩に出かける', 2),
 ('軽いストレッチをする', 2),
 ('贅沢なパンを買う', 2),
 ('1,000円分自分の欲しいものを買う', 2),
-('好きなドリンクを1つテイクアウト',2),
-('帰りにスイーツを1つ買う',2),
-('帰りにホットスナックを買う',2),
-('帰りにチョコレート菓子を買う',2),
-('早く寝ましょう',2),
+('好きなドリンクを1つテイクアウト', 2),
+('帰りにスイーツを1つ買う', 2),
+('帰りにホットスナックを買う', 2),
+('帰りにチョコレート菓子を買う', 2),
+('早く寝ましょう', 2),
 -- rarity 1
 ('一人呑み', 1),
 ('入ったことのないお店に挑戦', 1),
@@ -99,46 +99,46 @@ CREATE TABLE rewards_result (
     FOREIGN KEY (gacha_id) REFERENCES rewards_collection(id)
 );
 
--- 気分記録（全ユーザーに対して一括挿入）
+-- 気分記録サンプル(全ユーザー同一)
 INSERT INTO mood_records (user_id, record_date, mood, comment)
-SELECT u.id, d.record_date, d.mood, d.comment
+SELECT
+  u.id,
+  d.record_date,
+  d.mood,
+  d.comment
 FROM users u
 JOIN (
-  SELECT '2025-06-01' AS record_date, 3 AS mood, '朝は眠かったが、午後は調子が良かった' UNION ALL
-  SELECT '2025-06-01', 2, '夕方に少し疲れを感じた' UNION ALL
-  SELECT '2025-06-02', 4, '散歩して気分がすっきりした' UNION ALL
-  SELECT '2025-06-03', 1, 'なんとなく落ち込んだ一日だった' UNION ALL
-  SELECT '2025-06-03', 3, '夜に映画を見て少し元気が出た' UNION ALL
-  SELECT '2025-06-04', 5, '朝からやる気に満ちていた' UNION ALL
-  SELECT '2025-06-05', 2, '仕事が忙しくて疲れた' UNION ALL
-  SELECT '2025-06-05', 3, '夜に音楽を聴いて少し癒された' UNION ALL
-  SELECT '2025-06-06', 4, 'ランチが美味しくて嬉しかった' UNION ALL
-  SELECT '2025-06-07', 3, '特に何もなかったけど平穏な日だった' UNION ALL
-  SELECT '2025-06-08', 1, '体調が悪くて寝込んでいた' UNION ALL
-  SELECT '2025-06-08', 2, '少し回復したけどまだ本調子じゃない' UNION ALL
-  SELECT '2025-06-09', 5, '朝から気分爽快！良いスタート' UNION ALL
-  SELECT '2025-06-10', 4, '友達と話して楽しかった' UNION ALL
-  SELECT '2025-06-10', 3, '夜は少し疲れていたけど、全体的には良い一日だった' UNION ALL
-  SELECT '2025-06-11', 3, '普通の一日だったが穏やかだった' UNION ALL
-  SELECT '2025-06-12', 4, '仕事で良い成果が出て満足' UNION ALL
-  SELECT '2025-06-13', 2, '少し疲れが溜まっていた' UNION ALL
-  SELECT '2025-06-14', 5, '友達と楽しい時間を過ごせた' UNION ALL
-  SELECT '2025-06-15', 3, 'いつも通りの一日だった' UNION ALL
-  SELECT '2025-06-16', 1, '体調が悪くて休んでいた' UNION ALL
-  SELECT '2025-06-17', 4, '運動してリフレッシュできた' UNION ALL
-  SELECT '2025-06-18', 3, '少しストレスを感じたがなんとか乗り切った' UNION ALL
-  SELECT '2025-06-19', 2, '少し気分が落ち込んでいた' UNION ALL
-  SELECT '2025-06-20', 4, '映画を見て元気が出た' UNION ALL
+  SELECT '2025-06-01' AS record_date, 3 AS mood, '朝は眠くて少しだるかった' AS comment UNION ALL
+  SELECT '2025-06-02', 4, '散歩してリフレッシュできた' UNION ALL
+  SELECT '2025-06-03', 2, '少し気分が落ち込んだが夜に映画を観て回復' UNION ALL
+  SELECT '2025-06-04', 3, '仕事は忙しかったが穏やかに過ごせた' UNION ALL
+  -- 6/5は穴抜け
+  SELECT '2025-06-06', 3, '平穏な一日だった' UNION ALL
+  SELECT '2025-06-07', 3, '特に変わりなし' UNION ALL
+  SELECT '2025-06-08', 1, '体調不良でほとんど寝ていた' UNION ALL
+  SELECT '2025-06-09', 5, '朝から元気で最高の気分' UNION ALL
+  SELECT '2025-06-10', 4, '友人と楽しく過ごせた' UNION ALL
+  SELECT '2025-06-11', 3, '普通の一日だった' UNION ALL
+  SELECT '2025-06-12', 4, '仕事で成果があって満足' UNION ALL
+  -- 6/13は穴抜け
+  SELECT '2025-06-14', 5, '休日にリラックスできた' UNION ALL
+  SELECT '2025-06-15', 3, '普段通りの一日だった' UNION ALL
+  SELECT '2025-06-16', 2, '体調はまずまずだったが少しだるい' UNION ALL
+  SELECT '2025-06-17', 4, '運動して気分リフレッシュ' UNION ALL
+  SELECT '2025-06-18', 3, 'ストレスはあったがなんとか乗り切った' UNION ALL
+  SELECT '2025-06-19', 3, 'やや気分が落ち着かない日' UNION ALL
+  SELECT '2025-06-20', 4, '映画を観て元気になった' UNION ALL
   SELECT '2025-06-21', 5, 'とても充実した日だった' UNION ALL
-  SELECT '2025-06-22', 3, '特に何もなかったが平穏だった' UNION ALL
-  SELECT '2025-06-23', 1, '朝からなんとなく気分が重かった' UNION ALL
-  SELECT '2025-06-24', 4, '同僚と楽しい時間を過ごせた' UNION ALL
-  SELECT '2025-06-25', 2, '仕事で少し失敗して落ち込んだ' UNION ALL
-  SELECT '2025-06-26', 3, 'なんとか気持ちを立て直した' UNION ALL
-  SELECT '2025-06-27', 5, '最高の一日だった！' UNION ALL
-  SELECT '2025-06-28', 4, '休日をゆっくり過ごした' UNION ALL
-  SELECT '2025-06-29', 3, '日曜の夜はちょっと憂鬱'
-) AS d(record_date, mood, comment);
+  -- 6/22は穴抜け
+  SELECT '2025-06-23', 2, '気分が少し沈み気味' UNION ALL
+  SELECT '2025-06-24', 4, '同僚と楽しい時間を過ごした' UNION ALL
+  SELECT '2025-06-25', 3, '仕事で少し悩みもあったが持ち直した' UNION ALL
+  SELECT '2025-06-26', 3, '普通の一日だった' UNION ALL
+  SELECT '2025-06-27', 5, '最高の気分で楽しかった' UNION ALL
+  SELECT '2025-06-28', 4, '休日をゆっくり過ごせた'
+) d
+ORDER BY d.record_date;
+
 
 -- ご褒美記録（mood → rarity を判断し、対応する rewards_collection からランダムに1件選択）
 INSERT INTO rewards_result (user_id, gacha_time, gacha_id)
