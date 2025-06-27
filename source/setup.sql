@@ -135,7 +135,8 @@ JOIN (
   SELECT '2025-06-25', 3, '仕事で少し悩みもあったが持ち直した' UNION ALL
   SELECT '2025-06-26', 3, '普通の一日だった' UNION ALL
   -- SELECT '2025-06-27', 5, '最高の気分で楽しかった' UNION ALL
-  SELECT '2025-06-28', 4, '休日をゆっくり過ごせた'
+  SELECT '2025-06-28', 4, '休日をゆっくり過ごせた' UNION ALL
+  SELECT '2025-06-29', 5, '休日にリラックスできた' 
 ) d
 ORDER BY d.record_date;
 
